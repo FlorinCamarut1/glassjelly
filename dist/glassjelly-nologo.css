@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.5.3";
+  --gj-version: "2.5.4";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -1334,7 +1334,7 @@ html :is(.MuiButton-root, .MuiIconButton-root, .MuiTab-root, .MuiMenuItem-root, 
   html .itemDetailPage .detailButton:not(.btnPlay):not(.btnResume):hover,
   html #slides-container :is(.detail-button, .favorite-button, .trailer-button, .arrow, .pause-button):hover,
   html .card:is(:hover, :focus-within) .cardOverlayButton:hover,
-  html #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer):hover,
+  html [id="loginPage"] :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer):hover,
   html :is(.raised:not(.button-submit), .button-cancel, .MuiButton-contained:not(.MuiButton-containedPrimary):not(.MuiButton-containedError), .MuiButton-outlined):hover {
     background: var(--gj-drop), rgba(255,255,255,.06) !important; box-shadow: var(--gj-drop-rim) !important; color: #fff;
   }
@@ -1403,7 +1403,7 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
     /* hover: hollow glass droplet (the Media Bar buttons only get the lens while hovered: moving picture underneath) */
     html:not(.layout-mobile):not(.layout-tv) :is(
       header.MuiAppBar-root .MuiStack-root > .MuiButton-root, .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root,
-      #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer)):hover {
+      [id="loginPage"] :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer)):hover {
       backdrop-filter: var(--gj-bubble) saturate(150%) brightness(1.12);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiIconButton-root, .card .cardOverlayButton,
@@ -1439,7 +1439,7 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
     html:not(.layout-mobile):not(.layout-tv) :is(
       header.MuiAppBar-root .MuiStack-root > .MuiButton-root:not(.MuiButton-colorPrimary), header.MuiAppBar-root .MuiTab-root:not(.Mui-selected),
       .headerTabs .emby-tab-button:not(.emby-tab-button-active), .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root, [id="slides-container"] .trailer-button,
-      #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer)):hover {
+      [id="loginPage"] :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer)):hover {
       background: radial-gradient(30% 24% at 24% 20%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
                   radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.07), rgba(255,255,255,0) 60%) !important;
       box-shadow: var(--gj-clear-hover-rim) !important;
@@ -1668,7 +1668,7 @@ html .card .cardOverlayFab-primary:hover { transform: scale(1.1); }
 @supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
   @media (hover: hover) and (pointer: fine) {
     html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root .MuiStack-root > .MuiButton-root:has(img[src*="icon-transparent"]):hover {
-      -webkit-backdrop-filter: none; backdrop-filter: none;
+      -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
       background: radial-gradient(30% 60% at 20% 20%, rgba(255,255,255,.18), rgba(255,255,255,0) 70%), rgba(255,255,255,.06) !important;
     }
   }

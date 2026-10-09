@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.5.4 — 2026-10-09
+
+- The v2.5.3 fix for the disc around the logo never applied: the generic hover rule had `#loginPage` inside an
+  `:is()` list, which gave it ID specificity. IDs in the section 21 hover lists are attribute selectors now.
+
 ## v2.5.3 — 2026-10-09
 
 - Hovering the home button (logo + "jellyfin") no longer shows a dark disc around the logo: the droplet lens magnified
