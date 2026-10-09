@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.3.1 — 2026-10-09
+
+- The selected tab is a glass lens instead of a grey pill (it read as a blur): bright outline and bevel, gloss over
+  the top half, a glint and a caustic glow at the bottom; refracting rim in Chromium. Hovering it keeps that look.
+
 ## v2.3.0 — 2026-10-09 · Clear glass hover
 
 - Hover in Chromium desktop browsers is pure glass, like Apple's Liquid Glass artwork: no tint, no frost, a thick
