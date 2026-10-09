@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.5.0";
+  --gj-version: "2.5.1";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -85,6 +85,7 @@
   --gj-lens-s: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.25%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2730%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
   --gj-bubble: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.5%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2758%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dr%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2746.4%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dg%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2734.8%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27db%27%2F%3E%3CfeColorMatrix%20in%3D%27dr%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27r%27%2F%3E%3CfeColorMatrix%20in%3D%27dg%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27g%27%2F%3E%3CfeColorMatrix%20in%3D%27db%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%201%200%200%200%200%200%201%200%27%20result%3D%27b%27%2F%3E%3CfeBlend%20in%3D%27r%27%20in2%3D%27g%27%20mode%3D%27screen%27%20result%3D%27rg%27%2F%3E%3CfeBlend%20in%3D%27rg%27%20in2%3D%27b%27%20mode%3D%27screen%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
   --gj-bubble-s: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.5%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2734%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dr%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2727.2%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dg%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2720.4%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27db%27%2F%3E%3CfeColorMatrix%20in%3D%27dr%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27r%27%2F%3E%3CfeColorMatrix%20in%3D%27dg%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27g%27%2F%3E%3CfeColorMatrix%20in%3D%27db%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%201%200%200%200%200%200%201%200%27%20result%3D%27b%27%2F%3E%3CfeBlend%20in%3D%27r%27%20in2%3D%27g%27%20mode%3D%27screen%27%20result%3D%27rg%27%2F%3E%3CfeBlend%20in%3D%27rg%27%20in2%3D%27b%27%20mode%3D%27screen%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
+  --gj-bubble-fab: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.3%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2764%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dr%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2749.6%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dg%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2735.2%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27db%27%2F%3E%3CfeColorMatrix%20in%3D%27dr%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27r%27%2F%3E%3CfeColorMatrix%20in%3D%27dg%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27g%27%2F%3E%3CfeColorMatrix%20in%3D%27db%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%201%200%200%200%200%200%201%200%27%20result%3D%27b%27%2F%3E%3CfeBlend%20in%3D%27r%27%20in2%3D%27g%27%20mode%3D%27screen%27%20result%3D%27rg%27%2F%3E%3CfeBlend%20in%3D%27rg%27%20in2%3D%27b%27%20mode%3D%27screen%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
   /* lens:end */
   --gj-r-xs: 6px; --gj-r-s: 10px; --gj-r-card: 12px; --gj-r-m: 16px;
   --gj-r-l: 22px; --gj-r-sheet: 28px; --gj-r-pill: 999px;
@@ -1222,7 +1223,7 @@ html.layout-tv .sectionTitle { font-size: 26px; }
   :root, html[data-theme] {
     --gj-mat-ultrathin: rgba(30,30,34,.94); --gj-mat-thin: rgba(30,30,34,.94); --gj-mat-regular: rgba(28,28,32,.95);
     --gj-mat-thick: rgba(28,28,32,.97); --gj-mat-sheet: rgba(28,28,32,.98); --gj-glass-fill: rgba(70,70,76,.92);
-    --gj-lens: saturate(1); --gj-lens-cap: saturate(1); --gj-lens-panel: saturate(1); --gj-lens-s: saturate(1); --gj-bubble: saturate(1); --gj-bubble-s: saturate(1);
+    --gj-lens: saturate(1); --gj-lens-cap: saturate(1); --gj-lens-panel: saturate(1); --gj-lens-s: saturate(1); --gj-bubble: saturate(1); --gj-bubble-s: saturate(1); --gj-bubble-fab: saturate(1);
   }
 }
 /* 21b. Sheen: the faint top highlight that makes a tinted pane read as a slab of glass (every browser) */
@@ -1338,7 +1339,7 @@ html :is(header.MuiAppBar-root .MuiStack-root > .MuiButton-root, header.MuiAppBa
 /* declared on the hovered element itself, not on :root: a var() inside a custom property is resolved where the property
    is declared, so on :root the cursor position (set on the element by js/hover.js) would never reach the gradient */
 html :is(.MuiButton-root, .MuiIconButton-root, .MuiTab-root, .MuiMenuItem-root, .MuiListItemButton-root, .detailButton, .actionSheetMenuItem,
-  .paper-icon-button-light, .emby-button, .emby-tab-button, .navMenuOption, .cardOverlayButton, #slides-container button, option):hover {
+  .paper-icon-button-light, .emby-button, .emby-tab-button, .navMenuOption, .cardOverlayButton, [id="slides-container"] button, option):hover {
   --gj-drop: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.34) 0%, rgba(255,255,255,.15) 42%, rgba(255,255,255,.08) 100%);
   --gj-drop-soft: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.22) 0%, rgba(255,255,255,.09) 45%, rgba(255,255,255,.05) 100%);
   --gj-drop-rim: inset 2.5px 2.5px 2px -1.5px rgba(255,255,255,.95), inset -2.5px -2.5px 2px -1.5px rgba(255,255,255,.65),
@@ -1371,7 +1372,7 @@ html :is(.MuiButton-root, .MuiIconButton-root, .MuiTab-root, .MuiMenuItem-root, 
   html .card:is(:hover, :focus-within) .cardOverlayButton:hover { transform: scale(1.12); }
   html .card .cardOverlayButton { transition: transform 420ms var(--gj-spring), background-color var(--gj-dur-fast) var(--gj-ease); }
   /* white primary pills keep their white, but get the rim + a lit top */
-  html :is(.button-submit, .MuiButton-containedPrimary, #slides-container .play-button, .itemDetailPage .detailButton:is(.btnPlay, .btnResume)):hover {
+  html :is(.button-submit, .MuiButton-containedPrimary, [id="slides-container"] .play-button, .itemDetailPage .detailButton:is(.btnPlay, .btnResume)):hover {
     background: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), #fff 0%, #f2f2f7 55%, #e2e2ea 100%) !important;
     box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.08), 0 8px 22px rgba(0,0,0,.35) !important;
   }
@@ -1401,7 +1402,7 @@ html :is(.MuiButton-root, .MuiIconButton-root, .MuiTab-root, .MuiMenuItem-root, 
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
   html :is(header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root, .MuiButtonGroup-root > .MuiButton-root,
-    .itemDetailPage .detailButton, #slides-container button, .cardOverlayButton, .actionSheetMenuItem, .MuiMenuItem-root,
+    .itemDetailPage .detailButton, [id="slides-container"] button, .cardOverlayButton, .actionSheetMenuItem, .MuiMenuItem-root,
     .videoOsdBottom .paper-icon-button-light):hover { transform: none; }
 }
 
@@ -1435,7 +1436,7 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
       backdrop-filter: var(--gj-bubble) saturate(150%) brightness(1.12);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiIconButton-root, .card .cardOverlayButton,
-      .videoOsdBottom .buttons .paper-icon-button-light, #slides-container :is(.detail-button, .favorite-button, .pause-button, .arrow)):hover {
+      .videoOsdBottom .buttons .paper-icon-button-light, [id="slides-container"] :is(.detail-button, .favorite-button, .pause-button, .arrow)):hover {
       backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.12);
     }
     html:not(.layout-mobile):not(.layout-tv) #slides-container .trailer-button:hover {
@@ -1445,7 +1446,7 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
       backdrop-filter: var(--gj-bubble) saturate(150%) brightness(1.15);
     }
     /* the rim shadow is clipped away with the lens: the bevel carries the droplet instead */
-    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), #slides-container :is(.detail-button, .favorite-button, .trailer-button)):hover {
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), [id="slides-container"] :is(.detail-button, .favorite-button, .trailer-button)):hover {
       box-shadow: inset 2.5px 2.5px 2px -1.5px rgba(255,255,255,.95), inset -2.5px -2.5px 2px -1.5px rgba(255,255,255,.65),
                   inset 0 0 0 1px rgba(255,255,255,.22), inset 0 0 14px rgba(255,255,255,.14) !important;
     }
@@ -1466,7 +1467,7 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
     /* pills and menu rows */
     html:not(.layout-mobile):not(.layout-tv) :is(
       header.MuiAppBar-root .MuiStack-root > .MuiButton-root:not(.MuiButton-colorPrimary), header.MuiAppBar-root .MuiTab-root:not(.Mui-selected),
-      .headerTabs .emby-tab-button:not(.emby-tab-button-active), .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root, #slides-container .trailer-button,
+      .headerTabs .emby-tab-button:not(.emby-tab-button-active), .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root, [id="slides-container"] .trailer-button,
       #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer)):hover {
       background: radial-gradient(30% 24% at 24% 20%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
                   radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.07), rgba(255,255,255,0) 60%) !important;
@@ -1486,12 +1487,12 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
     /* round buttons */
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiIconButton-root, .itemDetailPage .detailButton:not(.btnPlay):not(.btnResume),
       .card .cardOverlayButton, .videoOsdBottom .buttons .paper-icon-button-light, .osdHeader .headerButton,
-      #slides-container :is(.detail-button, .favorite-button, .pause-button, .arrow)):hover {
+      [id="slides-container"] :is(.detail-button, .favorite-button, .pause-button, .arrow)):hover {
       background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.4), rgba(255,255,255,0) 70%) !important;
       box-shadow: var(--gj-clear-hover-rim) !important;
       backdrop-filter: var(--gj-bubble-s) saturate(125%) brightness(1.05);
     }
-    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton, .card .cardOverlayButton, #slides-container button,
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton, .card .cardOverlayButton, [id="slides-container"] button,
       .videoOsdBottom .buttons .paper-icon-button-light):hover :is(.material-icons, .detailButton-icon, svg) {
       text-shadow: 0 1px 3px rgba(0,0,0,.6); filter: drop-shadow(0 1px 2px rgba(0,0,0,.5));
     }
@@ -1631,7 +1632,7 @@ html header.MuiAppBar-root .MuiTab-root.Mui-selected, html .headerTabs .emby-tab
 /* 21n. PLAY = WHITE GLASS (v2.5): the primary Play / Resume pills (details page, Media Bar) are milky white glass instead
    of an opaque white pill - lit top-left, bevelled, the picture behind bending through the rim in Chromium, frosted
    white elsewhere. Black label as before (the glass stays light enough for it). Form "Save" buttons stay solid white. */
-html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), #slides-container .play-button) {
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), [id="slides-container"] .play-button) {
   color: #0b0b10 !important;
   background:
     radial-gradient(34% 46% at 20% 24%, rgba(255,255,255,.75), rgba(255,255,255,0) 70%),
@@ -1640,15 +1641,53 @@ html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), #sli
               inset 0 0 0 1px rgba(255,255,255,.55), inset 0 -8px 14px -6px rgba(255,255,255,.5), 0 8px 24px rgba(0,0,0,.35) !important;
   -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.25); backdrop-filter: blur(10px) saturate(180%) brightness(1.25);
 }
-html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), #slides-container .play-button):hover {
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), [id="slides-container"] .play-button):hover {
   background:
     radial-gradient(34% 46% at var(--gj-mx, 20%) var(--gj-my, 24%), rgba(255,255,255,.9), rgba(255,255,255,0) 70%),
     linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.5) 55%, rgba(255,255,255,.6)) !important;
 }
 @supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
   @media (hover: hover) and (pointer: fine) {
-    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), #slides-container .play-button) {
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), [id="slides-container"] .play-button) {
       backdrop-filter: var(--gj-bubble) saturate(160%) brightness(1.3);
     }
+  }
+}
+
+/* 21o. POSTER BUTTONS = GLASS BEADS (v2.5.1): the big play button in the middle of a hovered poster and the ✓ ♥ ⋮ under
+   it are clear glass while the card is hovered (not only when the button itself is): no tint, a glint, the bevel,
+   and in Chromium a strong bead lens (--gj-bubble-fab) that magnifies and bends the artwork. Only the hovered card has
+   them, so this stays one small group of layers (PERF-P1). */
+html .card .cardOverlayFab-primary {
+  color: #fff; border-radius: 50%;
+  background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.42), rgba(255,255,255,0) 70%), rgba(255,255,255,.06) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 2px 2px 2px -1px rgba(255,255,255,.95), inset -2px -2px 2px -1px rgba(255,255,255,.6),
+              inset 0 0 0 3px rgba(0,0,0,.06), inset 0 0 14px rgba(255,255,255,.12), 0 8px 22px rgba(0,0,0,.35) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(160%) brightness(1.1); backdrop-filter: blur(6px) saturate(160%) brightness(1.1);
+  transition: transform 420ms var(--gj-spring);
+}
+html .card .cardOverlayFab-primary .material-icons { text-shadow: 0 1px 4px rgba(0,0,0,.55); }
+html .card .cardOverlayFab-primary:hover { transform: scale(1.1); }
+@supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.layout-mobile):not(.layout-tv) .card:is(:hover, :focus-within) .cardOverlayFab-primary {
+      backdrop-filter: var(--gj-bubble-fab) saturate(150%) brightness(1.1);
+    }
+    /* hovering the bead itself keeps the big lens (the generic round-button hover of 21j would swap in a weaker one) */
+    html:not(.layout-mobile):not(.layout-tv) .card:is(:hover, :focus-within) .cardOverlayFab-primary.cardOverlayButton.itemAction:is(:hover, :focus-visible) {
+      backdrop-filter: var(--gj-bubble-fab) saturate(160%) brightness(1.16);
+      background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%), rgba(255,255,255,.08) !important;
+    }
+    html:not(.layout-mobile):not(.layout-tv) .card:is(:hover, :focus-within) .cardOverlayButton:not(.cardOverlayFab-primary) {
+      background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.4), rgba(255,255,255,0) 70%), rgba(255,255,255,.05);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.9), inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.55), inset 0 0 10px rgba(255,255,255,.1);
+      backdrop-filter: var(--gj-bubble-s) saturate(140%) brightness(1.08);
+    }
+    html:not(.layout-mobile):not(.layout-tv) .card:is(:hover, :focus-within) .cardOverlayButton .material-icons { text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+    /* watched / favourite stay recognisable: whiter glass, white glyph */
+    html:not(.layout-mobile):not(.layout-tv) .card:is(:hover, :focus-within) .cardOverlayButton:is(.playstatebutton-played, :has(.ratingbutton-icon-withrating), :has(> .MuiSvgIcon-colorError)) {
+      background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%), rgba(255,255,255,.34);
+    }
+    html:not(.layout-mobile):not(.layout-tv) .card:is(:hover, :focus-within) .cardOverlayButton :is(.playstatebutton-icon-played, .ratingbutton-icon-withrating) { color: #fff; }
   }
 }

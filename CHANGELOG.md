@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.5.1 — 2026-10-09
+
+- Poster buttons are glass beads while the card is hovered (not only when the button itself is): the big play button
+  gets a strong magnifying lens (`--gj-bubble-fab`), ✓ ♥ ⋮ the round-bead lens; watched / favourite stay whiter.
+- Hover rules no longer carry `#slides-container` inside `:is()` lists (the ID made them outrank everything, e.g. the
+  play bead lost its big lens when hovered directly).
+
 ## v2.5.0 — 2026-10-09 · Liquid everything + glass logo
 
 - Menus, action sheets, dialogs, drawers and the dashboard sidebar, the player panel, the now-playing bar, toasts and
