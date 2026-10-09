@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.4.0 — 2026-10-09 · Clear capsules
+
+- Header capsules, the library toolbar and the search pill are a glass rod in Chromium: no blur any more, only a strong
+  lens (`--gj-lens-cap`) that bends and stretches what scrolls underneath, with a light tint, white labels and a
+  stronger text shadow for legibility. Safari / Firefox keep frosted capsules.
+- The header scroll edge no longer blurs (it fogged everything under the capsules); the dark fade stays.
+
 ## v2.3.1 — 2026-10-09
 
 - The selected tab is a glass lens instead of a grey pill (it read as a blur): bright outline and bevel, gloss over
