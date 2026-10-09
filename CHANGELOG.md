@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.1.0 — 2026-10-09 · Liquid hover
+
+- Hover is glass now: tabs, header icons, toolbar, details and Media Bar buttons, poster buttons, menu rows and
+  drawer items turn into a droplet of brighter glass with a specular rim and a springy grow.
+- The light follows the cursor: new `src/js/hover.js` (File Transformation ...0002, `--no-hover-light` to skip) sets
+  `--gj-mx` / `--gj-my` on the hovered element; without it the light sits at the top centre (CSS-only installs).
+- Posters: glass rim + a highlight that follows the pointer on the lifted card.
+- Menus: rows sit inside the glass with a 6px inset and no hairlines; the delete row lights up red.
+
 ## v2.0.0 — 2026-10-09 · Liquid Glass
 
 First public release, as **GlassJelly** (v1 was a private "Apple TV" theme).

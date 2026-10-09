@@ -14,7 +14,7 @@ What it writes
   1. Dashboard > General > Branding > Custom CSS: the theme, between the GLASSJELLY BEGIN/END markers (anything else
      you have there is kept). --cdn writes a one-line @import of the jsDelivr copy instead of the whole file.
   2. If the File Transformation plugin is installed, small scripts in index.html (all optional, see --no-*):
-       ...0002 backdrops default + ambient background + favicon + Skip Intro dock   ...0003 dashboard CSS
+       ...0002 backdrops default + ambient background + favicon + Skip Intro dock + hover light   ...0003 dashboard CSS
        ...0004 early logo / startup screen (before </head>)
      Without the plugin you get the CSS-only theme (no ambient artwork background, admin pages stay stock).
   3. The login background (Branding > Splash screen) = assets/splash.png, unless --no-splash / --no-logo.
@@ -26,7 +26,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = "FlorinCamarut1/glassjelly"
 THEME_FILE = os.path.join(HERE, "dist", "glassjelly.css")
 EARLY_FILE = os.path.join(HERE, "src", "early.css")
-JS = {n: os.path.join(HERE, "src", "js", n + ".js") for n in ("backdrops", "ambient", "favicon", "player", "dashboard")}
+JS = {n: os.path.join(HERE, "src", "js", n + ".js") for n in ("backdrops", "ambient", "favicon", "player", "hover", "dashboard")}
 SPLASH_FILE = os.path.join(HERE, "assets", "splash.png")
 BACKUP_DIR = os.path.join(HERE, "backups")
 SPLASH_ORIG_NOTE = os.path.join(BACKUP_DIR, "splashscreen-original.txt")
@@ -160,7 +160,7 @@ def script(name):
 
 def theme_js(o):
     parts = [script(n) for n, on in (("backdrops", o["backdrops"]), ("ambient", o["ambient"]), ("favicon", o["logo"]),
-                                    ("player", o["player"])) if on]
+                                    ("player", o["player"]), ("hover", o["hover"])) if on]
     return ("".join(parts) + "</body>") if parts else None
 
 
@@ -333,6 +333,7 @@ def main():
     ap.add_argument("--no-dashboard", action="store_true", help="leave the admin dashboard stock")
     ap.add_argument("--no-backdrops-default", action="store_true", help="do not switch Backdrops on for new devices")
     ap.add_argument("--no-skip-dock", action="store_true", help="leave Skip Intro where Jellyfin puts it")
+    ap.add_argument("--no-hover-light", action="store_true", help="hover highlights stay centred (no cursor-following script)")
     a = ap.parse_args()
 
     if not a.uninstall and not a.restore and not os.path.exists(THEME_FILE):
@@ -374,8 +375,9 @@ def main():
     if not a.restore:
         on = not a.uninstall
         o = {"backdrops": on and not a.no_backdrops_default, "ambient": on and not a.no_ambient,
-             "logo": on and not a.no_logo, "player": on and not a.no_skip_dock, "dashboard": on and not a.no_dashboard}
-        label = " + ".join(n for n in ("backdrops", "ambient", "favicon", "player") if o["logo" if n == "favicon" else n]) or "none"
+             "logo": on and not a.no_logo, "player": on and not a.no_skip_dock, "hover": on and not a.no_hover_light,
+             "dashboard": on and not a.no_dashboard}
+        label = " + ".join(n for n in ("backdrops", "ambient", "favicon", "player", "hover") if o["logo" if n == "favicon" else n]) or "none"
         has_ft = set_transformations(api, [(THEME_ID, theme_js(o), label, "</body>"),
                                            (DASHBOARD_ID, (script("dashboard") + "</body>") if o["dashboard"] else None, "dashboard", "</body>"),
                                            (EARLY_ID, early_head(theme, o["logo"]), "early logo", "</head>")], a.dry_run)
@@ -384,7 +386,7 @@ def main():
                   "  Add it from https://www.iamparadox.dev/jellyfin/plugins/manifest.json and run this again for the full theme.")
         if has_ft:
             expect = {"__gjBackdrops": o["backdrops"], "__gjAmbient": o["ambient"], "__gjLogo": o["logo"],
-                      "__gjSkipDock": o["player"], "__gjDashCss": o["dashboard"], EARLY_MARK: o["logo"]}
+                      "__gjSkipDock": o["player"], "__gjHover": o["hover"], "__gjDashCss": o["dashboard"], EARLY_MARK: o["logo"]}
         set_splash(api, o["logo"] and not a.no_splash, a.dry_run)
     if not a.dry_run:
         verify(api, BEGIN in new, expect, had_sub_rule)

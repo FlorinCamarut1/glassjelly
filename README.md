@@ -26,6 +26,8 @@ current artwork glowing through as an ambient background, white accent like tvOS
 - **Everything themed**: home, libraries, details, search, menus and action sheets, dialogs, login, settings, the
   admin dashboard, iOS-style switches. Styles the Media Bar Enhanced, Home Screen Sections and Jellyfin Enhanced plugins
   when you have them.
+- **Liquid hover**: whatever is under the mouse — tabs, header icons, buttons, menu rows — becomes a droplet of
+  brighter glass lit from the cursor, posters get a glass rim and a highlight that follows the pointer.
 - **Jelly press**: glass buttons squash a little when pressed and spring back.
 - **Accessible**: honours *Reduce transparency* (solid materials) and *Reduce motion*.
 - **Fast**: glass only on single, large surfaces — never on the hundreds of per-card buttons (each blurred element is a
@@ -45,11 +47,11 @@ current artwork glowing through as an ambient background, white accent like tvOS
 Dashboard → General → **Branding** → **Custom CSS**, paste, **Save**, then reload the page (Ctrl+F5):
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.0.0/dist/glassjelly.css");
+@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.1.0/dist/glassjelly.css");
 ```
 
 Keep Jellyfin's own logo and your server name in the header? Use `dist/glassjelly-nologo.css` instead.
-Pin a tag (`@v2.0.0`) so an update never surprises you; change it when you want a new version.
+Pin a tag (`@v2.1.0`) so an update never surprises you; change it when you want a new version.
 
 ### Option B — installer (full theme)
 
@@ -74,6 +76,7 @@ the changes.
 | `--no-dashboard` | leave the admin dashboard stock |
 | `--no-skip-dock` | leave Skip Intro where Jellyfin puts it |
 | `--no-backdrops-default` | do not switch *Backdrops* on for devices that never chose |
+| `--no-hover-light` | hover highlights stay centred (no cursor-following script) |
 | `--no-font` | system fonts only (no Inter from jsDelivr) |
 
 **Update**: `git pull && python3 install.py --url ...` (same options). **Remove**: `python3 install.py --uninstall`;

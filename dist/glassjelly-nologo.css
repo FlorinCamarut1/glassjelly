@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.0.0";
+  --gj-version: "2.1.0";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -1289,4 +1289,77 @@ html :is(header.MuiAppBar-root .MuiStack-root > .MuiButton-root, header.MuiAppBa
       backdrop-filter: var(--gj-lens) var(--gj-blur-l); clip-path: inset(0 round var(--gj-r-m));
     }
   }
+}
+
+/* 21h. HOVER = LIQUID GLASS (v2.1). What sits under the pointer turns into a small droplet of brighter glass: a
+   gradient lit from the cursor (--gj-mx / --gj-my, set by js/hover.js; without the script the light sits at the top
+   centre), a specular rim and a soft shadow, with a springy grow. Menu rows get the same droplet as a pill; posters
+   get a glass rim and a highlight that follows the cursor. No backdrop-filter anywhere here: hover must stay cheap. */
+/* declared on the hovered element itself, not on :root: a var() inside a custom property is resolved where the property
+   is declared, so on :root the cursor position (set on the element by js/hover.js) would never reach the gradient */
+html :is(.MuiButton-root, .MuiIconButton-root, .MuiTab-root, .MuiMenuItem-root, .MuiListItemButton-root, .detailButton, .actionSheetMenuItem,
+  .paper-icon-button-light, .emby-button, .emby-tab-button, .navMenuOption, .cardOverlayButton, #slides-container button, option):hover {
+  --gj-drop: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.34) 0%, rgba(255,255,255,.15) 42%, rgba(255,255,255,.08) 100%);
+  --gj-drop-soft: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.22) 0%, rgba(255,255,255,.09) 45%, rgba(255,255,255,.05) 100%);
+  --gj-drop-rim: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -.5px 0 rgba(255,255,255,.18), inset 0 0 0 .5px rgba(255,255,255,.24),
+                 inset 0 0 12px rgba(255,255,255,.07), 0 6px 16px rgba(0,0,0,.26);
+  --gj-drop-rim-flat: inset 0 1px 0 rgba(255,255,255,.4), inset 0 0 0 .5px rgba(255,255,255,.2), inset 0 0 12px rgba(255,255,255,.06);
+}
+@media (hover: hover) and (pointer: fine) {
+  /* capsule items: header nav, header icons, header tabs, library toolbar, player buttons */
+  html header.MuiAppBar-root .MuiStack-root > .MuiButton-root:not(.MuiButton-colorPrimary):hover,
+  html header.MuiAppBar-root .MuiTab-root:not(.Mui-selected):hover, html .headerTabs .emby-tab-button:not(.emby-tab-button-active):hover,
+  html .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root:hover {
+    background: var(--gj-drop-soft) !important; box-shadow: var(--gj-drop-rim-flat) !important; color: #fff; transform: scale(1.04);
+  }
+  html header.MuiAppBar-root .MuiStack-root > .MuiButton-root.MuiButton-colorPrimary:hover { background: var(--gj-drop); transform: scale(1.04); }
+  html header.MuiAppBar-root .MuiIconButton-root:hover, html .skinHeader .headerButton:hover,
+  html .videoOsdBottom .buttons .paper-icon-button-light:hover:not(:disabled) {
+    background: var(--gj-drop) !important; box-shadow: var(--gj-drop-rim-flat); color: #fff; transform: scale(1.08);
+  }
+  /* round glass buttons (details page, Media Bar, poster ✓ ♥ ⋮, login) and plain pills */
+  html .itemDetailPage .detailButton:not(.btnPlay):not(.btnResume):hover,
+  html #slides-container :is(.detail-button, .favorite-button, .trailer-button, .arrow, .pause-button):hover,
+  html .card:is(:hover, :focus-within) .cardOverlayButton:hover,
+  html #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer):hover,
+  html :is(.raised:not(.button-submit), .button-cancel, .MuiButton-contained:not(.MuiButton-containedPrimary):not(.MuiButton-containedError), .MuiButton-outlined):hover {
+    background: var(--gj-drop), rgba(255,255,255,.06) !important; box-shadow: var(--gj-drop-rim) !important; color: #fff;
+  }
+  html .itemDetailPage .detailButton:not(.btnPlay):not(.btnResume):hover { transform: scale(1.1); }
+  html #slides-container :is(.detail-button, .favorite-button, .trailer-button, .pause-button):hover { transform: scale(1.08); }
+  html .card:is(:hover, :focus-within) .cardOverlayButton:hover { transform: scale(1.12); }
+  html .card .cardOverlayButton { transition: transform 420ms var(--gj-spring), background-color var(--gj-dur-fast) var(--gj-ease); }
+  /* white primary pills keep their white, but get the rim + a lit top */
+  html :is(.button-submit, .MuiButton-containedPrimary, #slides-container .play-button, .itemDetailPage .detailButton:is(.btnPlay, .btnResume)):hover {
+    background: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), #fff 0%, #f2f2f7 55%, #e2e2ea 100%) !important;
+    box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.08), 0 8px 22px rgba(0,0,0,.35) !important;
+  }
+
+  /* menu rows: action sheets, MUI menus / selects, the customizable <select> picker, drawers and the dashboard sidebar */
+  html .actionSheet .actionSheetScroller { padding: 6px; box-sizing: border-box; }
+  html .actionSheetMenuItem { border-radius: var(--gj-r-s); transition: transform 380ms var(--gj-spring), background-color var(--gj-dur-fast) var(--gj-ease); }
+  html .actionSheetMenuItem:hover, html .MuiMenuItem-root:hover, html .MuiDrawer-paper .MuiListItemButton-root:hover, html .navMenuOption:hover,
+  html select.emby-select-withcolor option:hover {
+    background: var(--gj-drop-soft) !important; box-shadow: var(--gj-drop-rim-flat) !important; color: #fff;
+  }
+  html .actionSheetMenuItem:hover, html .MuiMenuItem-root:hover { transform: scale(1.015); }
+  html .actionSheetMenuItem:hover .actionsheetMenuItemIcon { color: #fff; }
+  html .actionSheetMenuItem[data-id="delete"]:hover { background: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,69,58,.32), rgba(255,69,58,.14) 50%, rgba(255,69,58,.08)) !important; color: #ff6961; }
+  html .actionSheetMenuItem + .actionSheetMenuItem { box-shadow: none; }   /* rows are droplets now: no hairlines (they curved on the rounded rows) */
+  html .MuiMenuItem-root { transition: transform 380ms var(--gj-spring), background-color var(--gj-dur-fast) var(--gj-ease); }
+
+  /* posters: glass rim + a highlight that follows the cursor across the art, on the lifted card only */
+  html body:not(.dashboardDocument) .card:not(.overflowSquareCard-tv) .cardScalable::after {
+    content: ""; position: absolute; inset: 0; z-index: 2; border-radius: var(--gj-r-card); pointer-events: none;
+    background: radial-gradient(70% 55% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.22), rgba(255,255,255,.05) 55%, rgba(255,255,255,0) 75%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), inset 0 0 0 1px rgba(255,255,255,.16), inset 0 -1px 0 rgba(255,255,255,.08);
+    opacity: 0; transition: opacity var(--gj-dur) var(--gj-ease);
+  }
+  html body:not(.dashboardDocument) .card:not(.overflowSquareCard-tv):hover .cardScalable::after { opacity: 1; }
+  html body:not(.dashboardDocument) .card .cardScalable .cardOverlayContainer { z-index: 3; }   /* buttons above the highlight */
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  html :is(header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root, .MuiButtonGroup-root > .MuiButton-root,
+    .itemDetailPage .detailButton, #slides-container button, .cardOverlayButton, .actionSheetMenuItem, .MuiMenuItem-root,
+    .videoOsdBottom .paper-icon-button-light):hover { transform: none; }
 }
