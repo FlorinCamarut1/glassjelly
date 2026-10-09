@@ -253,6 +253,9 @@ def set_splash(api, want, dry):
         if ours is None:
             print("  login background: assets/splash.png missing, skipped"); return
         if same:
+            if not dry and not os.path.exists(SPLASH_MARK):   # remember it is ours, so a later version replaces it cleanly
+                os.makedirs(BACKUP_DIR, exist_ok=True)
+                open(SPLASH_MARK, "w").close()
             print("  login background: up to date"); return
         if dry:
             print("  login background (dry run): would upload assets/splash.png"); return
