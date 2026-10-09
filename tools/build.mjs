@@ -15,13 +15,13 @@ export const LENS = { rim: 8, soft: 6, scale: 40, reach: 4 };     // panels, men
 export const LENS_CAP = { rim: 6, soft: 8, scale: 74, reach: 5 }; // clear capsules: a glass rod, no blur (v2.4)
 export const LENS_PANEL = { rim: 10, soft: 10, scale: 70, reach: 6 }; // clear menus, dialogs, drawers, player (v2.5)
 export const LENS_S = { rim: 4, soft: 3, scale: 14, reach: 3 };   // (unused since v2.2: round buttons use BUBBLE_S)
-export const BUBBLE = { core: 0.5, scale: 58, spread: 0.4 };   // clear hover droplet: pills, menu rows (dispersion)
-export const BUBBLE_HS = { core: 0.5, scale: 34, spread: 0.4 }; // clear hover droplet: round buttons
-export const BUBBLE_S = { core: 0.25, scale: 30 };              // round buttons (44 px)
-export const BUBBLE_FAB = { core: 0.3, scale: 64, spread: 0.45 }; // big play bead on a hovered poster (v2.5.1)
+export const BUBBLE = { rim: 4, soft: 10, scale: 62, reach: 7 };   // hover droplet: pills, menu rows (dispersion)
+export const BUBBLE_HS = { rim: 3, soft: 9, scale: 52, reach: 7 }; // hover droplet: round buttons 34-48 px
+export const BUBBLE_S = { rim: 3, soft: 9, scale: 46, reach: 7 };            // round buttons at rest
+export const BUBBLE_FAB = { rim: 4, soft: 12, scale: 70, reach: 8 }; // big play bead on a hovered poster
 
 let css = fs.readFileSync(SRC, 'utf8');
-const tokens = `/* lens:begin */\n  --gj-lens: ${lens(LENS)};\n  --gj-lens-cap: ${lens(LENS_CAP)};\n  --gj-lens-panel: ${lens(LENS_PANEL)};\n  --gj-lens-s: ${bubble(BUBBLE_S)};\n  --gj-bubble: ${bubbleCA(BUBBLE)};\n  --gj-bubble-s: ${bubbleCA(BUBBLE_HS)};\n  --gj-bubble-fab: ${bubbleCA(BUBBLE_FAB)};\n  /* lens:end */`;
+const tokens = `/* lens:begin */\n  --gj-lens: ${lens(LENS)};\n  --gj-lens-cap: ${lens(LENS_CAP)};\n  --gj-lens-panel: ${lens(LENS_PANEL)};\n  --gj-lens-s: ${lens(BUBBLE_S)};\n  --gj-bubble: ${lens(BUBBLE)};\n  --gj-bubble-s: ${lens(BUBBLE_HS)};\n  --gj-bubble-fab: ${lens(BUBBLE_FAB)};\n  /* lens:end */`;
 const re = /\/\* lens:begin \*\/[\s\S]*?\/\* lens:end \*\//;
 if (!re.test(css)) throw new Error('lens markers missing in src/glassjelly.css');
 css = css.replace(re, tokens);

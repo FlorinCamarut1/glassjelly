@@ -7,7 +7,7 @@
 //                                                          the thick edge of a lens; the interior is untouched.
 // Corners: the box is a rectangle, so the element also gets clip-path: inset(0 round R) (Chromium does not clip
 // url() backdrop filters to border-radius anyway).
-export function lens({ rim = 10, soft = 7, scale = 36, reach = 4 } = {}) {
+export function lens({ rim = 10, soft = 7, scale = 36, reach = 4, spread = 0 } = {}) {
   const k = ['-1', ...Array(2 * reach - 1).fill('0'), '1'].join(' ');
   const n = 2 * reach + 1;
   const svg =
@@ -21,12 +21,25 @@ export function lens({ rim = 10, soft = 7, scale = 36, reach = 4 } = {}) {
     "<feColorMatrix in='gx' type='matrix' values='1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1' result='rx'/>" +
     "<feColorMatrix in='gy' type='matrix' values='0 0 0 0 0 0 1 0 0 0 0 0 0 0 .5 0 0 0 0 1' result='ry'/>" +
     "<feComposite in='rx' in2='ry' operator='arithmetic' k2='1' k3='1' result='m'/>" +
-    `<feDisplacementMap in='SourceGraphic' in2='m' scale='${scale}' xChannelSelector='R' yChannelSelector='G'/>` +
+    (spread ? dispersion(scale, spread) : `<feDisplacementMap in='SourceGraphic' in2='m' scale='${scale}' xChannelSelector='R' yChannelSelector='G'/>`) +
     "<feGaussianBlur stdDeviation='.5'/>" +   // feDisplacementMap samples nearest-neighbour: smooth the stair steps
     '</filter></svg>';
   return 'url("data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27') + '#lg")';
 }
 
+// red / green / blue displaced by slightly different amounts: the colour fringes of real glass at the rim
+function dispersion(scale, spread) {
+  const d = (s, r) => `<feDisplacementMap in='SourceGraphic' in2='m' scale='${+s.toFixed(1)}' xChannelSelector='R' yChannelSelector='G' result='${r}'/>`;
+  const k = (i, r, row) => `<feColorMatrix in='${i}' type='matrix' values='${row}' result='${r}'/>`;
+  return d(scale, 'dr') + d(scale * (1 - spread / 2), 'dg') + d(scale * (1 - spread), 'db') +
+    k('dr', 'r', '1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0') + k('dg', 'g', '0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0') +
+    k('db', 'b', '0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0') +
+    "<feBlend in='r' in2='g' mode='screen' result='rg'/><feBlend in='rg' in2='b' mode='screen'/>";
+}
+
+// NOTE (v2.5.2): bubble() / bubbleCA() below use an feImage displacement map. In backdrop-filter, current Chromium
+// renders it with almost no displacement (tested at 58 and 130 px), so the theme no longer uses them: round and
+// hover lenses are lens() with a large soft value, which makes the box field nearly radial.
 // "Hollow" bubble lens for round things and hover droplets: a shape-aware displacement map (feImage, stretched to the
 // element box with percentages): directional R/G gradients = normals, covered in the middle by a neutral grey disc that
 // fades out toward the edge -> a clear centre and a thick, strongly bending rim, like a glass bead.

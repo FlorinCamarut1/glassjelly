@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.5.2 — 2026-10-09
+
+- Round buttons and hover droplets really refract now. The feImage-based bubble lens (v2.2–2.5.1) produced almost no
+  displacement inside backdrop-filter; every bead, poster button and hover lens is now the procedural lens() with a
+  large soft radius (nearly radial on circles). The poster play bead bends the artwork clearly. Dispersion dropped
+  (it left green fringes at the corners).
+- Phones: the header icon cluster and the avatar are rounded glass capsules (they were square boxes on iPhone).
+
 ## v2.5.1 — 2026-10-09
 
 - Poster buttons are glass beads while the card is hovered (not only when the button itself is): the big play button
