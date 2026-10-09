@@ -27,12 +27,12 @@ export function lens({ rim = 10, soft = 7, scale = 36, reach = 4 } = {}) {
 }
 
 // "Hollow" bubble lens for round things and hover droplets: a shape-aware displacement map (feImage, stretched to the
-// element box with percentages): directional R/G gradients = outward normals, covered in the middle by a neutral grey
-// disc that fades out toward the edge -> a clear centre and a thick, strongly bending rim, like a glass bead.
+// element box with percentages): directional R/G gradients = normals, covered in the middle by a neutral grey disc that
+// fades out toward the edge -> a clear centre and a thick, strongly bending rim, like a glass bead.
 // On a circle the rim is exactly round; on a pill it becomes an ellipse (the ends bend most, as on real glass).
-// core = radius (0..1) of the clear centre, scale = displacement in px.
-export function bubble({ core = 0.55, scale = 40, magnify = true } = {}) {
-  const [a, b] = magnify ? ['f', '0'] : ['0', 'f'];   // magnify: sample toward the centre (convex lens)
+// core = radius (0..1) of the undistorted centre, scale = displacement in px, magnify = sample toward the centre.
+function bubbleMap(core, magnify) {
+  const [a, b] = magnify ? ['f', '0'] : ['0', 'f'];
   const map =
     "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none' width='100' height='100'>" +
     `<defs><linearGradient id='x'><stop offset='0' stop-color='#${a}00'/><stop offset='1' stop-color='#${b}00'/></linearGradient>` +
@@ -41,9 +41,23 @@ export function bubble({ core = 0.55, scale = 40, magnify = true } = {}) {
     "<stop offset='1' stop-color='#808080' stop-opacity='0'/></radialGradient></defs>" +
     "<rect width='100' height='100' fill='url(#x)'/><rect width='100' height='100' fill='url(#y)' style='mix-blend-mode:screen'/>" +
     "<rect width='100' height='100' fill='url(#m)'/></svg>";
-  const svg =
-    "<svg xmlns='http://www.w3.org/2000/svg'><filter id='lg' x='0%' y='0%' width='100%' height='100%' color-interpolation-filters='sRGB'>" +
-    `<feImage href='data:image/svg+xml,${encodeURIComponent(map)}' x='0%' y='0%' width='100%' height='100%' preserveAspectRatio='none' result='m'/>` +
-    `<feDisplacementMap in='SourceGraphic' in2='m' scale='${scale}' xChannelSelector='R' yChannelSelector='G'/></filter></svg>`;
-  return 'url("data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27') + '#lg")';
+  return `<feImage href='data:image/svg+xml,${encodeURIComponent(map)}' x='0%' y='0%' width='100%' height='100%' preserveAspectRatio='none' result='m'/>`;
+}
+const wrap = body => 'url("data:image/svg+xml,' + encodeURIComponent(
+  "<svg xmlns='http://www.w3.org/2000/svg'><filter id='lg' x='0%' y='0%' width='100%' height='100%' color-interpolation-filters='sRGB'>" +
+  body + '</filter></svg>').replace(/'/g, '%27') + '#lg")';
+const disp = (s, r) => `<feDisplacementMap in='SourceGraphic' in2='m' scale='${+s.toFixed(1)}' xChannelSelector='R' yChannelSelector='G'${r ? ` result='${r}'` : ''}/>`;
+
+export function bubble({ core = 0.55, scale = 40, magnify = true } = {}) {
+  return wrap(bubbleMap(core, magnify) + disp(scale));
+}
+
+// bubble() + chromatic dispersion: red, green and blue bend by slightly different amounts, so the rim gets the faint
+// colour fringes of real glass; the centre stays neutral (grey map) -> no fringes there. spread = blue vs red (0..1).
+export function bubbleCA({ core = 0.2, scale = 46, spread = 0.22, magnify = true } = {}) {
+  const keep = (i, r, row) => `<feColorMatrix in='${i}' type='matrix' values='${row}' result='${r}'/>`;
+  return wrap(bubbleMap(core, magnify) + disp(scale, 'dr') + disp(scale * (1 - spread / 2), 'dg') + disp(scale * (1 - spread), 'db') +
+    keep('dr', 'r', '1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0') + keep('dg', 'g', '0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0') +
+    keep('db', 'b', '0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0') +
+    "<feBlend in='r' in2='g' mode='screen' result='rg'/><feBlend in='rg' in2='b' mode='screen'/>");
 }

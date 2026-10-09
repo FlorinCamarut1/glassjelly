@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.3.0 — 2026-10-09 · Clear glass hover
+
+- Hover in Chromium desktop browsers is pure glass, like Apple's Liquid Glass artwork: no tint, no frost, a thick
+  refracting rim with colour dispersion (`bubbleCA()`: red, green and blue bend by different amounts), a thin bright
+  outline and a small glint. Pills/menu rows use `--gj-bubble`, round buttons `--gj-bubble-s`.
+- The capsule around a hovered item drops its frost, so the droplet bends the real picture instead of a blur.
+- Safari / Firefox keep the lit droplet of v2.1 (a clear droplet would be invisible without the lens).
+
 ## v2.2.0 — 2026-10-09 · Control Center glass
 
 - Thick bevelled rim on every glass surface, lit from the top-left with a reflection bottom-right (iOS 26 Control
