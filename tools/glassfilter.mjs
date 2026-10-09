@@ -25,3 +25,25 @@ export function lens({ rim = 10, soft = 7, scale = 36, reach = 4 } = {}) {
     '</filter></svg>';
   return 'url("data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27') + '#lg")';
 }
+
+// "Hollow" bubble lens for round things and hover droplets: a shape-aware displacement map (feImage, stretched to the
+// element box with percentages): directional R/G gradients = outward normals, covered in the middle by a neutral grey
+// disc that fades out toward the edge -> a clear centre and a thick, strongly bending rim, like a glass bead.
+// On a circle the rim is exactly round; on a pill it becomes an ellipse (the ends bend most, as on real glass).
+// core = radius (0..1) of the clear centre, scale = displacement in px.
+export function bubble({ core = 0.55, scale = 40, magnify = true } = {}) {
+  const [a, b] = magnify ? ['f', '0'] : ['0', 'f'];   // magnify: sample toward the centre (convex lens)
+  const map =
+    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none' width='100' height='100'>" +
+    `<defs><linearGradient id='x'><stop offset='0' stop-color='#${a}00'/><stop offset='1' stop-color='#${b}00'/></linearGradient>` +
+    `<linearGradient id='y' x2='0' y2='1'><stop offset='0' stop-color='#0${a}0'/><stop offset='1' stop-color='#0${b}0'/></linearGradient>` +
+    `<radialGradient id='m'><stop offset='0' stop-color='#808080'/><stop offset='${core}' stop-color='#808080'/>` +
+    "<stop offset='1' stop-color='#808080' stop-opacity='0'/></radialGradient></defs>" +
+    "<rect width='100' height='100' fill='url(#x)'/><rect width='100' height='100' fill='url(#y)' style='mix-blend-mode:screen'/>" +
+    "<rect width='100' height='100' fill='url(#m)'/></svg>";
+  const svg =
+    "<svg xmlns='http://www.w3.org/2000/svg'><filter id='lg' x='0%' y='0%' width='100%' height='100%' color-interpolation-filters='sRGB'>" +
+    `<feImage href='data:image/svg+xml,${encodeURIComponent(map)}' x='0%' y='0%' width='100%' height='100%' preserveAspectRatio='none' result='m'/>` +
+    `<feDisplacementMap in='SourceGraphic' in2='m' scale='${scale}' xChannelSelector='R' yChannelSelector='G'/></filter></svg>`;
+  return 'url("data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27') + '#lg")';
+}

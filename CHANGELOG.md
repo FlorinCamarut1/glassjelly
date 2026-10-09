@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.2.0 — 2026-10-09 · Control Center glass
+
+- Thick bevelled rim on every glass surface, lit from the top-left with a reflection bottom-right (iOS 26 Control
+  Center look); capsules, header icons, search, details and Media Bar buttons are clear glass now.
+- Hollow-glass lens: a shape-aware "bubble" displacement (`bubble()` in `tools/glassfilter.mjs`: clear magnified
+  centre, strongly bending rim). Round buttons are glass beads at rest (no more square artefact of the box lens on
+  circles) and every hovered control or menu row becomes a hollow glass droplet (Chromium desktop).
+
 ## v2.1.0 — 2026-10-09 · Liquid hover
 
 - Hover is glass now: tabs, header icons, toolbar, details and Media Bar buttons, poster buttons, menu rows and

@@ -6,15 +6,17 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { lens } from './glassfilter.mjs';
+import { lens, bubble } from './glassfilter.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'src', 'glassjelly.css');
 export const LENS = { rim: 8, soft: 6, scale: 30, reach: 4 };     // panels, capsules, menus
-export const LENS_S = { rim: 4, soft: 3, scale: 14, reach: 3 };   // small round buttons
+export const LENS_S = { rim: 4, soft: 3, scale: 14, reach: 3 };   // (unused since v2.2: round buttons use BUBBLE_S)
+export const BUBBLE = { core: 0.2, scale: 46 };                  // hollow-glass hover droplet: pills, menu rows
+export const BUBBLE_S = { core: 0.25, scale: 22 };              // round buttons (44 px)
 
 let css = fs.readFileSync(SRC, 'utf8');
-const tokens = `/* lens:begin */\n  --gj-lens: ${lens(LENS)};\n  --gj-lens-s: ${lens(LENS_S)};\n  /* lens:end */`;
+const tokens = `/* lens:begin */\n  --gj-lens: ${lens(LENS)};\n  --gj-lens-s: ${bubble(BUBBLE_S)};\n  --gj-bubble: ${bubble(BUBBLE)};\n  /* lens:end */`;
 const re = /\/\* lens:begin \*\/[\s\S]*?\/\* lens:end \*\//;
 if (!re.test(css)) throw new Error('lens markers missing in src/glassjelly.css');
 css = css.replace(re, tokens);
