@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.5.3 — 2026-10-09
+
+- Hovering the home button (logo + "jellyfin") no longer shows a dark disc around the logo: the droplet lens magnified
+  the backdrop at the rounded end of the pill. That button gets a plain glass hover; the pill hover lens elsewhere
+  bends the rim only (rim 5, soft 5, scale 46) instead of bulging the middle.
+
 ## v2.5.2 — 2026-10-09
 
 - Round buttons and hover droplets really refract now. The feImage-based bubble lens (v2.2–2.5.1) produced almost no
