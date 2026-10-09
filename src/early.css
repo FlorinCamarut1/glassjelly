@@ -2,10 +2,10 @@
    screen is themed from the first frame, before Jellyfin fetches the Branding CSS. Media Bar's loader
    (#page-loader.bar-loading: logo + progress bar) becomes a glass capsule with a glowing white fill; the gap and the
    grey "unfilled" part are hidden (the plugin keeps setting their widths, harmlessly). No dollar sign in here. */
-.bar-loading{background:radial-gradient(42% 38% at 50% 46%,rgba(118,96,226,.16),transparent 72%),linear-gradient(180deg,#15161b,#0d0e12)!important}
+.bar-loading{background:radial-gradient(42% 38% at 50% 46%,rgba(190,205,230,.10),transparent 72%),linear-gradient(180deg,#15161b,#0d0e12)!important}
 .bar-loading .loader-content{gap:34px}
 .bar-loading h1{height:140px}
-.bar-loading .splashLogo{filter:drop-shadow(0 10px 30px rgba(120,100,230,.45))}
+.bar-loading .splashLogo{filter:drop-shadow(0 10px 30px rgba(0,0,0,.55)) drop-shadow(0 0 24px rgba(255,255,255,.2))}
 .bar-loading .progress-container{width:220px;height:10px;padding:2px;box-sizing:border-box;border-radius:99px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.06));border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 0 0 .5px rgba(255,255,255,.16),0 8px 24px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(10px) saturate(180%);backdrop-filter:blur(10px) saturate(180%)}
-.bar-loading .progress-bar{height:100%;border-radius:99px;background:linear-gradient(180deg,#fff,rgba(255,255,255,.78));box-shadow:0 0 10px rgba(150,140,255,.55)}
+.bar-loading .progress-bar{height:100%;border-radius:99px;background:linear-gradient(180deg,#fff,rgba(255,255,255,.78));box-shadow:0 0 10px rgba(255,255,255,.45)}
 .bar-loading .progress-gap,.bar-loading .unfilled-bar{display:none}

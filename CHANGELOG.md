@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.5.0 — 2026-10-09 · Liquid everything + glass logo
+
+- Menus, action sheets, dialogs, drawers and the dashboard sidebar, the player panel, the now-playing bar, toasts and
+  the login form are clear glass slabs in Chromium: a thick refracting rim (`--gj-lens-panel`) that bends what is
+  behind, a darker tint for legibility and only a 4px frost on panels with text (none on the player).
+- Stronger distortion everywhere (capsule lens 56 → 74, panels 70, hover droplets 58 / 34, round beads 30).
+- Play / Resume (details page, Media Bar) are white glass with the lens instead of opaque white pills.
+- Smoother edges: no more `clip-path` on lensed elements (it drew pixelated edges on the GPU; current Chromium clips
+  url() backdrop filters to border-radius itself), and every lens ends in a half-pixel blur that removes the stair
+  steps of `feDisplacementMap`.
+- New logo: the Jellyfin triangle as a slab of clear glass with a drop of white light inside, monochrome like the
+  theme (`tools/logo.mjs` → `assets/logo/glassjelly.svg`, injected as `--gj-logo` by the build); new login
+  background and startup screen to match, no more purple glows.
+
 ## v2.4.0 — 2026-10-09 · Clear capsules
 
 - Header capsules, the library toolbar and the search pill are a glass rod in Chromium: no blur any more, only a strong

@@ -47,11 +47,11 @@ current artwork glowing through as an ambient background, white accent like tvOS
 Dashboard → General → **Branding** → **Custom CSS**, paste, **Save**, then reload the page (Ctrl+F5):
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.4.0/dist/glassjelly.css");
+@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.5.0/dist/glassjelly.css");
 ```
 
 Keep Jellyfin's own logo and your server name in the header? Use `dist/glassjelly-nologo.css` instead.
-Pin a tag (`@v2.4.0`) so an update never surprises you; change it when you want a new version.
+Pin a tag (`@v2.5.0`) so an update never surprises you; change it when you want a new version.
 
 ### Option B — installer (full theme)
 
@@ -127,7 +127,7 @@ replacement text as a regex.
 
 ## Credits
 
-Made by [FlorinCamarut1](https://github.com/FlorinCamarut1). The neon triangle logo is a recolour of the Jellyfin logo
-(see [jellyfin-ux](https://github.com/jellyfin/jellyfin-ux) for its licence); GlassJelly is not affiliated with the
+Made by [FlorinCamarut1](https://github.com/FlorinCamarut1). The glass triangle logo is a reinterpretation of the Jellyfin
+logo (see [jellyfin-ux](https://github.com/jellyfin/jellyfin-ux) for its licence); GlassJelly is not affiliated with the
 Jellyfin project. Inter font by Rasmus Andersson (SIL OFL), served by jsDelivr / Fontsource.
 Theme code: MIT, see [LICENSE](LICENSE).

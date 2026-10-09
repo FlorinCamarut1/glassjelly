@@ -22,6 +22,7 @@ export function lens({ rim = 10, soft = 7, scale = 36, reach = 4 } = {}) {
     "<feColorMatrix in='gy' type='matrix' values='0 0 0 0 0 0 1 0 0 0 0 0 0 0 .5 0 0 0 0 1' result='ry'/>" +
     "<feComposite in='rx' in2='ry' operator='arithmetic' k2='1' k3='1' result='m'/>" +
     `<feDisplacementMap in='SourceGraphic' in2='m' scale='${scale}' xChannelSelector='R' yChannelSelector='G'/>` +
+    "<feGaussianBlur stdDeviation='.5'/>" +   // feDisplacementMap samples nearest-neighbour: smooth the stair steps
     '</filter></svg>';
   return 'url("data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27') + '#lg")';
 }
@@ -46,10 +47,11 @@ function bubbleMap(core, magnify) {
 const wrap = body => 'url("data:image/svg+xml,' + encodeURIComponent(
   "<svg xmlns='http://www.w3.org/2000/svg'><filter id='lg' x='0%' y='0%' width='100%' height='100%' color-interpolation-filters='sRGB'>" +
   body + '</filter></svg>').replace(/'/g, '%27') + '#lg")';
+const SMOOTH = "<feGaussianBlur stdDeviation='.5'/>";   // nearest-neighbour displacement -> soften the stair steps
 const disp = (s, r) => `<feDisplacementMap in='SourceGraphic' in2='m' scale='${+s.toFixed(1)}' xChannelSelector='R' yChannelSelector='G'${r ? ` result='${r}'` : ''}/>`;
 
 export function bubble({ core = 0.55, scale = 40, magnify = true } = {}) {
-  return wrap(bubbleMap(core, magnify) + disp(scale));
+  return wrap(bubbleMap(core, magnify) + disp(scale) + SMOOTH);
 }
 
 // bubble() + chromatic dispersion: red, green and blue bend by slightly different amounts, so the rim gets the faint
@@ -59,5 +61,5 @@ export function bubbleCA({ core = 0.2, scale = 46, spread = 0.22, magnify = true
   return wrap(bubbleMap(core, magnify) + disp(scale, 'dr') + disp(scale * (1 - spread / 2), 'dg') + disp(scale * (1 - spread), 'db') +
     keep('dr', 'r', '1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0') + keep('dg', 'g', '0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0') +
     keep('db', 'b', '0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0') +
-    "<feBlend in='r' in2='g' mode='screen' result='rg'/><feBlend in='rg' in2='b' mode='screen'/>");
+    "<feBlend in='r' in2='g' mode='screen' result='rg'/><feBlend in='rg' in2='b' mode='screen'/>" + SMOOTH);
 }

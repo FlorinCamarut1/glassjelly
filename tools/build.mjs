@@ -7,21 +7,27 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { lens, bubble, bubbleCA } from './glassfilter.mjs';
+import { svg as LOGO } from './logo.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'src', 'glassjelly.css');
-export const LENS = { rim: 8, soft: 6, scale: 30, reach: 4 };     // panels, menus, player (frosted)
-export const LENS_CAP = { rim: 6, soft: 8, scale: 56, reach: 5 }; // clear capsules: a glass rod, no blur (v2.4)
+export const LENS = { rim: 8, soft: 6, scale: 40, reach: 4 };     // panels, menus, player (frosted)
+export const LENS_CAP = { rim: 6, soft: 8, scale: 74, reach: 5 }; // clear capsules: a glass rod, no blur (v2.4)
+export const LENS_PANEL = { rim: 10, soft: 10, scale: 70, reach: 6 }; // clear menus, dialogs, drawers, player (v2.5)
 export const LENS_S = { rim: 4, soft: 3, scale: 14, reach: 3 };   // (unused since v2.2: round buttons use BUBBLE_S)
-export const BUBBLE = { core: 0.55, scale: 44, spread: 0.4 };   // clear hover droplet: pills, menu rows (dispersion)
-export const BUBBLE_HS = { core: 0.55, scale: 26, spread: 0.4 }; // clear hover droplet: round buttons
-export const BUBBLE_S = { core: 0.25, scale: 22 };              // round buttons (44 px)
+export const BUBBLE = { core: 0.5, scale: 58, spread: 0.4 };   // clear hover droplet: pills, menu rows (dispersion)
+export const BUBBLE_HS = { core: 0.5, scale: 34, spread: 0.4 }; // clear hover droplet: round buttons
+export const BUBBLE_S = { core: 0.25, scale: 30 };              // round buttons (44 px)
 
 let css = fs.readFileSync(SRC, 'utf8');
-const tokens = `/* lens:begin */\n  --gj-lens: ${lens(LENS)};\n  --gj-lens-cap: ${lens(LENS_CAP)};\n  --gj-lens-s: ${bubble(BUBBLE_S)};\n  --gj-bubble: ${bubbleCA(BUBBLE)};\n  --gj-bubble-s: ${bubbleCA(BUBBLE_HS)};\n  /* lens:end */`;
+const tokens = `/* lens:begin */\n  --gj-lens: ${lens(LENS)};\n  --gj-lens-cap: ${lens(LENS_CAP)};\n  --gj-lens-panel: ${lens(LENS_PANEL)};\n  --gj-lens-s: ${bubble(BUBBLE_S)};\n  --gj-bubble: ${bubbleCA(BUBBLE)};\n  --gj-bubble-s: ${bubbleCA(BUBBLE_HS)};\n  /* lens:end */`;
 const re = /\/\* lens:begin \*\/[\s\S]*?\/\* lens:end \*\//;
 if (!re.test(css)) throw new Error('lens markers missing in src/glassjelly.css');
 css = css.replace(re, tokens);
+// the logo token comes from tools/logo.mjs (also written to assets/logo/glassjelly.svg by `node tools/logo.mjs`)
+const logoRe = /--gj-logo: url\("data:image\/svg\+xml,[^"]*"\);/;
+if (!logoRe.test(css)) throw new Error('--gj-logo missing');
+css = css.replace(logoRe, '--gj-logo: url("data:image/svg+xml,' + encodeURIComponent(LOGO.trim()).replace(/'/g, '%27') + '");');
 fs.writeFileSync(SRC, css);
 
 const version = (css.match(/--gj-version:\s*"([^"]+)"/) || [])[1];

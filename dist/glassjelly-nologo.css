@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.4.0";
+  --gj-version: "2.5.0";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -79,11 +79,12 @@
      --gj-lens = panels and capsules, --gj-lens-s = round buttons (a round bead lens), --gj-bubble / --gj-bubble-s = the clear
      hover droplet for pills / round buttons (a thick refracting rim with colour dispersion, clear middle) */
   /* lens:begin */
-  --gj-lens: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeMorphology%20in%3D%27SourceAlpha%27%20operator%3D%27erode%27%20radius%3D%278%27%20result%3D%27e%27%2F%3E%3CfeGaussianBlur%20in%3D%27e%27%20stdDeviation%3D%276%27%20result%3D%27b%27%2F%3E%3CfeColorMatrix%20in%3D%27b%27%20type%3D%27matrix%27%20values%3D%270%200%200%201%200%200%200%200%201%200%200%200%200%201%200%200%200%200%200%201%27%20result%3D%27h%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%279%201%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gx%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%271%209%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gy%27%2F%3E%3CfeColorMatrix%20in%3D%27gx%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%27%20result%3D%27rx%27%2F%3E%3CfeColorMatrix%20in%3D%27gy%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%20.5%200%200%200%200%201%27%20result%3D%27ry%27%2F%3E%3CfeComposite%20in%3D%27rx%27%20in2%3D%27ry%27%20operator%3D%27arithmetic%27%20k2%3D%271%27%20k3%3D%271%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2730%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
-  --gj-lens-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeMorphology%20in%3D%27SourceAlpha%27%20operator%3D%27erode%27%20radius%3D%276%27%20result%3D%27e%27%2F%3E%3CfeGaussianBlur%20in%3D%27e%27%20stdDeviation%3D%278%27%20result%3D%27b%27%2F%3E%3CfeColorMatrix%20in%3D%27b%27%20type%3D%27matrix%27%20values%3D%270%200%200%201%200%200%200%200%201%200%200%200%200%201%200%200%200%200%200%201%27%20result%3D%27h%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%2711%201%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gx%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%271%2011%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gy%27%2F%3E%3CfeColorMatrix%20in%3D%27gx%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%27%20result%3D%27rx%27%2F%3E%3CfeColorMatrix%20in%3D%27gy%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%20.5%200%200%200%200%201%27%20result%3D%27ry%27%2F%3E%3CfeComposite%20in%3D%27rx%27%20in2%3D%27ry%27%20operator%3D%27arithmetic%27%20k2%3D%271%27%20k3%3D%271%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2756%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
-  --gj-lens-s: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.25%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2722%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
-  --gj-bubble: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.55%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2744%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dr%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2735.2%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dg%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2726.4%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27db%27%2F%3E%3CfeColorMatrix%20in%3D%27dr%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27r%27%2F%3E%3CfeColorMatrix%20in%3D%27dg%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27g%27%2F%3E%3CfeColorMatrix%20in%3D%27db%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%201%200%200%200%200%200%201%200%27%20result%3D%27b%27%2F%3E%3CfeBlend%20in%3D%27r%27%20in2%3D%27g%27%20mode%3D%27screen%27%20result%3D%27rg%27%2F%3E%3CfeBlend%20in%3D%27rg%27%20in2%3D%27b%27%20mode%3D%27screen%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
-  --gj-bubble-s: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.55%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2726%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dr%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2720.8%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dg%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2715.6%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27db%27%2F%3E%3CfeColorMatrix%20in%3D%27dr%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27r%27%2F%3E%3CfeColorMatrix%20in%3D%27dg%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27g%27%2F%3E%3CfeColorMatrix%20in%3D%27db%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%201%200%200%200%200%200%201%200%27%20result%3D%27b%27%2F%3E%3CfeBlend%20in%3D%27r%27%20in2%3D%27g%27%20mode%3D%27screen%27%20result%3D%27rg%27%2F%3E%3CfeBlend%20in%3D%27rg%27%20in2%3D%27b%27%20mode%3D%27screen%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
+  --gj-lens: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeMorphology%20in%3D%27SourceAlpha%27%20operator%3D%27erode%27%20radius%3D%278%27%20result%3D%27e%27%2F%3E%3CfeGaussianBlur%20in%3D%27e%27%20stdDeviation%3D%276%27%20result%3D%27b%27%2F%3E%3CfeColorMatrix%20in%3D%27b%27%20type%3D%27matrix%27%20values%3D%270%200%200%201%200%200%200%200%201%200%200%200%200%201%200%200%200%200%200%201%27%20result%3D%27h%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%279%201%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gx%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%271%209%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gy%27%2F%3E%3CfeColorMatrix%20in%3D%27gx%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%27%20result%3D%27rx%27%2F%3E%3CfeColorMatrix%20in%3D%27gy%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%20.5%200%200%200%200%201%27%20result%3D%27ry%27%2F%3E%3CfeComposite%20in%3D%27rx%27%20in2%3D%27ry%27%20operator%3D%27arithmetic%27%20k2%3D%271%27%20k3%3D%271%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2740%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
+  --gj-lens-cap: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeMorphology%20in%3D%27SourceAlpha%27%20operator%3D%27erode%27%20radius%3D%276%27%20result%3D%27e%27%2F%3E%3CfeGaussianBlur%20in%3D%27e%27%20stdDeviation%3D%278%27%20result%3D%27b%27%2F%3E%3CfeColorMatrix%20in%3D%27b%27%20type%3D%27matrix%27%20values%3D%270%200%200%201%200%200%200%200%201%200%200%200%200%201%200%200%200%200%200%201%27%20result%3D%27h%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%2711%201%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gx%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%271%2011%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gy%27%2F%3E%3CfeColorMatrix%20in%3D%27gx%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%27%20result%3D%27rx%27%2F%3E%3CfeColorMatrix%20in%3D%27gy%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%20.5%200%200%200%200%201%27%20result%3D%27ry%27%2F%3E%3CfeComposite%20in%3D%27rx%27%20in2%3D%27ry%27%20operator%3D%27arithmetic%27%20k2%3D%271%27%20k3%3D%271%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2774%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
+  --gj-lens-panel: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeMorphology%20in%3D%27SourceAlpha%27%20operator%3D%27erode%27%20radius%3D%2710%27%20result%3D%27e%27%2F%3E%3CfeGaussianBlur%20in%3D%27e%27%20stdDeviation%3D%2710%27%20result%3D%27b%27%2F%3E%3CfeColorMatrix%20in%3D%27b%27%20type%3D%27matrix%27%20values%3D%270%200%200%201%200%200%200%200%201%200%200%200%200%201%200%200%200%200%200%201%27%20result%3D%27h%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%2713%201%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gx%27%2F%3E%3CfeConvolveMatrix%20in%3D%27h%27%20order%3D%271%2013%27%20kernelMatrix%3D%27-1%200%200%200%200%200%200%200%200%200%200%200%201%27%20divisor%3D%271%27%20bias%3D%27.5%27%20preserveAlpha%3D%27true%27%20edgeMode%3D%27duplicate%27%20result%3D%27gy%27%2F%3E%3CfeColorMatrix%20in%3D%27gx%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%27%20result%3D%27rx%27%2F%3E%3CfeColorMatrix%20in%3D%27gy%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%20.5%200%200%200%200%201%27%20result%3D%27ry%27%2F%3E%3CfeComposite%20in%3D%27rx%27%20in2%3D%27ry%27%20operator%3D%27arithmetic%27%20k2%3D%271%27%20k3%3D%271%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2770%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
+  --gj-lens-s: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.25%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2730%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
+  --gj-bubble: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.5%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2758%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dr%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2746.4%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dg%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2734.8%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27db%27%2F%3E%3CfeColorMatrix%20in%3D%27dr%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27r%27%2F%3E%3CfeColorMatrix%20in%3D%27dg%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27g%27%2F%3E%3CfeColorMatrix%20in%3D%27db%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%201%200%200%200%200%200%201%200%27%20result%3D%27b%27%2F%3E%3CfeBlend%20in%3D%27r%27%20in2%3D%27g%27%20mode%3D%27screen%27%20result%3D%27rg%27%2F%3E%3CfeBlend%20in%3D%27rg%27%20in2%3D%27b%27%20mode%3D%27screen%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
+  --gj-bubble-s: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27lg%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeImage%20href%3D%27data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%27http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%27%2520viewBox%253D%270%25200%2520100%2520100%27%2520preserveAspectRatio%253D%27none%27%2520width%253D%27100%27%2520height%253D%27100%27%253E%253Cdefs%253E%253ClinearGradient%2520id%253D%27x%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523f00%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253ClinearGradient%2520id%253D%27y%27%2520x2%253D%270%27%2520y2%253D%271%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%25230f0%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523000%27%252F%253E%253C%252FlinearGradient%253E%253CradialGradient%2520id%253D%27m%27%253E%253Cstop%2520offset%253D%270%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%270.5%27%2520stop-color%253D%27%2523808080%27%252F%253E%253Cstop%2520offset%253D%271%27%2520stop-color%253D%27%2523808080%27%2520stop-opacity%253D%270%27%252F%253E%253C%252FradialGradient%253E%253C%252Fdefs%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523x)%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523y)%27%2520style%253D%27mix-blend-mode%253Ascreen%27%252F%253E%253Crect%2520width%253D%27100%27%2520height%253D%27100%27%2520fill%253D%27url(%2523m)%27%252F%253E%253C%252Fsvg%253E%27%20x%3D%270%25%27%20y%3D%270%25%27%20width%3D%27100%25%27%20height%3D%27100%25%27%20preserveAspectRatio%3D%27none%27%20result%3D%27m%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2734%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dr%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2727.2%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27dg%27%2F%3E%3CfeDisplacementMap%20in%3D%27SourceGraphic%27%20in2%3D%27m%27%20scale%3D%2720.4%27%20xChannelSelector%3D%27R%27%20yChannelSelector%3D%27G%27%20result%3D%27db%27%2F%3E%3CfeColorMatrix%20in%3D%27dr%27%20type%3D%27matrix%27%20values%3D%271%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27r%27%2F%3E%3CfeColorMatrix%20in%3D%27dg%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%201%200%200%200%200%200%200%200%200%200%200%200%201%200%27%20result%3D%27g%27%2F%3E%3CfeColorMatrix%20in%3D%27db%27%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%200%200%200%200%200%200%200%201%200%200%200%200%200%201%200%27%20result%3D%27b%27%2F%3E%3CfeBlend%20in%3D%27r%27%20in2%3D%27g%27%20mode%3D%27screen%27%20result%3D%27rg%27%2F%3E%3CfeBlend%20in%3D%27rg%27%20in2%3D%27b%27%20mode%3D%27screen%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%27.5%27%2F%3E%3C%2Ffilter%3E%3C%2Fsvg%3E#lg");
   /* lens:end */
   --gj-r-xs: 6px; --gj-r-s: 10px; --gj-r-card: 12px; --gj-r-m: 16px;
   --gj-r-l: 22px; --gj-r-sheet: 28px; --gj-r-pill: 999px;
@@ -1185,7 +1186,7 @@ html.layout-tv .sectionTitle { font-size: 26px; }
   :root, html[data-theme] {
     --gj-mat-ultrathin: rgba(30,30,34,.94); --gj-mat-thin: rgba(30,30,34,.94); --gj-mat-regular: rgba(28,28,32,.95);
     --gj-mat-thick: rgba(28,28,32,.97); --gj-mat-sheet: rgba(28,28,32,.98); --gj-glass-fill: rgba(70,70,76,.92);
-    --gj-lens: saturate(1); --gj-lens-cap: saturate(1); --gj-lens-s: saturate(1); --gj-bubble: saturate(1); --gj-bubble-s: saturate(1);
+    --gj-lens: saturate(1); --gj-lens-cap: saturate(1); --gj-lens-panel: saturate(1); --gj-lens-s: saturate(1); --gj-bubble: saturate(1); --gj-bubble-s: saturate(1);
   }
 }
 /* 21b. Sheen: the faint top highlight that makes a tinted pane read as a slab of glass (every browser) */
@@ -1254,8 +1255,8 @@ html :is(header.MuiAppBar-root .MuiStack-root > .MuiButton-root, header.MuiAppBa
 /* 21g. REFRACTION. The lens (--gj-lens, an SVG displacement filter) bends the backdrop at the rim of the pane like the
    edge of a real glass slab. It only works in Chromium (Chrome, Edge, Brave, Opera, Jellyfin Media Player), so it is
    gated on a Blink-only property; Safari/Firefox keep the plain glass above. Desktop pointers only: phones and TV
-   boxes keep the cheaper blur. Chromium does not clip url() backdrop filters to border-radius -> clip-path (which
-   also drops the outer shadow of these panes; the rim and sheen carry the depth instead).
+   boxes keep the cheaper blur. v2.5: no clip-path any more - current Chromium clips url() backdrop filters to
+   border-radius itself, and clip-path over a backdrop filter drew aliased (pixelated) edges on the GPU.
    Only on single, large surfaces - never on per-card elements (each one is a GPU layer, see PERF-P1). */
 @supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
   @media (hover: hover) and (pointer: fine) {
@@ -1263,33 +1264,33 @@ html :is(header.MuiAppBar-root .MuiStack-root > .MuiButton-root, header.MuiAppBa
       header.MuiAppBar-root > .MuiToolbar-root > .MuiStack-root:first-of-type:has(> .MuiButton-root),
       .MuiButtonGroup-root:not(.cardOverlayButton-br),
       #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer)) {
-      backdrop-filter: var(--gj-lens) var(--gj-blur-s); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-lens) var(--gj-blur-s);
     }
     html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButton-root) {
-      backdrop-filter: var(--gj-lens-s) var(--gj-blur-s); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-lens-s) var(--gj-blur-s);
     }
     html:not(.layout-mobile):not(.layout-tv) #searchPage .searchFields .searchFieldsInner {
-      backdrop-filter: var(--gj-lens) var(--gj-blur-m); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-lens) var(--gj-blur-m);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), .osdHeader .headerButton) {
-      backdrop-filter: var(--gj-lens-s) var(--gj-blur-s); clip-path: inset(0 round 50%);
+      backdrop-filter: var(--gj-lens-s) var(--gj-blur-s);
     }
     html:not(.layout-mobile):not(.layout-tv) .videoOsdBottom .osdControls {
-      backdrop-filter: var(--gj-lens) var(--gj-blur-l); clip-path: inset(0 round var(--gj-r-l));
+      backdrop-filter: var(--gj-lens) var(--gj-blur-l);
     }
     html:not(.layout-mobile):not(.layout-tv) .nowPlayingBar {
-      backdrop-filter: var(--gj-lens) var(--gj-blur-m); clip-path: inset(0 round var(--gj-r-l));
+      backdrop-filter: var(--gj-lens) var(--gj-blur-m);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(.MuiMenu-paper, .MuiPopover-paper) {
-      backdrop-filter: var(--gj-lens) var(--gj-blur-l); clip-path: inset(0 round var(--gj-r-m));
+      backdrop-filter: var(--gj-lens) var(--gj-blur-l);
     }
     html:not(.layout-mobile):not(.layout-tv) #loginPage .manualLoginForm {
-      backdrop-filter: var(--gj-lens) var(--gj-blur-l); clip-path: inset(0 round var(--gj-r-l));
+      backdrop-filter: var(--gj-lens) var(--gj-blur-l);
     }
   }
   @media (hover: hover) and (pointer: fine) and (min-width: 601px) {
     html:not(.layout-mobile):not(.layout-tv) .actionSheet.dialog:not(.dialog-fullscreen) {
-      backdrop-filter: var(--gj-lens) var(--gj-blur-l); clip-path: inset(0 round var(--gj-r-m));
+      backdrop-filter: var(--gj-lens) var(--gj-blur-l);
     }
   }
 }
@@ -1389,23 +1390,23 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
 @supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
   @media (hover: hover) and (pointer: fine) {
     html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), .osdHeader .headerButton) {
-      backdrop-filter: var(--gj-lens-s) blur(1.5px) saturate(160%) brightness(1.08); clip-path: inset(0 round 50%);
+      backdrop-filter: var(--gj-lens-s) blur(1.5px) saturate(160%) brightness(1.08);
     }
     /* hover: hollow glass droplet (the Media Bar buttons only get the lens while hovered: moving picture underneath) */
     html:not(.layout-mobile):not(.layout-tv) :is(
       header.MuiAppBar-root .MuiStack-root > .MuiButton-root, .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root,
       #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer)):hover {
-      backdrop-filter: var(--gj-bubble) saturate(150%) brightness(1.12); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-bubble) saturate(150%) brightness(1.12);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiIconButton-root, .card .cardOverlayButton,
       .videoOsdBottom .buttons .paper-icon-button-light, #slides-container :is(.detail-button, .favorite-button, .pause-button, .arrow)):hover {
-      backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.12); clip-path: inset(0 round 50%);
+      backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.12);
     }
     html:not(.layout-mobile):not(.layout-tv) #slides-container .trailer-button:hover {
-      backdrop-filter: var(--gj-bubble) blur(1.5px) saturate(150%) brightness(1.12); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-bubble) blur(1.5px) saturate(150%) brightness(1.12);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(.actionSheetMenuItem, .MuiMenuItem-root, .MuiDrawer-paper .MuiListItemButton-root):hover {
-      backdrop-filter: var(--gj-bubble) saturate(150%) brightness(1.15); clip-path: inset(0 round var(--gj-r-s));
+      backdrop-filter: var(--gj-bubble) saturate(150%) brightness(1.15);
     }
     /* the rim shadow is clipped away with the lens: the bevel carries the droplet instead */
     html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), #slides-container :is(.detail-button, .favorite-button, .trailer-button)):hover {
@@ -1434,14 +1435,14 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
       background: radial-gradient(30% 24% at 24% 20%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
                   radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.07), rgba(255,255,255,0) 60%) !important;
       box-shadow: var(--gj-clear-hover-rim) !important;
-      backdrop-filter: var(--gj-bubble) saturate(125%) brightness(1.05); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-bubble) saturate(125%) brightness(1.05);
       text-shadow: 0 1px 3px rgba(0,0,0,.55);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(.actionSheetMenuItem, .MuiMenuItem-root, .MuiDrawer-paper .MuiListItemButton-root, .navMenuOption):hover {
       background: radial-gradient(30% 40% at 12% 22%, rgba(255,255,255,.22), rgba(255,255,255,0) 70%),
                   radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.08), rgba(255,255,255,.02) 60%) !important;
       box-shadow: var(--gj-clear-hover-rim) !important;
-      backdrop-filter: var(--gj-bubble) saturate(130%) brightness(1.08); clip-path: inset(0 round var(--gj-r-s));
+      backdrop-filter: var(--gj-bubble) saturate(130%) brightness(1.08);
     }
     html:not(.layout-mobile):not(.layout-tv) .actionSheetMenuItem[data-id="delete"]:hover {
       box-shadow: inset 0 0 0 1px rgba(255,105,97,.6), inset 1.5px 1.5px 1px -.5px rgba(255,180,175,.9), inset 0 0 12px rgba(255,69,58,.18) !important;
@@ -1452,7 +1453,7 @@ html .itemDetailPage .btnUserRating:has(.ratingbutton-icon-withrating), html .it
       #slides-container :is(.detail-button, .favorite-button, .pause-button, .arrow)):hover {
       background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.4), rgba(255,255,255,0) 70%) !important;
       box-shadow: var(--gj-clear-hover-rim) !important;
-      backdrop-filter: var(--gj-bubble-s) saturate(125%) brightness(1.05); clip-path: inset(0 round 50%);
+      backdrop-filter: var(--gj-bubble-s) saturate(125%) brightness(1.05);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton, .card .cardOverlayButton, #slides-container button,
       .videoOsdBottom .buttons .paper-icon-button-light):hover :is(.material-icons, .detailButton-icon, svg) {
@@ -1491,7 +1492,7 @@ html header.MuiAppBar-root .MuiTab-root.Mui-selected, html .headerTabs .emby-tab
   @media (hover: hover) and (pointer: fine) {
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiStack-root > .MuiButton-root.MuiButton-colorPrimary,
       header.MuiAppBar-root .MuiTab-root.Mui-selected, .headerTabs .emby-tab-button.emby-tab-button-active) {
-      backdrop-filter: var(--gj-bubble) saturate(140%) brightness(1.1); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-bubble) saturate(140%) brightness(1.1);
     }
   }
 }
@@ -1513,7 +1514,7 @@ html header.MuiAppBar-root .MuiTab-root.Mui-selected, html .headerTabs .emby-tab
       .MuiButtonGroup-root:not(.cardOverlayButton-br)):has(:hover) {
       background: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.07), rgba(255,255,255,.015) 60%, rgba(255,255,255,.035)),
                   rgba(10,10,14,.22) !important;
-      backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04); clip-path: inset(0 round 999px);
+      backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiStack-root > .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root,
       .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root, #searchPage .searchFields :is(input, .searchfields-icon)) {
@@ -1522,6 +1523,96 @@ html header.MuiAppBar-root .MuiTab-root.Mui-selected, html .headerTabs .emby-tab
     html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root .MuiStack-root > .MuiButton-root:not(.MuiButton-colorPrimary) { color: rgba(255,255,255,.9); }   /* grey labels vanish on clear glass */
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiIconButton-root, .MuiButtonGroup-root:not(.cardOverlayButton-br) > .MuiButton-root) svg {
       filter: drop-shadow(0 1px 2px rgba(0,0,0,.55));
+    }
+  }
+}
+
+/* 21m. LIQUID PANELS (v2.5, Chromium desktop): menus, dialogs, drawers and the dashboard sidebar, the player panel,
+   the now-playing bar, toasts and the login form are clear glass slabs too: no frost, a thick refracting rim
+   (--gj-lens-panel) that bends whatever is behind, and a darker tint than the capsules so long text stays readable
+   (menus .64, form dialogs .76, the player .40 over the video) plus a 4px frost on everything with text (with no frost
+   at all the page text behind fought with the menu text); the player panel has none. Safari / Firefox keep the frosted
+   versions. */
+:root, html[data-theme] {
+  --gj-liquid-menu: rgba(12,12,16,.64);
+  --gj-liquid-sheet: rgba(14,14,18,.76);
+  --gj-liquid-osd: rgba(10,10,14,.40);
+  --gj-liquid-sheen: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0) 40%);
+  --gj-liquid-text: 0 1px 3px rgba(0,0,0,.65), 0 0 10px rgba(0,0,0,.35);
+}
+@supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.layout-mobile):not(.layout-tv) :is(.MuiMenu-paper, .MuiPopover-paper) {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-menu) !important;
+      backdrop-filter: var(--gj-lens-panel) blur(4px) saturate(130%) brightness(.9);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.dialog:not(.dialog-fullscreen):not(.actionSheet), .MuiDialog-paper) {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-sheet) !important;
+      backdrop-filter: var(--gj-lens-panel) blur(4px) saturate(130%) brightness(.9);
+    }
+    /* the floating footer of form dialogs: frosted over the form that scrolls under it (inside the dialog) */
+    html:not(.layout-mobile):not(.layout-tv) .dialog:not(.dialog-fullscreen) .formDialogFooter:not(.formDialogFooter-clear) {
+      background: rgba(14,14,18,.55); backdrop-filter: blur(14px) saturate(160%);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.MuiDrawer-paper, .mainDrawer) {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-menu) !important;
+      backdrop-filter: var(--gj-lens-panel) blur(4px) saturate(130%) brightness(.9);
+    }
+    html:not(.layout-mobile):not(.layout-tv) .videoOsdBottom .osdControls {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-osd) !important;
+      backdrop-filter: var(--gj-lens-panel) saturate(140%) brightness(.95);
+    }
+    html:not(.layout-mobile):not(.layout-tv) .nowPlayingBar {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-menu) !important;
+      backdrop-filter: var(--gj-lens-panel) blur(4px) saturate(130%) brightness(.9);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.upNextContainer, .upNextDialog, .iconOsd, .playerStats) {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-menu) !important;
+      backdrop-filter: var(--gj-lens-panel) blur(4px) saturate(130%) brightness(.9);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.toast, .MuiSnackbarContent-root) {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-menu) !important;
+      backdrop-filter: var(--gj-lens-cap) saturate(130%) brightness(.9);
+    }
+    html:not(.layout-mobile):not(.layout-tv) #loginPage .manualLoginForm {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-sheet) !important;
+      backdrop-filter: var(--gj-lens-panel) blur(4px) saturate(130%) brightness(.9);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.MuiMenuItem-root, .MuiDrawer-paper .MuiListItemButton-root, .navMenuOption,
+      .videoOsdBottom :is(.osdTitle, .osdTextContainer), .nowPlayingBar .nowPlayingBarText, .toast, .MuiSnackbarContent-root) {
+      text-shadow: var(--gj-liquid-text);
+    }
+  }
+  @media (hover: hover) and (pointer: fine) and (min-width: 601px) {
+    html:not(.layout-mobile):not(.layout-tv) .actionSheet.dialog:not(.dialog-fullscreen) {
+      background: var(--gj-liquid-sheen), var(--gj-liquid-menu) !important;
+      backdrop-filter: var(--gj-lens-panel) blur(4px) saturate(130%) brightness(.9);
+    }
+    html:not(.layout-mobile):not(.layout-tv) .actionSheetMenuItem { text-shadow: var(--gj-liquid-text); }
+  }
+}
+
+/* 21n. PLAY = WHITE GLASS (v2.5): the primary Play / Resume pills (details page, Media Bar) are milky white glass instead
+   of an opaque white pill - lit top-left, bevelled, the picture behind bending through the rim in Chromium, frosted
+   white elsewhere. Black label as before (the glass stays light enough for it). Form "Save" buttons stay solid white. */
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), #slides-container .play-button) {
+  color: #0b0b10 !important;
+  background:
+    radial-gradient(34% 46% at 20% 24%, rgba(255,255,255,.75), rgba(255,255,255,0) 70%),
+    linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.56) 55%, rgba(255,255,255,.64)) !important;
+  box-shadow: inset 2.5px 2.5px 2px -1.5px #fff, inset -2.5px -2.5px 2px -1.5px rgba(255,255,255,.9),
+              inset 0 0 0 1px rgba(255,255,255,.55), inset 0 -8px 14px -6px rgba(255,255,255,.5), 0 8px 24px rgba(0,0,0,.35) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(180%) brightness(1.25); backdrop-filter: blur(10px) saturate(180%) brightness(1.25);
+}
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), #slides-container .play-button):hover {
+  background:
+    radial-gradient(34% 46% at var(--gj-mx, 20%) var(--gj-my, 24%), rgba(255,255,255,.9), rgba(255,255,255,0) 70%),
+    linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.5) 55%, rgba(255,255,255,.6)) !important;
+}
+@supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), #slides-container .play-button) {
+      backdrop-filter: var(--gj-bubble) saturate(160%) brightness(1.3);
     }
   }
 }
