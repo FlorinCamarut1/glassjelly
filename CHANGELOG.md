@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.7.2 — 2026-10-11
+
+- Back to the v2.6 refraction (lens() with the v2.6 values, every lens token identical to v2.6.0): a gentle bend
+  behind the glass, which reads better than the strong v2.7.1 rods. dome() stays available in tools/glassfilter.mjs.
+  Everything else from v2.7.0 / v2.7.1 stays, including the clean selected-tab rim (no doubled arc at the right end).
+
 ## v2.7.1 — 2026-10-11
 
 - Much stronger refraction: the header and toolbar capsules are glass rods (the dome rim spans half the height, so
