@@ -32,5 +32,12 @@
     x = e.clientX; y = e.clientY;
     if (cur && !raf) raf = requestAnimationFrame(paint);
   }, { passive: true, capture: true });
+  // scrolling: drop the hover glass of whatever slides under a resting pointer (css: html.gj-scrolling)
+  var root = document.documentElement, idle = 0;
+  document.addEventListener('scroll', function () {
+    if (!idle) root.classList.add('gj-scrolling'); else clearTimeout(idle);
+    if (cur) { clear(cur); cur = null; }
+    idle = setTimeout(function () { idle = 0; root.classList.remove('gj-scrolling'); }, 180);
+  }, { passive: true, capture: true });
   document.addEventListener('pointerleave', function () { if (cur) clear(cur); cur = null; }, true);
 })();

@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.7.0 — 2026-10-11
+
+- New dome lens (tools/glassfilter.mjs dome(), used by every lens token): the refraction grows smoothly toward the edge
+  and compresses the picture into the rim like the curved edge of a glass slab. The old lens shifted a whole band at
+  the rim, which showed the backdrop twice (doubled text at capsule edges). Stronger everywhere: capsules, round
+  buttons, poster and episode play beads, menus, dialogs, the player panel.
+- No more doubled arc at the end of the selected header tab: children of a capsule / menu no longer carry their own
+  lens (the capsule is a backdrop root, so that lens could only bend the capsule's own rim), and the tab, hovered pills
+  and the capsules get one clean rim instead of parallel offset bevels.
+- Scrolling no longer flashes the hover glass on posters / episode rows / play buttons sliding under a resting mouse
+  (hover.js sets html.gj-scrolling while the page scrolls).
+- The white Play / Resume pill is frosted only (the lens pulled a grey smudge into it).
+
 ## v2.6.0 — 2026-10-11
 
 - Glass everywhere: the controls that were still flat grey fills are glass now (section 21q). Episode rows on season

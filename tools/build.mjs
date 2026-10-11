@@ -6,19 +6,20 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { lens, bubble, bubbleCA } from './glassfilter.mjs';
+import { dome as lens } from './glassfilter.mjs';   // v2.7: every lens token is a dome lens
 import { svg as LOGO } from './logo.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'src', 'glassjelly.css');
-export const LENS = { rim: 8, soft: 6, scale: 40, reach: 4 };     // panels, menus, player (frosted)
-export const LENS_CAP = { rim: 6, soft: 8, scale: 74, reach: 5 }; // clear capsules: a glass rod, no blur (v2.4)
-export const LENS_PANEL = { rim: 10, soft: 10, scale: 70, reach: 6 }; // clear menus, dialogs, drawers, player (v2.5)
-export const LENS_S = { rim: 4, soft: 3, scale: 14, reach: 3 };   // (unused since v2.2: round buttons use BUBBLE_S)
-export const BUBBLE = { rim: 5, soft: 5, scale: 46, reach: 5 };   // hover droplet: pills, menu rows (dispersion)
-export const BUBBLE_HS = { rim: 3, soft: 9, scale: 52, reach: 7 }; // hover droplet: round buttons 34-48 px
-export const BUBBLE_S = { rim: 3, soft: 9, scale: 46, reach: 7 };            // round buttons at rest
-export const BUBBLE_FAB = { rim: 4, soft: 12, scale: 70, reach: 8 }; // big play bead on a hovered poster
+// dome(): band = width of the curved rim, dir = blur of the normal field, p = how sharply it curves at the very edge,
+// scale = displacement in px at the edge (x .5). Keep band below half the element height (a 44px capsule: <= 16).
+export const LENS = { band: 16, dir: 8, p: 2, scale: 52 };          // frosted capsules / search pill / login buttons
+export const LENS_CAP = { band: 14, dir: 7, p: 2, scale: 50 };      // clear capsules (header, library toolbar)
+export const LENS_PANEL = { band: 40, dir: 18, p: 2.2, scale: 110 }; // menus, dialogs, drawers, player panel
+export const BUBBLE = { band: 12, dir: 6, p: 2, scale: 42 };        // hover droplet: pills, menu rows
+export const BUBBLE_HS = { band: 22, dir: 9, p: 1.8, scale: 64 };   // hover droplet: round buttons 34-48 px
+export const BUBBLE_S = { band: 22, dir: 9, p: 1.8, scale: 62 };    // round buttons at rest
+export const BUBBLE_FAB = { band: 26, dir: 10, p: 1.8, scale: 82 }; // big play bead on a hovered poster
 
 let css = fs.readFileSync(SRC, 'utf8');
 const tokens = `/* lens:begin */\n  --gj-lens: ${lens(LENS)};\n  --gj-lens-cap: ${lens(LENS_CAP)};\n  --gj-lens-panel: ${lens(LENS_PANEL)};\n  --gj-lens-s: ${lens(BUBBLE_S)};\n  --gj-bubble: ${lens(BUBBLE)};\n  --gj-bubble-s: ${lens(BUBBLE_HS)};\n  --gj-bubble-fab: ${lens(BUBBLE_FAB)};\n  /* lens:end */`;

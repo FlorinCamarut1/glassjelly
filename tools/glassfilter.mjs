@@ -76,3 +76,34 @@ export function bubbleCA({ core = 0.2, scale = 46, spread = 0.22, magnify = true
     keep('db', 'b', '0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0') +
     "<feBlend in='r' in2='g' mode='screen' result='rg'/><feBlend in='rg' in2='b' mode='screen'/>" + SMOOTH);
 }
+
+// v2.7: DOME lens. lens() above shifts a whole band at the rim by the same amount, so the backdrop showed up twice
+// (doubled text at the edge of a capsule). dome() is the curved edge of a glass slab instead: the direction is the
+// normal of a broadly blurred box (saturated to a unit sign), the strength grows smoothly toward the edge
+// ((1 - ramp)^p over the last ~band px), so the picture is compressed into the rim and bends round the corners.
+export function dome({ band = 14, dir = 10, p = 1.6, scale = 40, reach = 3 } = {}) {
+  const k = ['-1', ...Array(2 * reach - 1).fill('0'), '1'].join(' ');
+  const n = 2 * reach + 1;
+  const svg =
+    "<svg xmlns='http://www.w3.org/2000/svg'>" +
+    "<filter id='lg' x='0' y='0' width='100%' height='100%' color-interpolation-filters='linearRGB'>" +
+    // direction field
+    `<feGaussianBlur in='SourceAlpha' stdDeviation='${dir}' result='d0'/>` +
+    "<feColorMatrix in='d0' type='matrix' values='0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1' result='d1'/>" +
+    `<feConvolveMatrix in='d1' order='${n} 1' kernelMatrix='${k}' divisor='1' bias='.5' preserveAlpha='true' edgeMode='duplicate' result='gx'/>` +
+    `<feConvolveMatrix in='d1' order='1 ${n}' kernelMatrix='${k}' divisor='1' bias='.5' preserveAlpha='true' edgeMode='duplicate' result='gy'/>` +
+    "<feColorMatrix in='gx' type='matrix' values='1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1' result='rx'/>" +
+    "<feColorMatrix in='gy' type='matrix' values='0 0 0 0 0 0 1 0 0 0 0 0 0 0 .5 0 0 0 0 1' result='ry'/>" +
+    "<feComposite in='rx' in2='ry' operator='arithmetic' k2='1' k3='1' result='g'/>" +
+    "<feComponentTransfer in='g' result='u'><feFuncR type='linear' slope='40' intercept='-19.5'/><feFuncG type='linear' slope='40' intercept='-19.5'/></feComponentTransfer>" +
+    // magnitude: 1 at the edge, 0 deeper than ~band
+    `<feMorphology in='SourceAlpha' operator='erode' radius='${Math.round(band / 2)}' result='e'/>` +
+    `<feGaussianBlur in='e' stdDeviation='${band / 2}' result='eb'/>` +
+    "<feColorMatrix in='eb' type='matrix' values='0 0 0 -1 1 0 0 0 -1 1 0 0 0 -1 1 0 0 0 0 1' result='m0'/>" +
+    `<feComponentTransfer in='m0' result='m'><feFuncR type='gamma' exponent='${p}'/><feFuncG type='gamma' exponent='${p}'/></feComponentTransfer>` +
+    "<feComposite in='u' in2='m' operator='arithmetic' k1='1' k3='-.5' k4='.5' result='map'/>" +
+    `<feDisplacementMap in='SourceGraphic' in2='map' scale='${scale}' xChannelSelector='R' yChannelSelector='G'/>` +
+    "<feGaussianBlur stdDeviation='.5'/>" +
+    '</filter></svg>';
+  return 'url("data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27') + '#lg")';
+}
