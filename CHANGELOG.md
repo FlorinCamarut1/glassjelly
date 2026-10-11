@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.7.3 — 2026-10-11
+
+- New: GlassJelly as a Jellyfin 12 plugin (plugin/, first version). It injects the theme into index.html at request
+  time and serves the stylesheet itself, with a settings page in the dashboard; no Branding CSS, no File
+  Transformation, no install script. Not in a plugin repository yet: build it from plugin/README.md.
+- Dashboard app bar on a stock Jellyfin (without Jellyfin Enhanced): no empty full-width capsule, Help sits next to
+  the avatar.
+- install.py: --uninstall --no-splash keeps the login background.
+
 ## v2.7.2 — 2026-10-11
 
 - Back to the v2.6 refraction (lens() with the v2.6 values, every lens token identical to v2.6.0): a gentle bend

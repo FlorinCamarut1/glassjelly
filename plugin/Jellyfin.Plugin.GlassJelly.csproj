@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- GlassJelly as a Jellyfin plugin (Jellyfin 12, .NET 10). The theme files are not copied into this folder: the
+       built dist/*.css, src/early.css and src/js/*.js are embedded straight from the repo, so `node tools/build.mjs`
+       stays the single source and the plugin always ships the same theme as the CDN / install.py. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Jellyfin.Plugin.GlassJelly</RootNamespace>
+    <AssemblyName>Jellyfin.Plugin.GlassJelly</AssemblyName>
+    <AssemblyVersion>2.7.3.0</AssemblyVersion>
+    <FileVersion>2.7.3.0</FileVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Jellyfin.Controller" Version="12.0.0" ExcludeAssets="runtime" />
+    <PackageReference Include="Jellyfin.Model" Version="12.0.0" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\configPage.html" LogicalName="GlassJelly.configPage.html" />
+    <EmbeddedResource Include="..\dist\glassjelly.css" LogicalName="GlassJelly.css.glassjelly.css" />
+    <EmbeddedResource Include="..\dist\glassjelly-nologo.css" LogicalName="GlassJelly.css.glassjelly-nologo.css" />
+    <EmbeddedResource Include="..\src\early.css" LogicalName="GlassJelly.css.early.css" />
+    <EmbeddedResource Include="..\src\js\*.js" LogicalName="GlassJelly.js.%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

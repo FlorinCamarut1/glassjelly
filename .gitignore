@@ -3,3 +3,6 @@ proto/
 __pycache__/
 node_modules/
 *.pyc
+plugin/bin/
+plugin/obj/
+plugin/out/

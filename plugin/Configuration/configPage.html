@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GlassJelly</title>
+</head>
+<body>
+    <div id="GlassJellyConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="GlassJellyConfigForm">
+                    <div class="verticalSection">
+                        <h2 class="sectionTitle">GlassJelly</h2>
+                        <p class="fieldDescription">Liquid Glass theme for the web client. Changes apply the next time a browser loads Jellyfin (reload the page; on phones close and reopen the app).</p>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjEnabled" name="Enabled" type="checkbox" is="emby-checkbox" />
+                            <span>Enable the theme</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Off = Jellyfin's own look, without uninstalling the plugin.</div>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjLogo" name="Logo" type="checkbox" is="emby-checkbox" />
+                            <span>Glass logo</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">The glass triangle in the header, on the startup screen and as the browser tab icon.</div>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjAmbient" name="Ambient" type="checkbox" is="emby-checkbox" />
+                            <span>Ambient background</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">The art of what you are looking at, blurred, behind the whole interface.</div>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjBackdropsDefault" name="BackdropsDefault" type="checkbox" is="emby-checkbox" />
+                            <span>Backdrops on by default</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Turns on backdrops once per device for users who never chose; their own setting is kept.</div>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjHover" name="Hover" type="checkbox" is="emby-checkbox" />
+                            <span>Hover light</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">The glass under the mouse is lit from where the pointer is; no hover flashes while scrolling.</div>
+                    </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjPlayer" name="Player" type="checkbox" is="emby-checkbox" />
+                            <span>Player tweaks</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Docks the Skip Intro button into the glass control bar while it is visible.</div>
+                    </div>
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            (function () {
+                var pluginId = 'b3a397c3-d76f-4a9a-8980-3ad430af041f';
+                var keys = ['Enabled', 'Logo', 'Ambient', 'BackdropsDefault', 'Hover', 'Player'];
+                var page = document.querySelector('#GlassJellyConfigPage');
+                page.addEventListener('pageshow', function () {
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+                        keys.forEach(function (k) { page.querySelector('#gj' + k).checked = config[k] !== false; });
+                        Dashboard.hideLoadingMsg();
+                    });
+                });
+                page.querySelector('#GlassJellyConfigForm').addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+                        keys.forEach(function (k) { config[k] = page.querySelector('#gj' + k).checked; });
+                        ApiClient.updatePluginConfiguration(pluginId, config).then(function (result) {
+                            Dashboard.processPluginConfigurationUpdateResult(result);
+                        });
+                    });
+                    return false;
+                });
+            })();
+        </script>
+    </div>
+</body>
+</html>

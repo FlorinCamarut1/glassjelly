@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.7.2";
+  --gj-version: "2.7.3";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -1819,7 +1819,11 @@ html :is(.defaultCardBackground1, .defaultCardBackground2, .defaultCardBackgroun
 }
 
 /* dashboard: the Jellyfin Enhanced host box in the app bar grew to the full width and drew an empty glass capsule */
-html body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > .je-header-actions-host { flex-grow: 0; margin-inline-start: auto; }
+html body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > .je-header-actions-host { flex-grow: 0; margin-inline-start: 0; }
+/* stock Jellyfin (no Jellyfin Enhanced): the box with the Help button is the one that grows */
+html body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButton-root) { flex-grow: 0; margin-inline-start: 0; }
+/* the Back button pushes everything else to the right (auto margins on two boxes split the space: Help ended up centred) */
+html body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > :first-child { margin-inline-end: auto; }
 
 /* Chromium desktop: the pickers bend what is behind them; the hovered row / button gets the lens (one at a time) */
 @supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
