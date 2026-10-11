@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.7.5.0",
+        "changelog": "- Plugin: new option **Subtitle lift** (off by default). While the player controls are visible, subtitles rise just\n  above them (the bar height is measured live, so it is right at any resolution) and settle back when they hide; the\n  Subtitle Appearance dialog applies to every subtitle type, ASS/SSA included. It sets every user's subtitle styling to\n  \"Custom\", hence opt-in. Per device: `localStorage.jfSubGap` (px above the bar, default 20) and\n  `localStorage.jfSubRest` (px at rest, default -1). Script: `src/js/sublift.js`.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.7.5/glassjelly-plugin_2.7.5.0.zip",
+        "checksum": "C644E2F448DC2FF53B353D2F22D82D89",
+        "timestamp": "2026-10-11T15:50:49Z"
+      },
+      {
         "version": "2.7.4.0",
         "changelog": "- GlassJelly is installable from Jellyfin's plugin catalog: add\n  `https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/manifest.json` in Dashboard → Plugins → Manage\n  Repositories, then install GlassJelly. Every release tag builds the plugin on GitHub Actions and adds it to the\n  manifest, so updates show up in the dashboard.\n- The plugin has its own image in the catalog and the plugin list.",
         "targetAbi": "12.0.0.0",
