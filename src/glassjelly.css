@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.5.4";
+  --gj-version: "2.6.0";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -1706,6 +1706,168 @@ html .card .cardOverlayFab-primary:hover { transform: scale(1.1); }
     html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root .MuiStack-root > .MuiButton-root:has(img[src*="icon-transparent"]):hover {
       -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
       background: radial-gradient(30% 60% at 20% 20%, rgba(255,255,255,.18), rgba(255,255,255,0) 70%), rgba(255,255,255,.06) !important;
+    }
+  }
+}
+
+/* 21q. GLASS EVERYWHERE (v2.6): what was still a flat grey fill becomes glass too. Four cheap materials, no
+   backdrop-filter at rest (they repeat: one per episode row, per field, per button - PERF-P1):
+   --gj-q-pill = a raised glass pill (secondary buttons, chips, link pills, pickers), --gj-q-well = a recessed glass
+   well (text fields, unchecked boxes), --gj-q-slab = a glass slab that groups content (episode rows, settings groups,
+   user cards), --gj-q-bead = a clear round button. In Chromium the one thing under the pointer gets the lens. */
+:root, html[data-theme] {
+  --gj-q-pill: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.15), rgba(255,255,255,.05) 60%, rgba(255,255,255,.08)), rgba(255,255,255,.035);
+  --gj-q-pill-edge: inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.55), inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.28),
+                    inset 0 0 0 1px rgba(255,255,255,.10), 0 2px 8px rgba(0,0,0,.18);
+  --gj-q-well: linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.06) 45%, rgba(255,255,255,.035)), rgba(118,118,128,.13);
+  --gj-q-well-edge: inset 0 1.5px 3px rgba(0,0,0,.40), inset 0 -1px 0 rgba(255,255,255,.12), inset 0 0 0 1px rgba(255,255,255,.07);
+  --gj-q-slab: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03) 38%, rgba(255,255,255,.02) 70%, rgba(255,255,255,.04)), rgba(255,255,255,.03);
+  --gj-q-slab-edge: inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.40), inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.18),
+                    inset 0 0 0 1px rgba(255,255,255,.06), 0 10px 30px rgba(0,0,0,.20);
+  --gj-q-bead: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%), rgba(255,255,255,.05);
+  --gj-q-bead-edge: inset 0 0 0 1px rgba(255,255,255,.30), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.8), inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.4),
+                    inset 0 0 10px rgba(255,255,255,.06);
+}
+
+/* secondary buttons, chips (the library count), "Delete image"-style pills */
+html :is(.raised:not(.button-submit), .button-cancel, .MuiButton-contained:not(.MuiButton-containedPrimary):not(.MuiButton-containedError),
+  .MuiButton-outlined:not(.MuiButton-outlinedError), a[data-role=button], .MuiChip-filledDefault, .MuiChip-outlinedDefault) {
+  background: var(--gj-q-pill); box-shadow: var(--gj-q-pill-edge); border: 0; color: #fff;
+}
+html .button-delete { background: radial-gradient(120% 120% at 30% 15%, rgba(255,105,97,.20), rgba(255,69,58,.08) 60%), rgba(255,69,58,.06); box-shadow: var(--gj-q-pill-edge); }
+html .MuiButton-contained.MuiButton-containedError:not(.MuiButton-containedPrimary) {
+  background: radial-gradient(120% 120% at 30% 15%, rgba(255,105,97,.26), rgba(255,69,58,.12) 60%), rgba(255,69,58,.10);
+  box-shadow: inset 1.5px 1.5px 1px -.5px rgba(255,180,175,.55), inset -1.5px -1.5px 1px -.5px rgba(255,140,130,.3), inset 0 0 0 1px rgba(255,105,97,.18);
+}
+/* primary (Save, Sign in, Add) stays solid white for contrast, but as a bevelled glass bead, not a flat sticker */
+html :is(.button-submit, .raised.button-submit, .MuiButton-containedPrimary) {
+  background: radial-gradient(34% 60% at 22% 20%, #fff, rgba(255,255,255,0) 70%), linear-gradient(180deg, #fff, #ececf1 60%, #f4f4f8);
+  box-shadow: inset 1.5px 1.5px 1px -.5px #fff, inset -1.5px -1.5px 1px -.5px rgba(0,0,0,.10), inset 0 -6px 10px -6px rgba(0,0,0,.12), 0 6px 18px rgba(0,0,0,.30);
+}
+/* segmented controls (dashboard Activity, Media Bar settings tabs): selected = the glass lens of the header tab */
+html body.dashboardDocument .MuiToggleButtonGroup-root { background: var(--gj-q-well); box-shadow: var(--gj-q-well-edge); }
+html :is(body.dashboardDocument .MuiToggleButtonGroup-grouped.Mui-selected, .media-bar-settings-popup .media-bar-client-tab.active) {
+  background: radial-gradient(26% 36% at 20% 24%, rgba(255,255,255,.45), rgba(255,255,255,0) 70%),
+              linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.08) 50%, rgba(255,255,255,.12)) !important;
+  color: #fff !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,.45), inset 1.5px 1.5px 1px -.5px #fff, inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.5) !important;
+}
+html .media-bar-settings-popup .media-bar-client-tab.active :is(svg, i, .material-icons) { color: #fff !important; fill: currentColor !important; }
+
+/* fields: recessed glass wells (text inputs, legacy selects, MUI filled / outlined inputs, unchecked boxes) */
+html :is(.emby-input, .emby-textarea, .emby-select-withcolor:not(.detailTrackSelect), .MuiFilledInput-root) {
+  background: var(--gj-q-well); box-shadow: var(--gj-q-well-edge);
+}
+html .MuiFilledInput-root:hover { background: var(--gj-q-well); box-shadow: var(--gj-q-well-edge), inset 0 0 0 1px rgba(255,255,255,.14); }
+html .MuiOutlinedInput-root { background: var(--gj-q-well); border-radius: var(--gj-r-s); box-shadow: var(--gj-q-well-edge); }
+html .MuiOutlinedInput-root:not(.Mui-focused) .MuiOutlinedInput-notchedOutline { border-color: transparent; }
+html :is(.emby-input, .emby-textarea, .emby-select-withcolor, .MuiFilledInput-root, .MuiOutlinedInput-root):is(:focus, .Mui-focused) {
+  box-shadow: var(--gj-q-well-edge), 0 0 0 2px rgba(255,255,255,.85);
+}
+html .emby-checkbox:not(:checked) + span + .checkboxOutline { background: var(--gj-q-well); box-shadow: var(--gj-q-well-edge); border-color: rgba(255,255,255,.28); }
+html .emby-checkbox:checked + span + .checkboxOutline { box-shadow: inset 1.5px 1.5px 1px -.5px #fff, inset -1px -1px 1px -.5px rgba(0,0,0,.15), 0 2px 6px rgba(0,0,0,.25); }
+
+/* details page: track pickers (Version / Audio / Subtitles) are glass pop-up buttons, external links glass pills */
+html .itemDetailPage .trackSelections .selectContainer .detailTrackSelect:not([disabled]) {
+  background: var(--gj-q-pill); box-shadow: var(--gj-q-pill-edge); border-radius: var(--gj-r-pill);
+}
+html .itemDetailPage .trackSelections .selectContainer .detailTrackSelect:not([disabled]):focus-visible { box-shadow: var(--gj-q-pill-edge), 0 0 0 2px rgba(255,255,255,.85); }
+html .itemDetailPage .itemExternalLinks a.button-link {
+  padding: 6px 13px; background: var(--gj-q-pill); box-shadow: var(--gj-q-pill-edge); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+
+/* row scroll arrows: clear glass beads (were a dark grey disc) */
+html .emby-scrollbuttons-button { background: var(--gj-q-bead), rgba(20,20,26,.30); box-shadow: var(--gj-q-bead-edge), 0 4px 14px rgba(0,0,0,.25); }
+html .emby-scrollbuttons-button:disabled { opacity: .35; }
+
+/* episode rows (season page, "More from this season", list views): each row is a glass slab, the thumbnail's play
+   button a glass bead and the info / watched / favourite / more actions clear glass beads, like the top buttons */
+html .itemsContainer.vertical-list > .listItem:not(.listItem-largeImage-tv) {
+  background: var(--gj-q-slab); box-shadow: var(--gj-q-slab-edge); border-radius: var(--gj-r-l);
+  padding: 10px 14px 10px 10px !important; margin-bottom: 12px;
+}
+@media (min-width: 601px) {
+  html .itemDetailPage .itemsContainer.vertical-list > .listItem:not(.listItem-largeImage-tv) { margin-inline-start: -10px; }   /* thumbnail stays on the gutter */
+}
+html .itemsContainer.vertical-list > .listItem .listItemImage { border-radius: var(--gj-r-m); box-shadow: inset 0 0 0 1px rgba(255,255,255,.10), 0 4px 14px rgba(0,0,0,.30); }
+html .listItemImage .listItemImageButton {
+  color: #fff; background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.42), rgba(255,255,255,0) 70%), rgba(0,0,0,.16);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), inset 2px 2px 2px -1px rgba(255,255,255,.95), inset -2px -2px 2px -1px rgba(255,255,255,.55),
+              inset 0 0 14px rgba(255,255,255,.10), 0 6px 18px rgba(0,0,0,.35);
+  transition: transform 420ms var(--gj-spring);
+}
+html .listItemImage .listItemImageButton .material-icons { text-shadow: 0 1px 4px rgba(0,0,0,.55); }
+html .listItemImage .listItemImageButton:hover { background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%), rgba(255,255,255,.10); transform: scale(1.1); }
+html .listViewUserDataButtons .listItemButton {
+  width: 44px; height: 44px; min-width: 44px; margin-inline-start: 6px; color: #fff;
+  background: var(--gj-q-bead); box-shadow: var(--gj-q-bead-edge); transition: transform 420ms var(--gj-spring);
+}
+html .listViewUserDataButtons .listItemButton:is(.playstatebutton-played, :has(.ratingbutton-icon-withrating)) {
+  background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%), rgba(255,255,255,.30);
+}
+html .listViewUserDataButtons .listItemButton :is(.playstatebutton-icon-played, .ratingbutton-icon-withrating) { color: #fff; }
+/* the 21h hover droplet tokens, for these elements too */
+html :is(.listItemButton, .listItemImageButton, .emby-scrollbuttons-button, .itemExternalLinks a, .detailTrackSelect, .listItem):hover {
+  --gj-drop: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.34) 0%, rgba(255,255,255,.15) 42%, rgba(255,255,255,.08) 100%);
+  --gj-drop-rim: inset 2.5px 2.5px 2px -1.5px rgba(255,255,255,.95), inset -2.5px -2.5px 2px -1.5px rgba(255,255,255,.65),
+                 inset 0 0 0 1px rgba(255,255,255,.22), inset 0 0 14px rgba(255,255,255,.14), 0 8px 22px rgba(0,0,0,.24);
+  --gj-drop-rim-flat: inset 2px 2px 2px -1.5px rgba(255,255,255,.85), inset -2px -2px 2px -1.5px rgba(255,255,255,.55),
+                 inset 0 0 0 1px rgba(255,255,255,.18), inset 0 0 12px rgba(255,255,255,.1);
+}
+@media (hover: hover) and (pointer: fine) {
+  html .itemsContainer.vertical-list > .listItem:not(.listItem-largeImage-tv) { transition: background-color var(--gj-dur) var(--gj-ease), box-shadow var(--gj-dur) var(--gj-ease); }
+  html .itemsContainer.vertical-list > .listItem:not(.listItem-largeImage-tv):hover {
+    background: radial-gradient(90% 140% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.10), rgba(255,255,255,0) 60%), var(--gj-q-slab);
+    box-shadow: inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.6), inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.3), inset 0 0 0 1px rgba(255,255,255,.12), 0 14px 36px rgba(0,0,0,.28);
+  }
+  html .listViewUserDataButtons .listItemButton:hover {
+    background: var(--gj-drop), rgba(255,255,255,.06) !important; box-shadow: var(--gj-drop-rim) !important; transform: scale(1.1);
+  }
+  html .itemDetailPage .itemExternalLinks a.button-link:hover, html .emby-scrollbuttons-button:hover:not(:disabled),
+  html .itemDetailPage .trackSelections .detailTrackSelect:not([disabled]):hover {
+    background: var(--gj-drop), rgba(255,255,255,.06) !important; box-shadow: var(--gj-drop-rim-flat) !important;
+  }
+}
+
+/* settings (user preferences): the link list and every form section are grouped glass slabs, like iOS Settings */
+html .userPreferencesPage .readOnlyContent .verticalSection:has(> .listItem-border),
+html .userPreferencesPage form .verticalSection:not(.hide) {
+  background: var(--gj-q-slab); box-shadow: var(--gj-q-slab-edge); border-radius: var(--gj-r-l);
+  padding: 8px 20px 16px; margin-bottom: 20px;
+}
+html .userPreferencesPage .readOnlyContent .verticalSection:has(> .listItem-border) { padding: 6px 8px 8px; }
+html .userPreferencesPage .readOnlyContent .verticalSection:has(> .listItem-border) > .sectionTitle { padding: 10px 12px 6px; margin: 0; }
+html .userPreferencesPage .listItem-border { display: block; border: 0 !important; border-radius: var(--gj-r-m); }
+html .userPreferencesPage .listItem-border + .listItem-border { box-shadow: inset 0 .5px 0 rgba(255,255,255,.08); }
+html .userPreferencesPage .listItem-border .listItem { padding-inline: 12px; color: #fff; }
+html .userPreferencesPage .listItem-border .listItemIcon { color: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  html .userPreferencesPage .listItem-border:hover {
+    background: radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.14), rgba(255,255,255,.05) 60%) !important;
+    box-shadow: inset 2px 2px 2px -1.5px rgba(255,255,255,.85), inset -2px -2px 2px -1.5px rgba(255,255,255,.5), inset 0 0 0 1px rgba(255,255,255,.16) !important;
+  }
+}
+
+/* cards without art (users in the dashboard, people without a photo): glass instead of a grey tile */
+html .visualCardBox { background: var(--gj-q-slab); box-shadow: var(--gj-q-slab-edge); }
+html :is(.defaultCardBackground1, .defaultCardBackground2, .defaultCardBackground3, .defaultCardBackground4, .defaultCardBackground5) {
+  background: radial-gradient(120% 90% at 30% 10%, rgba(255,255,255,.12), rgba(255,255,255,.03) 60%), linear-gradient(160deg, #26262b, #18181c);
+  box-shadow: inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.30), inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.12), inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* dashboard: the Jellyfin Enhanced host box in the app bar grew to the full width and drew an empty glass capsule */
+html body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > .je-header-actions-host { flex-grow: 0; margin-inline-start: auto; }
+
+/* Chromium desktop: the pickers bend what is behind them; the hovered row / button gets the lens (one at a time) */
+@supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.layout-mobile):not(.layout-tv) .itemDetailPage .trackSelections .detailTrackSelect:not([disabled]) {
+      backdrop-filter: var(--gj-lens) blur(1.5px) saturate(150%) brightness(1.04);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.listViewUserDataButtons .listItemButton, .emby-scrollbuttons-button:not(:disabled), .itemExternalLinks a.button-link):hover {
+      backdrop-filter: var(--gj-lens-s) saturate(140%) brightness(1.1);
+    }
+    html:not(.layout-mobile):not(.layout-tv) .itemsContainer.vertical-list > .listItem:not(.listItem-largeImage-tv):hover .listItemImageButton {
+      backdrop-filter: var(--gj-bubble-fab) saturate(150%) brightness(1.1);
     }
   }
 }

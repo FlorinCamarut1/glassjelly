@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.6.0 — 2026-10-11
+
+- Glass everywhere: the controls that were still flat grey fills are glass now (section 21q). Episode rows on season
+  and details pages are glass slabs with a glass play bead on the thumbnail and clear glass beads for info / watched /
+  favourite / more; track pickers (Audio, Subtitles) are glass pop-up buttons that bend the backdrop in Chromium;
+  external links (IMDb, TMDB...) are glass pills; row scroll arrows are clear beads.
+- Settings: the preferences list and every settings section are grouped glass slabs; text fields and selects are
+  recessed glass wells, secondary buttons and chips glass pills, Save stays white but bevelled.
+- Dashboard: user cards and placeholder tiles are glass; segmented controls and the Media Bar settings tabs use the
+  glass-lens selected state. Fixed an empty full-width glass capsule in the dashboard app bar (the Jellyfin Enhanced
+  header box grew to the whole width).
+- Nothing new has a backdrop-filter at rest (they repeat per row / field); the lens is only on the hovered element.
+
 ## v2.5.4 — 2026-10-09
 
 - The v2.5.3 fix for the disc around the logo never applied: the generic hover rule had `#loginPage` inside an
