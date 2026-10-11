@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.8.0.0",
+        "changelog": "- One material: every glass control and surface uses the header capsule's glass (section 21t). Play / Resume (details\n  page and Media Bar) are clear header glass with a white label instead of milky white; the round buttons next to them,\n  poster and episode beads, toolbar, pickers, link pills and login buttons share the header's fill, gentle lens and\n  rim. Menus, action sheets, dialogs, panels, the player OSD, the now-playing bar, toasts and dashboard cards keep a\n  darker tint for long text but use the same rim (one ring + top-left bevel, no doubled arcs at rounded ends).\n- Selected and hover states match the header's selected tab and hover everywhere (menu items, sidebars, segmented\n  controls, Media Bar settings tab, plugin tabs, picker options).\n- Fixes: player OSD buttons no longer carry a lens inside the panel; filter popover sections are no longer grey slabs;\n  the poster play bead has no blur at rest on every card; the login buttons' lens and the full-width Cancel now apply.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.8.0/glassjelly-plugin_2.8.0.0.zip",
+        "checksum": "9B4E2A4DC090C3B6900FB48B7DB1479E",
+        "timestamp": "2026-10-11T16:46:11Z"
+      },
+      {
         "version": "2.7.5.0",
         "changelog": "- Plugin: new option **Subtitle lift** (off by default). While the player controls are visible, subtitles rise just\n  above them (the bar height is measured live, so it is right at any resolution) and settle back when they hide; the\n  Subtitle Appearance dialog applies to every subtitle type, ASS/SSA included. It sets every user's subtitle styling to\n  \"Custom\", hence opt-in. Per device: `localStorage.jfSubGap` (px above the bar, default 20) and\n  `localStorage.jfSubRest` (px at rest, default -1). Script: `src/js/sublift.js`.",
         "targetAbi": "12.0.0.0",
