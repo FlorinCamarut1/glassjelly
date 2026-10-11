@@ -1,5 +1,20 @@
 # Changelog
 
+## v2.7.1 — 2026-10-11
+
+- Much stronger refraction: the header and toolbar capsules are glass rods (the dome rim spans half the height, so
+  the whole picture behind is squeezed toward the middle), round buttons and play beads bulge harder, menus / dialogs /
+  the player panel bend the page into a curved pillow at their edges. v2.7.0 read as plain transparent glass.
+- Fixes from a full read-only audit of every page (theme/qa/audit/AGENT-REPORT.md): transparent row scroll arrows
+  (two colour layers made the background invalid), dashboard Activity / Alerts / Paths lists and data tables are glass,
+  Jellyfin Enhanced settings panel is a liquid sheet (no cyan title), header capsules darken a little once scrolled,
+  no grow on hover for the end pills of a capsule, readable poster beads over bright art, denser phone action sheet,
+  40px header icons from Media Bar / Jellyfin Enhanced, glass sidebar selection, Media Bar counter / mute / settings,
+  login avatars, Edit Images buttons, red outlined buttons, aligned external links, glass played / count badges,
+  dialog footer rim, softer focus ring, smaller phone row beads, Display preferences slabs.
+- IDs inside :is() lists are attribute selectors now (an #id there lifted the whole rule to ID specificity and
+  blocked later overrides).
+
 ## v2.7.0 — 2026-10-11
 
 - New dome lens (tools/glassfilter.mjs dome(), used by every lens token): the refraction grows smoothly toward the edge
