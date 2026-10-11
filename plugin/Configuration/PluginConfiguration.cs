@@ -22,4 +22,8 @@ public class PluginConfiguration : BasePluginConfiguration
 
     /// <summary>Video player tweaks (Skip Intro docked into the glass control bar).</summary>
     public bool Player { get; set; } = true;
+
+    /// <summary>Subtitles rise above the player controls while they are visible, and the Subtitle Appearance dialog
+    /// applies to every subtitle type. Off by default: it sets every user's subtitle styling to "Custom".</summary>
+    public bool SubtitleLift { get; set; }
 }

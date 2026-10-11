@@ -55,6 +55,13 @@
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Docks the Skip Intro button into the glass control bar while it is visible.</div>
                     </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjSubtitleLift" name="SubtitleLift" type="checkbox" is="emby-checkbox" />
+                            <span>Subtitle lift</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">Subtitles rise above the player controls while they are visible, and Settings → Subtitles → Subtitle Appearance applies to every subtitle type (ASS/SSA too). Sets every user's subtitle styling to "Custom". Fine-tune per device in the browser console: <code>localStorage.jfSubGap</code> (px above the bar, default 20) and <code>localStorage.jfSubRest</code> (px when the bar is hidden, default -1).</div>
+                    </div>
                     <div>
                         <button is="emby-button" type="submit" class="raised button-submit block emby-button">
                             <span>Save</span>
@@ -66,12 +73,13 @@
         <script type="text/javascript">
             (function () {
                 var pluginId = 'b3a397c3-d76f-4a9a-8980-3ad430af041f';
-                var keys = ['Enabled', 'Logo', 'Ambient', 'BackdropsDefault', 'Hover', 'Player'];
+                var keys = ['Enabled', 'Logo', 'Ambient', 'BackdropsDefault', 'Hover', 'Player', 'SubtitleLift'];
+                var defaults = { SubtitleLift: false };
                 var page = document.querySelector('#GlassJellyConfigPage');
                 page.addEventListener('pageshow', function () {
                     Dashboard.showLoadingMsg();
                     ApiClient.getPluginConfiguration(pluginId).then(function (config) {
-                        keys.forEach(function (k) { page.querySelector('#gj' + k).checked = config[k] !== false; });
+                        keys.forEach(function (k) { page.querySelector('#gj' + k).checked = k in config ? config[k] === true : defaults[k] !== false; });
                         Dashboard.hideLoadingMsg();
                     });
                 });

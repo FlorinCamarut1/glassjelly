@@ -100,6 +100,7 @@ public static partial class ThemeAssets
             ("favicon", config.Logo),
             ("player", config.Player),
             ("hover", config.Hover),
+            ("sublift", config.SubtitleLift),
         };
         foreach ((string name, bool on) in scripts)
         {

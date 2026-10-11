@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.7.5 — 2026-10-11
+
+- Plugin: new option **Subtitle lift** (off by default). While the player controls are visible, subtitles rise just
+  above them (the bar height is measured live, so it is right at any resolution) and settle back when they hide; the
+  Subtitle Appearance dialog applies to every subtitle type, ASS/SSA included. It sets every user's subtitle styling to
+  "Custom", hence opt-in. Per device: `localStorage.jfSubGap` (px above the bar, default 20) and
+  `localStorage.jfSubRest` (px at rest, default -1). Script: `src/js/sublift.js`.
+
 ## v2.7.4 — 2026-10-11
 
 - GlassJelly is installable from Jellyfin's plugin catalog: add
