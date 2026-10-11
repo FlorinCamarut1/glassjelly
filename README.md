@@ -45,24 +45,40 @@ a monochrome glass logo, white accent like tvOS.
 ## Requirements
 
 - **Jellyfin 12.x** (web client). Older versions have a different header and are not supported.
-- Optional, for the full theme: the **File Transformation** plugin
+- With the **plugin** (option A) nothing else is needed. For the CSS / installer options, the full theme needs the
+  **File Transformation** plugin
   (repository `https://www.iamparadox.dev/jellyfin/plugins/manifest.json`). Without it you get the CSS-only theme:
   no ambient artwork background, stock admin dashboard, Skip Intro stays where Jellyfin puts it.
 
 ## Install
 
-### Option A — one line of CSS (any server, 30 seconds)
+### Option A — plugin (recommended, full theme, updates itself)
+
+1. Dashboard → **Plugins** → **Manage Repositories** → **+**, name `GlassJelly`, URL:
+
+   ```
+   https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/manifest.json
+   ```
+2. **Available** → **GlassJelly** → **Install**, then restart Jellyfin (Dashboard → Restart).
+3. Reload the web page (Ctrl+F5). Settings: Dashboard → Plugins → **GlassJelly** (logo, ambient background, backdrops
+   by default, hover light, player tweaks; they apply on the next page load, no restart).
+
+The plugin adds the theme to the web client by itself: no Custom CSS, no File Transformation. If you used option B or C
+before, remove that copy first (delete the GlassJelly part of Custom CSS, or `python3 install.py --uninstall --no-splash`),
+otherwise the theme loads twice. Jellyfin 12 only.
+
+### Option B — one line of CSS (any server, 30 seconds)
 
 Dashboard → General → **Branding** → **Custom CSS**, paste, **Save**, then reload the page (Ctrl+F5):
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.7.3/dist/glassjelly.css");
+@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.7.4/dist/glassjelly.css");
 ```
 
 Keep Jellyfin's own logo and your server name in the header? Use `dist/glassjelly-nologo.css` instead.
-Pin a tag (`@v2.7.3`) so an update never surprises you; change it when you want a new version.
+Pin a tag (`@v2.7.4`) so an update never surprises you; change it when you want a new version.
 
-### Option B — installer (full theme)
+### Option C — installer (full theme)
 
 Needs Python 3.8+ on any machine that can reach the server (no extra packages).
 
@@ -141,6 +157,11 @@ node tools/build.mjs     # regenerate the lens + logo tokens in src/, write dist
 `src/glassjelly.css` is the source (sections are numbered; v2 Liquid Glass lives in section 21), `src/js/` holds the
 index.html scripts, `src/early.css` the startup-screen CSS. Never put a `$` in a script: File Transformation treats the
 replacement text as a regex.
+
+Releases: add a `## vX.Y.Z` section to CHANGELOG.md, bump `--gj-version`, build, commit, then push a `vX.Y.Z` tag. The
+`Plugin release` workflow builds the plugin, attaches the zip to the GitHub release and adds the version to
+`manifest.json`; servers with the repository get the update in Dashboard → Plugins. `plugin/README.md` has the local
+build.
 
 ## Credits
 

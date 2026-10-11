@@ -21,6 +21,13 @@ docker run --rm --user "$(id -u):$(id -g)" -e HOME=/tmp -e DOTNET_CLI_HOME=/tmp 
   -v "$PWD":/src -w /src/plugin mcr.microsoft.com/dotnet/sdk:10.0 dotnet publish -c Release -o /src/plugin/out
 ```
 
+## Install from the catalog
+
+Add `https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/manifest.json` as a repository (Dashboard →
+Plugins → Manage Repositories). Releases are built by `.github/workflows/plugin.yml` on every `vX.Y.Z` tag
+(`tools/manifest.mjs` adds the version to `manifest.json`); the catalog image is `assets/plugin/thumb.png`
+(`node tools/plugin-thumb.cjs`).
+
 ## Install by hand
 
 Copy `out/Jellyfin.Plugin.GlassJelly.dll` to `<jellyfin config>/data/plugins/GlassJelly_<version>/` and restart

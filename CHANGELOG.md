@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.7.4 — 2026-10-11
+
+- GlassJelly is installable from Jellyfin's plugin catalog: add
+  `https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/manifest.json` in Dashboard → Plugins → Manage
+  Repositories, then install GlassJelly. Every release tag builds the plugin on GitHub Actions and adds it to the
+  manifest, so updates show up in the dashboard.
+- The plugin has its own image in the catalog and the plugin list.
+
 ## v2.7.3 — 2026-10-11
 
 - New: GlassJelly as a Jellyfin 12 plugin (plugin/, first version). It injects the theme into index.html at request

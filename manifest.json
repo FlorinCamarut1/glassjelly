@@ -1,0 +1,12 @@
+[
+  {
+    "guid": "b3a397c3-d76f-4a9a-8980-3ad430af041f",
+    "name": "GlassJelly",
+    "overview": "Liquid Glass theme for the Jellyfin web client.",
+    "description": "Apple-style Liquid Glass for jellyfin-web: clear glass capsules and panels that bend what is behind them, an ambient background from the artwork, glass buttons, menus, dialogs, player and dashboard. No Custom CSS needed; a settings page turns the logo, ambient background, hover light and player tweaks on or off.",
+    "owner": "FlorinCamarut1",
+    "category": "General",
+    "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
+    "versions": []
+  }
+]

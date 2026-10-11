@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.7.3";
+  --gj-version: "2.7.4";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;

@@ -1,0 +1,52 @@
+# Plugin release: on every vX.Y.Z tag, build the Jellyfin plugin, attach the zip to the GitHub release (created with the
+# CHANGELOG.md section if it does not exist yet) and add the version to manifest.json on main, so servers that have
+# https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/manifest.json as a plugin repository get the update.
+name: Plugin release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build the plugin
+        run: |
+          V="${GITHUB_REF_NAME#v}.0"
+          dotnet publish plugin/Jellyfin.Plugin.GlassJelly.csproj -c Release -o out \
+            -p:Version="$V" -p:AssemblyVersion="$V" -p:FileVersion="$V"
+          mkdir -p pkg && cp out/Jellyfin.Plugin.GlassJelly.dll pkg/
+          (cd pkg && zip -X "../glassjelly-plugin_${V}.zip" Jellyfin.Plugin.GlassJelly.dll)
+          echo "ZIP=glassjelly-plugin_${V}.zip" >> "$GITHUB_ENV"
+
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node tools/manifest.mjs --notes "$GITHUB_REF_NAME" > notes.md
+          gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1 || \
+            gh release create "$GITHUB_REF_NAME" --title "GlassJelly $GITHUB_REF_NAME" --notes-file notes.md
+          gh release upload "$GITHUB_REF_NAME" "$ZIP" --clobber
+
+      - name: Add the version to manifest.json
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          node tools/manifest.mjs "$GITHUB_REF_NAME" "$ZIP"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git commit -m "manifest: GlassJelly $GITHUB_REF_NAME"
+          git push origin main
