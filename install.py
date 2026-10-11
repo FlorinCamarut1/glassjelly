@@ -331,7 +331,7 @@ def main():
                     help="load the CSS from jsDelivr (@import) instead of pasting it; REF = tag, e.g. v2.0.0 (default latest)")
     ap.add_argument("--no-font", action="store_true", help="system fonts only (no Inter from jsDelivr)")
     ap.add_argument("--no-logo", action="store_true", help="keep Jellyfin's logo and server name, favicon and login background")
-    ap.add_argument("--no-splash", action="store_true", help="keep your login background")
+    ap.add_argument("--no-splash", action="store_true", help="keep your login background (with --uninstall: leave the GlassJelly one in place)")
     ap.add_argument("--no-ambient", action="store_true", help="no blurred-artwork background (graphite canvas only)")
     ap.add_argument("--no-dashboard", action="store_true", help="leave the admin dashboard stock")
     ap.add_argument("--no-backdrops-default", action="store_true", help="do not switch Backdrops on for new devices")
@@ -390,7 +390,10 @@ def main():
         if has_ft:
             expect = {"__gjBackdrops": o["backdrops"], "__gjAmbient": o["ambient"], "__gjLogo": o["logo"],
                       "__gjSkipDock": o["player"], "__gjHover": o["hover"], "__gjDashCss": o["dashboard"], EARLY_MARK: o["logo"]}
-        set_splash(api, o["logo"] and not a.no_splash, a.dry_run)
+        if a.uninstall and a.no_splash:
+            print("  login background: kept (--no-splash)")
+        else:
+            set_splash(api, o["logo"] and not a.no_splash, a.dry_run)
     if not a.dry_run:
         verify(api, BEGIN in new, expect, had_sub_rule)
         print("Done. Reload Jellyfin in the browser (Ctrl+F5 / Cmd+Shift+R); on phones close and reopen the app.")
