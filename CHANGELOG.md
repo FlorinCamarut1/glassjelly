@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.8.0 — 2026-10-11
+
+- One material: every glass control and surface uses the header capsule's glass (section 21t). Play / Resume (details
+  page and Media Bar) are clear header glass with a white label instead of milky white; the round buttons next to them,
+  poster and episode beads, toolbar, pickers, link pills and login buttons share the header's fill, gentle lens and
+  rim. Menus, action sheets, dialogs, panels, the player OSD, the now-playing bar, toasts and dashboard cards keep a
+  darker tint for long text but use the same rim (one ring + top-left bevel, no doubled arcs at rounded ends).
+- Selected and hover states match the header's selected tab and hover everywhere (menu items, sidebars, segmented
+  controls, Media Bar settings tab, plugin tabs, picker options).
+- Fixes: player OSD buttons no longer carry a lens inside the panel; filter popover sections are no longer grey slabs;
+  the poster play bead has no blur at rest on every card; the login buttons' lens and the full-width Cancel now apply.
+
 ## v2.7.5 — 2026-10-11
 
 - Plugin: new option **Subtitle lift** (off by default). While the player controls are visible, subtitles rise just

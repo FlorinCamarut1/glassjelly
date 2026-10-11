@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.7.5";
+  --gj-version: "2.8.0";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -2092,3 +2092,197 @@ html [id="displayPreferencesPage"] form > .MuiStack-root > .MuiStack-root {
 /* [26] the Seerr status icon in the search pill: a quiet glyph, not a broken-looking grey disc */
 html .searchFieldsInner .jellyseerr-icon { filter: grayscale(1) drop-shadow(0 1px 2px rgba(0,0,0,.5)); }
 html .searchFieldsInner .jellyseerr-icon.is-no-user { opacity: .45; }
+
+/* 21t. ONE MATERIAL (v2.8). Every glass control and surface now uses the header capsule's glass (21l / 21r):
+   - rim: ONE faint ring + a top-left bevel + a faint bottom line (--gj-rim). The old double bevel (top-left AND
+     bottom-right offset insets, plus an inner glow) drew two parallel arcs at every rounded end; it is gone from the
+     shared tokens (--gj-glass-edge, --gj-q-*-edge, --gj-drop-rim*), so menus, dialogs, panels, beads, slabs and cards
+     all get the same rim. Panels keep their darker tint + light frost (long text) but share rim, hover and selection.
+   - fill: clear, a faint lit-from-top-left gradient over a light dark tint (--gj-cap-fill); in Chromium desktop the
+     same lens family at the v2.6 strength (--gj-lens-cap on pills, --gj-lens-s on round buttons), never blur on top.
+   - selected = the header's selected tab (--gj-sel-bg / --gj-sel-rim: a lens drawn with light, no backdrop-filter);
+     hover = --gj-clear-hover-rim + a glint, no own lens inside anything that already has a backdrop-filter.
+   - Play / Resume (details, Media Bar) are no longer milky white: header glass with a white label, a little more
+     prominent (brighter ring, the gloss of the selected tab, a soft shadow) - --gj-prom-*.
+   Form "Save" / "Sign In" pills stay solid white (contrast on long forms) but get the same single-ring rim. */
+:root, html[data-theme] {
+  --gj-rim: inset 0 0 0 1px rgba(255,255,255,.20), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.6), inset 0 -1px 0 rgba(255,255,255,.08);
+  --gj-rim-bead: inset 0 0 0 1px rgba(255,255,255,.28), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.7), inset 0 -1px 0 rgba(255,255,255,.08);
+  --gj-cap-fill: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.07), rgba(255,255,255,.015) 60%, rgba(255,255,255,.035)), rgba(10,10,14,.22);
+  --gj-cap-text: 0 1px 3px rgba(0,0,0,.7), 0 0 10px rgba(0,0,0,.45);
+  --gj-sel-bg: radial-gradient(22% 40% at 18% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
+               linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 48%, rgba(255,255,255,.02) 56%, rgba(255,255,255,.07) 100%),
+               rgba(255,255,255,.05);
+  --gj-sel-rim: inset 0 0 0 1px rgba(255,255,255,.42), inset 0 1px 0 rgba(255,255,255,.55);
+  --gj-prom-bg: radial-gradient(56px 22px at 40px 13px, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),   /* px glint: same on a 148px pill and a full-width phone button */
+                linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.07) 48%, rgba(255,255,255,.035) 56%, rgba(255,255,255,.10) 100%),
+                rgba(10,10,14,.18);
+  --gj-prom-rim: inset 0 0 0 1px rgba(255,255,255,.40), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.8), inset 0 -1px 0 rgba(255,255,255,.12), 0 6px 18px rgba(0,0,0,.28);
+  /* the shared rim tokens of the older sections, re-pointed at the one rim */
+  --gj-glass-edge: var(--gj-rim);
+  --gj-q-pill-edge: inset 0 0 0 1px rgba(255,255,255,.16), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.55), inset 0 -1px 0 rgba(255,255,255,.06), 0 2px 8px rgba(0,0,0,.18);
+  --gj-q-slab-edge: inset 0 0 0 1px rgba(255,255,255,.10), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.40), inset 0 -1px 0 rgba(255,255,255,.05), 0 10px 30px rgba(0,0,0,.20);
+  --gj-q-bead-edge: var(--gj-rim-bead);
+}
+/* the hover droplet tokens (declared on the hovered element, see 21h) get the clean hover ring too */
+html :is(.MuiButton-root, .MuiIconButton-root, .MuiTab-root, .MuiMenuItem-root, .MuiListItemButton-root, .detailButton, .actionSheetMenuItem,
+  .paper-icon-button-light, .emby-button, .emby-tab-button, .navMenuOption, .cardOverlayButton, [id="slides-container"] button, option,
+  .listItemButton, .listItemImageButton, .emby-scrollbuttons-button, .itemExternalLinks a, .detailTrackSelect, .listItem):hover {
+  --gj-drop-rim: inset 0 0 0 1px rgba(255,255,255,.45), inset 0 1px 0 rgba(255,255,255,.5), inset 0 0 10px rgba(255,255,255,.07), 0 6px 18px rgba(0,0,0,.24);
+  --gj-drop-rim-flat: inset 0 0 0 1px rgba(255,255,255,.45), inset 0 1px 0 rgba(255,255,255,.5), inset 0 0 10px rgba(255,255,255,.07);
+}
+
+/* Play / Resume: prominent header glass, white label (every browser; Safari / Firefox / phones add a light frost,
+   as their header capsules do) */
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), [id="slides-container"] .play-button) {
+  color: #fff !important; text-shadow: var(--gj-cap-text);
+  background: var(--gj-prom-bg) !important; box-shadow: var(--gj-prom-rim) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(160%) brightness(1.04); backdrop-filter: blur(8px) saturate(160%) brightness(1.04);
+}
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), [id="slides-container"] .play-button) :is(.material-icons, .detailButton-icon, svg) {
+  color: #fff; filter: drop-shadow(0 1px 2px rgba(0,0,0,.55));
+}
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), [id="slides-container"] .play-button):hover {
+  color: #fff !important;
+  background: radial-gradient(60px 24px at 40px 13px, rgba(255,255,255,.42), rgba(255,255,255,0) 70%),
+              radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.08), rgba(255,255,255,0) 60%),
+              linear-gradient(180deg, rgba(255,255,255,.24) 0%, rgba(255,255,255,.09) 48%, rgba(255,255,255,.05) 56%, rgba(255,255,255,.12) 100%),
+              rgba(10,10,14,.12) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 10px rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.32) !important;
+}
+html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), [id="slides-container"] .play-button):focus-visible {
+  box-shadow: var(--gj-prom-rim), 0 0 0 2px rgba(255,255,255,.85) !important;
+}
+
+/* round buttons, Media Bar beads, player header buttons, the bare first header icon: the header's clear fill + rim */
+html :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), [id="slides-container"] :is(.trailer-button, .detail-button, .favorite-button, .arrow, .pause-button, .mute-button, .slide-counter),
+  .osdHeader .headerButton) {
+  background: var(--gj-cap-fill) !important; box-shadow: var(--gj-rim) !important;
+}
+html :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), [id="slides-container"] :is(.detail-button, .favorite-button, .trailer-button, .pause-button, .mute-button),
+  .osdHeader .headerButton) :is(.material-icons, .detailButton-icon, svg) { filter: drop-shadow(0 1px 2px rgba(0,0,0,.55)); }
+html [id="slides-container"] .slide-counter { text-shadow: var(--gj-cap-text); }
+/* watched / favourite: the selected-tab lens, a little whiter so the state still reads */
+html :is(.itemDetailPage .detailButton:is(.btnUserRating:has(.ratingbutton-icon-withrating), .btnPlaystate:has(.playstatebutton-icon-played)),
+  [id="slides-container"] .favorite-button.favorited) {   /* one :is() = the same weight as the fill rule above, so it wins */
+  background: radial-gradient(26% 36% at 26% 22%, rgba(255,255,255,.5), rgba(255,255,255,0) 70%),
+              linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,.14) 50%, rgba(255,255,255,.20)) !important;
+  box-shadow: var(--gj-sel-rim) !important;
+}
+
+/* selected items everywhere = the header's selected tab (was a flat white-ish fill or a double bevel) */
+html :is(.MuiMenuItem-root.Mui-selected, .navMenuOption-selected, .MuiDrawer-paper .MuiListItemButton-root.Mui-selected,
+  body.dashboardDocument .MuiToggleButtonGroup-grouped.Mui-selected, .media-bar-settings-popup .media-bar-client-tab.active,
+  body.dashboardDocument .page .jellyfin-tab-button.active, body.dashboardDocument [id="MediaBarEnhancedConfigurationPage"] .jellyfin-tab-button.active) {
+  background: var(--gj-sel-bg) !important; box-shadow: var(--gj-sel-rim) !important; color: #fff !important;
+}
+html .alphaPicker-fixed-right > .MuiPaper-root .MuiToggleButton-root.Mui-selected, html .alphaPickerButton-selected {
+  background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,.42), inset 0 1px 0 rgba(255,255,255,.5);
+}
+@supports (appearance: base-select) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.layout-tv) select.emby-select-withcolor:not([multiple]):not([size]) option:checked { background: var(--gj-sel-bg); box-shadow: var(--gj-sel-rim); }
+    html:not(.layout-tv) select.emby-select-withcolor:not([multiple]):not([size]) option:is(:hover, :focus-visible):not(:checked) {
+      background: radial-gradient(30% 40% at 12% 22%, rgba(255,255,255,.18), rgba(255,255,255,0) 70%), rgba(255,255,255,.04);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.45), inset 0 1px 0 rgba(255,255,255,.5);
+    }
+    html:not(.layout-tv) select.emby-select-withcolor::picker(select) { background: var(--gj-liquid-sheen), var(--gj-liquid-menu); box-shadow: var(--gj-rim), var(--gj-shadow-float); }
+  }
+}
+
+/* menus: the filter popover's accordion sections were opaque grey slabs inside the glass */
+html .MuiPopover-paper :is(.MuiAccordion-root, .MuiAccordionSummary-root, .MuiAccordionDetails-root) { background: transparent !important; box-shadow: none !important; }
+html .MuiPopover-paper .MuiAccordion-root + .MuiAccordion-root { box-shadow: inset 0 .5px 0 rgba(255,255,255,.08) !important; }
+html .MuiPopover-paper .MuiAccordion-root::before { display: none; }
+html .actionSheetMenuItem[data-id="delete"]:hover { box-shadow: inset 0 0 0 1px rgba(255,105,97,.6), inset 0 1px 0 rgba(255,180,175,.6) !important; }
+
+/* beads: poster play bead, poster ✓ ♥ ⋮, episode-row play bead, row hover */
+html .card .cardOverlayFab-primary {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.42), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.8), inset 0 -1px 0 rgba(255,255,255,.10), 0 8px 22px rgba(0,0,0,.35) !important;
+  -webkit-backdrop-filter: none; backdrop-filter: none;   /* PERF-P1: no backdrop at rest on every card (only the hovered one, below) */
+}
+@media (hover: hover) and (pointer: fine) {
+  html .card:is(:hover, :focus-within) .cardOverlayFab-primary { -webkit-backdrop-filter: blur(6px) saturate(160%) brightness(1.1); backdrop-filter: blur(6px) saturate(160%) brightness(1.1); }
+}
+html .listItemImage .listItemImageButton {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.42), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.8), inset 0 -1px 0 rgba(255,255,255,.10), 0 6px 18px rgba(0,0,0,.35);
+}
+@media (hover: hover) and (pointer: fine) {
+  html .itemsContainer.vertical-list > .listItem:not(.listItem-largeImage-tv):hover {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.16), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.55), inset 0 -1px 0 rgba(255,255,255,.07), 0 14px 36px rgba(0,0,0,.28);
+  }
+  html .userPreferencesPage .listItem-border:hover { box-shadow: inset 0 0 0 1px rgba(255,255,255,.45), inset 0 1px 0 rgba(255,255,255,.5) !important; }
+}
+html :is(.defaultCardBackground1, .defaultCardBackground2, .defaultCardBackground3, .defaultCardBackground4, .defaultCardBackground5) { box-shadow: var(--gj-q-slab-edge); }
+
+/* destructive pills: one red ring + bevel (was a double bevel) */
+html :is(.MuiButton-contained.MuiButton-containedError:not(.MuiButton-containedPrimary), .MuiButton-outlined.MuiButton-outlinedError) {
+  box-shadow: inset 0 0 0 1px rgba(255,105,97,.24), inset 1.5px 1.5px 1px -.5px rgba(255,180,175,.55), inset 0 -1px 0 rgba(255,105,97,.10);
+}
+/* solid white primaries: same rim language (a top highlight, a faint bottom line), no offset bevels */
+html :is(.button-submit, .raised.button-submit, .MuiButton-containedPrimary) {
+  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.08), 0 6px 18px rgba(0,0,0,.30);
+}
+html .media-bar-settings-popup .media-bar-btn-submit { box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(0,0,0,.08), 0 6px 18px rgba(0,0,0,.30) !important; }
+/* form dialog footer: carries the dialog's ring down its sides and bottom (it covers the dialog's own inset rim) */
+html .dialog:not(.dialog-fullscreen) .formDialogFooter:not(.formDialogFooter-clear) {
+  box-shadow: inset 0 .5px 0 rgba(255,255,255,.10), inset 1px 0 0 rgba(255,255,255,.20), inset -1px 0 0 rgba(255,255,255,.20), inset 0 -1px 0 rgba(255,255,255,.20);
+}
+/* login buttons: header capsules (section 17 styles them through #loginPage: an id selector is needed to win) */
+html #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer) {
+  background: var(--gj-glass-clear), rgba(26,26,32,.18); box-shadow: var(--gj-rim); text-shadow: var(--gj-cap-text);
+}
+html #loginPage .manualLoginForm .raised.cancel { max-width: none; }   /* [15] never applied: the button is .raised.cancel.block, and section 17's #loginPage max-width won */
+
+/* Chromium desktop: the header's material exactly - clear tint, the v2.6 lens, no blur on top */
+@supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume):not(.hide), [id="slides-container"] .play-button) {
+      -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04); backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), .osdHeader .headerButton,
+      header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child) {
+      -webkit-backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04); backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04);
+    }
+    html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child { background: var(--gj-cap-fill); box-shadow: var(--gj-rim); }
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .trackSelections .detailTrackSelect:not([disabled]),
+      body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > .je-header-actions-host:not(:has(> .MuiIconButton-root)):has(.headerButton)),
+    html:not(.layout-mobile):not(.layout-tv) #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer) {
+      background: var(--gj-cap-fill) !important; box-shadow: var(--gj-rim) !important; text-shadow: var(--gj-cap-text);
+      -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04); backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04);
+    }
+    /* hover on a standalone pill keeps its own lens (no swap to the droplet lens) and gets the header's light
+       ("body" only adds weight: the 21j hover rule it replaces is one element heavier) */
+    html:not(.layout-mobile):not(.layout-tv) body :is(.itemDetailPage .trackSelections .detailTrackSelect:not([disabled]), .itemDetailPage .itemExternalLinks a.button-link):hover,
+    html:not(.layout-mobile):not(.layout-tv) body #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer):hover {
+      background: radial-gradient(30% 24% at 24% 20%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
+                  radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.07), rgba(255,255,255,0) 60%), rgba(10,10,14,.18) !important;
+      box-shadow: var(--gj-clear-hover-rim) !important;
+      -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.06); backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.06);
+    }
+    /* row action beads and row arrows: the header's hover light (was the whitish droplet of 21h) */
+    html:not(.layout-mobile):not(.layout-tv) :is(.listViewUserDataButtons .listItemButton, .emby-scrollbuttons-button:not(:disabled)):hover {
+      background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.42), rgba(255,255,255,0) 70%), rgba(255,255,255,.05) !important;
+      box-shadow: var(--gj-clear-hover-rim) !important;
+    }
+    html:not(.layout-mobile):not(.layout-tv) .listViewUserDataButtons .listItemButton:is(.playstatebutton-played, :has(.ratingbutton-icon-withrating)):hover {
+      background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%), rgba(255,255,255,.26) !important;
+    }
+    /* poster ✓ ♥ ⋮ on the hovered card: one ring + bevel (21o drew the double bevel) */
+    html:not(.layout-mobile):not(.layout-tv) .card:is(:hover, :focus-within) .cardOverlayButton:not(.cardOverlayFab-primary) {
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.42), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.8), inset 0 -1px 0 rgba(255,255,255,.10);
+    }
+    html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), [id="slides-container"] .play-button):hover {
+      -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.08); backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.08);
+    }
+    /* NO LENS INSIDE A LENS (21r), for what 21r missed: the player buttons sit in the player panel (a backdrop root);
+       a hover lens there could only bend the panel's own rim */
+    html:not(.layout-mobile):not(.layout-tv) :is(.videoOsdBottom .osdControls .paper-icon-button-light, .nowPlayingBar .paper-icon-button-light, .osdControls button.skip-button),
+    html:not(.layout-mobile):not(.layout-tv) :is(.videoOsdBottom .osdControls .paper-icon-button-light, .nowPlayingBar .paper-icon-button-light, .osdControls button.skip-button):hover {
+      -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+    }
+    html:not(.layout-mobile):not(.layout-tv) .videoOsdBottom .osdControls .paper-icon-button-light:hover:not(:disabled) {
+      background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%), rgba(255,255,255,.04) !important;
+    }
+  }
+}
