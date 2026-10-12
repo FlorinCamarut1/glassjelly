@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.9.5 — 2026-10-12
+
+- Player header (Jellyfin 12 draws it with React, `.videoOsd-appBar`): Back, SyncPlay and Cast are glass beads like the
+  rest of the header; they were bare glyphs, because the theme only styled the legacy `.headerButton`.
+- Jellyfin Enhanced pause screen: the close button is a glass bead with a drawn X, centred (the "×" character sat ~2px
+  low), and on phones the Back bead is no longer cut in half (the plugin narrows the header to 10vw, 39px).
+- QA: a full pass with the real player (local test clip, playback reports blocked so no resume position is written)
+  over home, details, season, episode, libraries, sort menu, search, user menu, drawer, settings, dashboard, the
+  GlassJelly page, the player with its subtitle and settings menus and the pause screen, on desktop and phone.
+
 ## v2.9.4 — 2026-10-12
 
 - Phones: the icons in the episode-row buttons are centred. 2.9.3 made the buttons 36px circles but kept their 8px

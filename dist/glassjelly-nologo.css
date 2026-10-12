@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.9.4";
+  --gj-version: "2.9.5";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -2079,6 +2079,40 @@ html [id="displayPreferencesPage"] form > .MuiStack-root > .MuiStack-root {
 /* [26] the Seerr status icon in the search pill: a quiet glyph, not a broken-looking grey disc */
 html .searchFieldsInner .jellyseerr-icon { filter: grayscale(1) drop-shadow(0 1px 2px rgba(0,0,0,.5)); }
 html .searchFieldsInner .jellyseerr-icon.is-no-user { opacity: .45; }
+
+/* [27] Jellyfin Enhanced pause screen: its close button is a "×" character, which sits ~2px low in any font. A glass
+   bead (the player header's) with a drawn X, centred by the flex box the plugin already gives the button (v2.9.5) */
+html #pause-screen-close-btn {
+  width: 44px; height: 44px; padding: 0; border: 0; font-size: 0; color: transparent;
+  top: max(20px, env(safe-area-inset-top)); right: max(20px, env(safe-area-inset-right));
+  background: var(--gj-cap-fill); box-shadow: var(--gj-rim);
+  -webkit-backdrop-filter: blur(8px) saturate(140%); backdrop-filter: blur(8px) saturate(140%);
+  transition: transform 420ms var(--gj-spring), background-color var(--gj-dur-fast);
+}
+html #pause-screen-close-btn::before {
+  content: ""; width: 16px; height: 16px; background: #fff;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 3l10 10M13 3L3 13' stroke='%23000' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 3l10 10M13 3L3 13' stroke='%23000' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+html #pause-screen-close-btn:hover { background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.30), rgba(255,255,255,0) 70%), var(--gj-cap-fill); transform: scale(1.06); }
+html #pause-screen-close-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* [28] Jellyfin 12's player header is a React AppBar (.osdHeader > .videoOsd-appBar) with MUI icon buttons, not the
+   legacy .headerButton the rules above style: back, SyncPlay and Cast were bare glyphs. The header beads (v2.9.5) */
+html .osdHeader .MuiToolbar-root .MuiIconButton-root {
+  width: 44px; height: 44px; padding: 0; border-radius: 50%; color: #fff;
+  background: var(--gj-cap-fill); box-shadow: var(--gj-rim);
+  -webkit-backdrop-filter: blur(8px) saturate(140%); backdrop-filter: blur(8px) saturate(140%);
+  transition: transform 420ms var(--gj-spring), background-color var(--gj-dur-fast);
+}
+html .osdHeader .MuiToolbar-root .MuiIconButton-root:hover {
+  background: radial-gradient(34% 28% at 28% 22%, rgba(255,255,255,.30), rgba(255,255,255,0) 70%), var(--gj-cap-fill); transform: scale(1.06);
+}
+html .osdHeader .MuiToolbar-root .MuiIconButton-root .MuiSvgIcon-root { filter: drop-shadow(0 1px 2px rgba(0,0,0,.55)); }
+html .osdHeader .MuiToolbar-root { gap: 8px; }
+/* the pause screen (html.pause-screen-active) narrows the header to 10vw to keep only Back: 39px on a phone cut the
+   44px bead in half */
+html.pause-screen-active .skinHeader.osdHeader { width: max(10vw, 88px) !important; }
 
 /* 21t. ONE MATERIAL (v2.8). Every glass control and surface now uses the header capsule's glass (21l / 21r):
    - rim: ONE faint ring + a top-left bevel + a faint bottom line (--gj-rim). The old double bevel (top-left AND

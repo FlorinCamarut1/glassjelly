@@ -73,11 +73,11 @@ otherwise the theme loads twice. Jellyfin 12 only.
 Dashboard → General → **Branding** → **Custom CSS**, paste, **Save**, then reload the page (Ctrl+F5):
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.9.4/dist/glassjelly.css");
+@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.9.5/dist/glassjelly.css");
 ```
 
 Keep Jellyfin's own logo and your server name in the header? Use `dist/glassjelly-nologo.css` instead.
-Pin a tag (`@v2.9.4`) so an update never surprises you; change it when you want a new version.
+Pin a tag (`@v2.9.5`) so an update never surprises you; change it when you want a new version.
 
 ### Option C — installer (full theme)
 
