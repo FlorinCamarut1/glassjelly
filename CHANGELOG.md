@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.9.1 — 2026-10-12
+
+- Phones: the header capsules (menu, actions, avatar) use the desktop's clear glass (the same fill, rim and label
+  shadow) with a light 3px blur, instead of the heavy frost (blur 10px + saturate 180%) that turned the page behind
+  them into a tinted cloud. The scroll edge behind them is the desktop's again. Phones still have no lens: Safari
+  can't do it and 21l stays Chromium desktop only.
+
 ## v2.9.0 — 2026-10-12
 
 - Plugin: new **Colours** settings. **Background**: Graphite (default), Midnight blue, Ocean, Forest, Plum, Wine,

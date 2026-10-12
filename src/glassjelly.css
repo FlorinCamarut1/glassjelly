@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.9.0";
+  --gj-version: "2.9.1";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -1161,12 +1161,9 @@ html body.dashboardDocument .page .save-button { background: #fff; color: #000; 
 /* ============ 19. PHONE ============ */
 @media (max-width: 600px) {
   html header.MuiAppBar-root > .MuiToolbar-root { min-height: 56px; }
-  /* v2.9: the floating glass capsules of the desktop, no solid bar (was rgba(var(--gj-ink-deep),.97), QA-25). The scroll edge
-     is a little deeper and darker, so rows passing under the capsules don't fight the icons. */
-  html header.MuiAppBar-root.MuiAppBar-colorDefault::before {
-    inset: 0 0 -36px 0;
-    background: linear-gradient(180deg, rgba(var(--gj-ink-deep),.78) 0%, rgba(var(--gj-ink-deep),.46) 55%, rgba(var(--gj-ink-deep),0) 100%);
-  }
+  /* v2.9: the floating glass capsules of the desktop, no solid bar (was rgba(18,18,20,.97), QA-25); the desktop's
+     scroll edge, a little deeper (the capsule material on phones: 21v) */
+  html header.MuiAppBar-root.MuiAppBar-colorDefault::before { inset: 0 0 -36px 0; }
   /* QA-22: phone form dialogs fill the screen -> square corners */
   html .dialog.dialog-fixedSize { border-radius: 0; }
   /* QA-21: calmer poster wall behind "Please sign in" (blur stays desktop-only) */
@@ -2329,3 +2326,15 @@ html[data-gj-accent]:not(#gj) :is(.button-submit, .MuiButton-containedPrimary, .
   background: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.22), rgba(255,255,255,0) 70%), var(--gj-accent-hover) !important;
 }
 html[data-gj-accent]:not(#gj) :is(.button-submit, .MuiButton-containedPrimary) :is(span, .MuiSvgIcon-root) { color: inherit; }
+
+/* 21v. PHONE CAPSULES (v2.9.1). Phones have no lens (21l is Chromium desktop only; Safari can't do it), so the header
+   capsules were frosted: blur 10px + saturate 180% smeared the page into a tinted cloud. Now the desktop's material
+   (clear fill, the same rim and label shadow) with only a light blur that keeps the icons readable over posters. */
+html.layout-mobile:not(#gj) header.MuiAppBar-root > .MuiToolbar-root > :is(
+    .MuiStack-root:first-of-type:has(> .MuiButton-root), .MuiBox-root:has(> .MuiIconButton-root),
+    .MuiIconButton-root:first-child, .je-header-actions-host:has(.MuiIconButton-root, .headerButton)) {
+  background: var(--gj-cap-fill) !important; box-shadow: var(--gj-rim) !important;
+  -webkit-backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important; backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important;
+}
+html.layout-mobile header.MuiAppBar-root .MuiIconButton-root { text-shadow: 0 1px 3px rgba(0,0,0,.7), 0 0 10px rgba(0,0,0,.45); }
+html.layout-mobile header.MuiAppBar-root .MuiIconButton-root .MuiSvgIcon-root { filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
