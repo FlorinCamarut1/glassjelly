@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.9.0.0",
+        "changelog": "- Plugin: new **Colours** settings. **Background**: Graphite (default), Midnight blue, Ocean, Forest, Plum, Wine,\n  Espresso, OLED black or a custom colour; it tints the canvas, the dark glass of menus, dialogs and the player, and\n  lays a veil of the colour over the ambient artwork, while staying dark (a custom colour gives its hue, not its\n  brightness). **Accent**: White (default), Blue, Indigo, Purple, Pink, Red, Orange, Yellow, Green, Teal or custom;\n  fills progress bars, slider tracks, checkboxes and the Save / Sign In buttons (Play / Resume stay clear glass).\n  **Ambient strength**: Subtle, Normal, Vivid. The defaults render exactly as before.\n- Phones: the header is the floating glass capsules of the desktop instead of a solid near-black bar, over a deeper\n  scroll-edge fade.\n- Stylesheet: the dark tints of the glass are `--gj-ink*` tokens and the accent drives progress bars (section 1, 21u),\n  so a CSS-only install can recolour them too.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.9.0/glassjelly-plugin_2.9.0.0.zip",
+        "checksum": "15A249725F34E3E46AD023EEDFA7524E",
+        "timestamp": "2026-10-12T07:31:11Z"
+      },
+      {
         "version": "2.8.1.0",
         "changelog": "- Fix: the Media Bar mute toggle showed its icon pushed into the top-left corner, half outside the glass bead. The\n  plugin shows and hides the button with an inline `display`, which overrode the theme's centring; the icon is now\n  centred independently of `display`.",
         "targetAbi": "12.0.0.0",
