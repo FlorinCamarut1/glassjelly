@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.9.1.0",
+        "changelog": "- Phones: the header capsules (menu, actions, avatar) use the desktop's clear glass (the same fill, rim and label\n  shadow) with a light 3px blur, instead of the heavy frost (blur 10px + saturate 180%) that turned the page behind\n  them into a tinted cloud. The scroll edge behind them is the desktop's again. Phones still have no lens: Safari\n  can't do it and 21l stays Chromium desktop only.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.9.1/glassjelly-plugin_2.9.1.0.zip",
+        "checksum": "A403DD25E8230936CE330C43F66F07ED",
+        "timestamp": "2026-10-12T08:32:05Z"
+      },
+      {
         "version": "2.9.0.0",
         "changelog": "- Plugin: new **Colours** settings. **Background**: Graphite (default), Midnight blue, Ocean, Forest, Plum, Wine,\n  Espresso, OLED black or a custom colour; it tints the canvas, the dark glass of menus, dialogs and the player, and\n  lays a veil of the colour over the ambient artwork, while staying dark (a custom colour gives its hue, not its\n  brightness). **Accent**: White (default), Blue, Indigo, Purple, Pink, Red, Orange, Yellow, Green, Teal or custom;\n  fills progress bars, slider tracks, checkboxes and the Save / Sign In buttons (Play / Resume stay clear glass).\n  **Ambient strength**: Subtle, Normal, Vivid. The defaults render exactly as before.\n- Phones: the header is the floating glass capsules of the desktop instead of a solid near-black bar, over a deeper\n  scroll-edge fade.\n- Stylesheet: the dark tints of the glass are `--gj-ink*` tokens and the accent drives progress bars (section 1, 21u),\n  so a CSS-only install can recolour them too.",
         "targetAbi": "12.0.0.0",
