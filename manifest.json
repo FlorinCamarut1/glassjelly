@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.8.1.0",
+        "changelog": "- Fix: the Media Bar mute toggle showed its icon pushed into the top-left corner, half outside the glass bead. The\n  plugin shows and hides the button with an inline `display`, which overrode the theme's centring; the icon is now\n  centred independently of `display`.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.8.1/glassjelly-plugin_2.8.1.0.zip",
+        "checksum": "C1D80EEA45EAECF0FD68EEF475D3FE33",
+        "timestamp": "2026-10-12T06:51:21Z"
+      },
+      {
         "version": "2.8.0.0",
         "changelog": "- One material: every glass control and surface uses the header capsule's glass (section 21t). Play / Resume (details\n  page and Media Bar) are clear header glass with a white label instead of milky white; the round buttons next to them,\n  poster and episode beads, toolbar, pickers, link pills and login buttons share the header's fill, gentle lens and\n  rim. Menus, action sheets, dialogs, panels, the player OSD, the now-playing bar, toasts and dashboard cards keep a\n  darker tint for long text but use the same rim (one ring + top-left bevel, no doubled arcs at rounded ends).\n- Selected and hover states match the header's selected tab and hover everywhere (menu items, sidebars, segmented\n  controls, Media Bar settings tab, plugin tabs, picker options).\n- Fixes: player OSD buttons no longer carry a lens inside the panel; filter popover sections are no longer grey slabs;\n  the poster play bead has no blur at rest on every card; the login buttons' lens and the full-width Cancel now apply.",
         "targetAbi": "12.0.0.0",
