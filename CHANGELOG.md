@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.9.3 — 2026-10-12
+
+- Phones: the round buttons of the episode rows (info, played, favourite, more) were 36×44 ovals: the 44px touch
+  minimum height won over their 36px size. They are circles again. A scan of home, movie, series, season and settings
+  pages (Android, iPhone, desktop) finds no other oval round button.
+
 ## v2.9.2 — 2026-10-12
 
 - Header lens on touch screens: Chromium browsers (Chrome / Brave / Edge / Samsung Internet on Android, and the

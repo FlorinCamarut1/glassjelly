@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.9.2";
+  --gj-version: "2.9.3";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -2100,7 +2100,8 @@ html :is(.emby-input, .emby-textarea, .emby-select-withcolor, .MuiFilledInput-ro
 
 /* [22] phones: smaller row beads so the episode title keeps its width */
 @media (max-width: 600px) {
-  html .listViewUserDataButtons .listItemButton { width: 36px; height: 36px; min-width: 36px; margin-inline-start: 4px; }
+  /* min-height too: the 44px touch minimum of section 19 made them 36x44 ovals (v2.9.3) */
+  html .listViewUserDataButtons .listItemButton { width: 36px; height: 36px; min-width: 36px; min-height: 36px; margin-inline-start: 4px; }
 }
 
 /* [24] Display preferences (a React page now): its sections are grouped glass slabs too */
