@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.9.4 — 2026-10-12
+
+- Phones: the icons in the episode-row buttons are centred. 2.9.3 made the buttons 36px circles but kept their 8px
+  padding, which left 20px for a 24px icon and pushed it 2px down-right; the button now centres a 20px icon. A scan of
+  every round button on home, movie, series, season and settings pages (Android, iPhone, desktop) checks both the
+  shape and the icon centre.
+
 ## v2.9.3 — 2026-10-12
 
 - Phones: the round buttons of the episode rows (info, played, favourite, more) were 36×44 ovals: the 44px touch

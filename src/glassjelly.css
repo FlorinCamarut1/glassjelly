@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.9.3";
+  --gj-version: "2.9.4";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -2102,6 +2102,9 @@ html :is(.emby-input, .emby-textarea, .emby-select-withcolor, .MuiFilledInput-ro
 @media (max-width: 600px) {
   /* min-height too: the 44px touch minimum of section 19 made them 36x44 ovals (v2.9.3) */
   html .listViewUserDataButtons .listItemButton { width: 36px; height: 36px; min-width: 36px; min-height: 36px; margin-inline-start: 4px; }
+  /* the 8px padding left 20px for the 24px icon, 2px off centre: the bead centres it, the icon is 20px (v2.9.4) */
+  html .listViewUserDataButtons .listItemButton { display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+  html .listViewUserDataButtons .listItemButton .material-icons { font-size: 20px; width: 20px; height: 20px; line-height: 20px; }
 }
 
 /* [24] Display preferences (a React page now): its sections are grouped glass slabs too */
