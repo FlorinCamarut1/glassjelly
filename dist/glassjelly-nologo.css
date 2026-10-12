@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.8.0";
+  --gj-version: "2.8.1";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -1997,6 +1997,11 @@ html [id="slides-container"] .mute-button {
   background: var(--gj-glass-clear), rgba(26,26,32,.10); box-shadow: var(--gj-glass-edge);
 }
 html [id="slides-container"] :is(.mute-button, .pause-button) { margin-top: 10px; }
+/* the plugin shows/hides the mute toggle with an inline display:block|none, which beats the grid above →
+   centre the icon without relying on display (the button is position:absolute, so it is the containing block) */
+html [id="slides-container"] .mute-button > .material-icons {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; line-height: 1;
+}
 
 /* [14] Media Bar settings popup: pill-shaped active tab, glass buttons and fields */
 html .media-bar-settings-popup .media-bar-client-tab.active { border-radius: var(--gj-r-pill) !important; }

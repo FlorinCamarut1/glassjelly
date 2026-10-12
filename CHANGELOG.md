@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.8.1 — 2026-10-12
+
+- Fix: the Media Bar mute toggle showed its icon pushed into the top-left corner, half outside the glass bead. The
+  plugin shows and hides the button with an inline `display`, which overrode the theme's centring; the icon is now
+  centred independently of `display`.
+
 ## v2.8.0 — 2026-10-11
 
 - One material: every glass control and surface uses the header capsule's glass (section 21t). Play / Resume (details
