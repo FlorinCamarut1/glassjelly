@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.9.5.0",
+        "changelog": "- Player header (Jellyfin 12 draws it with React, `.videoOsd-appBar`): Back, SyncPlay and Cast are glass beads like the\n  rest of the header; they were bare glyphs, because the theme only styled the legacy `.headerButton`.\n- Jellyfin Enhanced pause screen: the close button is a glass bead with a drawn X, centred (the \"×\" character sat ~2px\n  low), and on phones the Back bead is no longer cut in half (the plugin narrows the header to 10vw, 39px).\n- QA: a full pass with the real player (local test clip, playback reports blocked so no resume position is written)\n  over home, details, season, episode, libraries, sort menu, search, user menu, drawer, settings, dashboard, the\n  GlassJelly page, the player with its subtitle and settings menus and the pause screen, on desktop and phone.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.9.5/glassjelly-plugin_2.9.5.0.zip",
+        "checksum": "D5A323827E7D79F682980E47C1854019",
+        "timestamp": "2026-10-12T14:12:31Z"
+      },
+      {
         "version": "2.9.4.0",
         "changelog": "- Phones: the icons in the episode-row buttons are centred. 2.9.3 made the buttons 36px circles but kept their 8px\n  padding, which left 20px for a 24px icon and pushed it 2px down-right; the button now centres a 20px icon. A scan of\n  every round button on home, movie, series, season and settings pages (Android, iPhone, desktop) checks both the\n  shape and the icon centre.",
         "targetAbi": "12.0.0.0",
