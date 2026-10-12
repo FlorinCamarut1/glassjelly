@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.9.2 — 2026-10-12
+
+- Header lens on touch screens: Chromium browsers (Chrome / Brave / Edge / Samsung Internet on Android, and the
+  DevTools device mode on a PC) now get the desktop's refracting header capsules; until now the lens needed a mouse,
+  so they fell back to frosted glass. The plugin marks them with `html.gj-lens`. iPhone / iPad (every browser is
+  WebKit, no lens) keep the clear glass with a light blur from 2.9.1.
+- Media Bar: the mute button is always shown. The plugin hides it on slides without a trailer; there it now stays in
+  place and sets the sound for the next trailer.
+
 ## v2.9.1 — 2026-10-12
 
 - Phones: the header capsules (menu, actions, avatar) use the desktop's clear glass (the same fill, rim and label

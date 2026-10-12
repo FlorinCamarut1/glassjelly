@@ -74,10 +74,11 @@ public static partial class ThemeAssets
             html.Append("<style id=\"gj-palette\">").Append(palette).Append("</style>");
         }
 
-        if (Palette.HasAccent(config))
-        {
-            html.Append("<script>document.documentElement.setAttribute('data-gj-accent','')</script>");
-        }
+        // html.gj-lens = a Chromium that can refract (stylesheet 21v): the header lens on touch screens too. Not on iOS,
+        // where every browser is WebKit ("CriOS" / "EdgiOS" carry no "Chrome/")
+        html.Append("<script>(function(d){var u=navigator.userAgent;if(/Chrome\\//.test(u)&&!/iPhone|iPad|iPod/.test(u)&&window.CSS&&CSS.supports('backdrop-filter','url(#a)'))d.classList.add('gj-lens');")
+            .Append(Palette.HasAccent(config) ? "d.setAttribute('data-gj-accent','');" : string.Empty)
+            .Append("})(document.documentElement)</script>");
 
         Match logo = config.Logo ? LogoRegex().Match(Read(Stylesheets["glassjelly.css"])) : Match.Empty;
         if (logo.Success)
