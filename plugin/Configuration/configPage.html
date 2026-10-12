@@ -5,7 +5,7 @@
     <title>GlassJelly</title>
 </head>
 <body>
-    <div id="GlassJellyConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox">
+    <div id="GlassJellyConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox,emby-select">
         <div data-role="content">
             <div class="content-primary">
                 <form id="GlassJellyConfigForm">
@@ -62,6 +62,55 @@
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Subtitles rise above the player controls while they are visible, and Settings → Subtitles → Subtitle Appearance applies to every subtitle type (ASS/SSA too). Sets every user's subtitle styling to "Custom". Fine-tune per device in the browser console: <code>localStorage.jfSubGap</code> (px above the bar, default 20) and <code>localStorage.jfSubRest</code> (px when the bar is hidden, default -1).</div>
                     </div>
+                    <div class="verticalSection">
+                        <h2 class="sectionTitle">Colours</h2>
+                    </div>
+                    <div class="selectContainer">
+                        <select is="emby-select" id="gjBackground" name="Background" label="Background">
+                            <option value="graphite">Graphite (default)</option>
+                            <option value="midnight">Midnight blue</option>
+                            <option value="ocean">Ocean</option>
+                            <option value="forest">Forest</option>
+                            <option value="plum">Plum</option>
+                            <option value="wine">Wine</option>
+                            <option value="espresso">Espresso</option>
+                            <option value="oled">OLED black</option>
+                            <option value="custom">Custom…</option>
+                        </select>
+                        <div class="fieldDescription">The canvas behind everything; it also tints the dark glass of menus, dialogs and the player. It always stays dark: a custom colour gives its hue, not its brightness.</div>
+                    </div>
+                    <div class="inputContainer gjCustom" data-for="gjBackground">
+                        <label class="inputLabel" for="gjBackgroundColor">Custom background</label>
+                        <input id="gjBackgroundColor" name="BackgroundColor" type="color" style="width:5em;height:2.6em;padding:0;border:0;background:none;cursor:pointer" />
+                    </div>
+                    <div class="selectContainer">
+                        <select is="emby-select" id="gjAccent" name="Accent" label="Accent">
+                            <option value="white">White (default)</option>
+                            <option value="blue">Blue</option>
+                            <option value="indigo">Indigo</option>
+                            <option value="purple">Purple</option>
+                            <option value="pink">Pink</option>
+                            <option value="red">Red</option>
+                            <option value="orange">Orange</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="green">Green</option>
+                            <option value="teal">Teal</option>
+                            <option value="custom">Custom…</option>
+                        </select>
+                        <div class="fieldDescription">Progress bars, sliders, checkboxes and the Save / Sign In buttons. Play and Resume stay clear glass.</div>
+                    </div>
+                    <div class="inputContainer gjCustom" data-for="gjAccent">
+                        <label class="inputLabel" for="gjAccentColor">Custom accent</label>
+                        <input id="gjAccentColor" name="AccentColor" type="color" style="width:5em;height:2.6em;padding:0;border:0;background:none;cursor:pointer" />
+                    </div>
+                    <div class="selectContainer">
+                        <select is="emby-select" id="gjAmbientStrength" name="AmbientStrength" label="Ambient strength">
+                            <option value="subtle">Subtle</option>
+                            <option value="normal">Normal (default)</option>
+                            <option value="vivid">Vivid</option>
+                        </select>
+                        <div class="fieldDescription">How much colour the blurred artwork behind the interface carries (with Ambient background on).</div>
+                    </div>
                     <div>
                         <button is="emby-button" type="submit" class="raised button-submit block emby-button">
                             <span>Save</span>
@@ -75,11 +124,22 @@
                 var pluginId = 'b3a397c3-d76f-4a9a-8980-3ad430af041f';
                 var keys = ['Enabled', 'Logo', 'Ambient', 'BackdropsDefault', 'Hover', 'Player', 'SubtitleLift'];
                 var defaults = { SubtitleLift: false };
+                // text settings (selects + colour pickers) and their defaults
+                var values = { Background: 'graphite', BackgroundColor: '#1e3a5f', Accent: 'white', AccentColor: '#0a84ff', AmbientStrength: 'normal' };
                 var page = document.querySelector('#GlassJellyConfigPage');
+                // a colour picker only shows while its select is on "Custom…"
+                function syncCustom() {
+                    page.querySelectorAll('.gjCustom').forEach(function (row) {
+                        row.style.display = page.querySelector('#' + row.getAttribute('data-for')).value === 'custom' ? '' : 'none';
+                    });
+                }
+                page.querySelectorAll('select[is="emby-select"]').forEach(function (s) { s.addEventListener('change', syncCustom); });
                 page.addEventListener('pageshow', function () {
                     Dashboard.showLoadingMsg();
                     ApiClient.getPluginConfiguration(pluginId).then(function (config) {
                         keys.forEach(function (k) { page.querySelector('#gj' + k).checked = k in config ? config[k] === true : defaults[k] !== false; });
+                        Object.keys(values).forEach(function (k) { page.querySelector('#gj' + k).value = config[k] || values[k]; });
+                        syncCustom();
                         Dashboard.hideLoadingMsg();
                     });
                 });
@@ -88,6 +148,7 @@
                     Dashboard.showLoadingMsg();
                     ApiClient.getPluginConfiguration(pluginId).then(function (config) {
                         keys.forEach(function (k) { config[k] = page.querySelector('#gj' + k).checked; });
+                        Object.keys(values).forEach(function (k) { config[k] = page.querySelector('#gj' + k).value; });
                         ApiClient.updatePluginConfiguration(pluginId, config).then(function (result) {
                             Dashboard.processPluginConfigurationUpdateResult(result);
                         });

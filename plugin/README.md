@@ -8,7 +8,10 @@ The theme as a Jellyfin server plugin: no Branding Custom CSS, no File Transform
 - `Api/GlassJellyController.cs` serves `/GlassJelly/glassjelly.css` (and `-nologo.css`) anonymously, cached for good
   under a content-hash URL.
 - `Configuration/configPage.html`: Dashboard → Plugins → GlassJelly (theme on/off, logo, ambient background, backdrops
-  by default, hover light, player tweaks, and the optional subtitle lift, off by default). Changes apply on the next page
+  by default, hover light, player tweaks, the optional subtitle lift, off by default, and the colours: background, accent, ambient
+  strength).
+- `Palette.cs` turns the colour options into overrides of the stylesheet's source tokens (canvas, ink, surfaces,
+  accent, ambient), inlined before `</head>`; the defaults emit nothing. Changes apply on the next page
   load, no restart.
 - The theme files are embedded from `../dist` and `../src` at build time: run `node tools/build.mjs` first.
 

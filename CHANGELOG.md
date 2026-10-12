@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.9.0 — 2026-10-12
+
+- Plugin: new **Colours** settings. **Background**: Graphite (default), Midnight blue, Ocean, Forest, Plum, Wine,
+  Espresso, OLED black or a custom colour; it tints the canvas, the dark glass of menus, dialogs and the player, and
+  lays a veil of the colour over the ambient artwork, while staying dark (a custom colour gives its hue, not its
+  brightness). **Accent**: White (default), Blue, Indigo, Purple, Pink, Red, Orange, Yellow, Green, Teal or custom;
+  fills progress bars, slider tracks, checkboxes and the Save / Sign In buttons (Play / Resume stay clear glass).
+  **Ambient strength**: Subtle, Normal, Vivid. The defaults render exactly as before.
+- Phones: the header is the floating glass capsules of the desktop instead of a solid near-black bar, over a deeper
+  scroll-edge fade.
+- Stylesheet: the dark tints of the glass are `--gj-ink*` tokens and the accent drives progress bars (section 1, 21u),
+  so a CSS-only install can recolour them too.
+
 ## v2.8.1 — 2026-10-12
 
 - Fix: the Media Bar mute toggle showed its icon pushed into the top-left corner, half outside the glass bead. The

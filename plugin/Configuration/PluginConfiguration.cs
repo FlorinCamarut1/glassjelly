@@ -26,4 +26,21 @@ public class PluginConfiguration : BasePluginConfiguration
     /// <summary>Subtitles rise above the player controls while they are visible, and the Subtitle Appearance dialog
     /// applies to every subtitle type. Off by default: it sets every user's subtitle styling to "Custom".</summary>
     public bool SubtitleLift { get; set; }
+
+    /// <summary>Canvas colour: graphite (the stylesheet's own), midnight, ocean, forest, plum, wine, espresso, oled or
+    /// custom (<see cref="BackgroundColor"/>). Also tints the dark glass of menus and dialogs.</summary>
+    public string Background { get; set; } = "graphite";
+
+    /// <summary>The custom background, #rrggbb: only its hue and saturation are used, the canvas stays dark.</summary>
+    public string BackgroundColor { get; set; } = "#1e3a5f";
+
+    /// <summary>Accent: white (the stylesheet's own), blue, indigo, purple, pink, red, orange, yellow, green, teal or
+    /// custom (<see cref="AccentColor"/>). Fills progress bars, sliders, checkboxes and the Save / Sign In buttons.</summary>
+    public string Accent { get; set; } = "white";
+
+    /// <summary>The custom accent, #rrggbb.</summary>
+    public string AccentColor { get; set; } = "#0a84ff";
+
+    /// <summary>Ambient background strength: subtle, normal or vivid.</summary>
+    public string AmbientStrength { get; set; } = "normal";
 }

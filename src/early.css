@@ -2,7 +2,7 @@
    screen is themed from the first frame, before Jellyfin fetches the Branding CSS. Media Bar's loader
    (#page-loader.bar-loading: logo + progress bar) becomes a glass capsule with a glowing white fill; the gap and the
    grey "unfilled" part are hidden (the plugin keeps setting their widths, harmlessly). No dollar sign in here. */
-.bar-loading{background:radial-gradient(42% 38% at 50% 46%,rgba(190,205,230,.10),transparent 72%),linear-gradient(180deg,#15161b,#0d0e12)!important}
+.bar-loading{background:radial-gradient(42% 38% at 50% 46%,rgba(190,205,230,.10),transparent 72%),linear-gradient(180deg,var(--gj-canvas-top,#15161b),var(--gj-canvas-bottom,#0d0e12))!important}
 .bar-loading .loader-content{gap:34px}
 .bar-loading h1{height:140px}
 .bar-loading .splashLogo{filter:drop-shadow(0 10px 30px rgba(0,0,0,.55)) drop-shadow(0 0 24px rgba(255,255,255,.2))}

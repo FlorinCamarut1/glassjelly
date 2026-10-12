@@ -61,7 +61,8 @@ a monochrome glass logo, white accent like tvOS.
    ```
 2. **Available** → **GlassJelly** → **Install**, then restart Jellyfin (Dashboard → Restart).
 3. Reload the web page (Ctrl+F5). Settings: Dashboard → Plugins → **GlassJelly** (logo, ambient background, backdrops
-   by default, hover light, player tweaks; they apply on the next page load, no restart).
+   by default, hover light, player tweaks, background colour, accent colour, ambient strength; they apply on the next
+   page load, no restart).
 
 The plugin adds the theme to the web client by itself: no Custom CSS, no File Transformation. If you used option B or C
 before, remove that copy first (delete the GlassJelly part of Custom CSS, or `python3 install.py --uninstall --no-splash`),
@@ -72,11 +73,11 @@ otherwise the theme loads twice. Jellyfin 12 only.
 Dashboard → General → **Branding** → **Custom CSS**, paste, **Save**, then reload the page (Ctrl+F5):
 
 ```css
-@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.8.1/dist/glassjelly.css");
+@import url("https://cdn.jsdelivr.net/gh/FlorinCamarut1/glassjelly@v2.9.0/dist/glassjelly.css");
 ```
 
 Keep Jellyfin's own logo and your server name in the header? Use `dist/glassjelly-nologo.css` instead.
-Pin a tag (`@v2.8.1`) so an update never surprises you; change it when you want a new version.
+Pin a tag (`@v2.9.0`) so an update never surprises you; change it when you want a new version.
 
 ### Option C — installer (full theme)
 

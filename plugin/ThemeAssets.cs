@@ -62,26 +62,34 @@ public static partial class ThemeAssets
         return value;
     }
 
-    /// <summary>Before &lt;/head&gt;: the glass logo as favicon and the startup screen (splash logo + Media Bar loader), so the
-    /// first frame is already themed. Only with the logo on (the same as install.py's transform ...0004).</summary>
+    /// <summary>Before &lt;/head&gt;: the colour options (<see cref="Palette"/>), then the glass logo as favicon and the startup
+    /// screen (splash logo + Media Bar loader), so the first frame is already themed. The logo part only with the logo on
+    /// (the same as install.py's transform ...0004).</summary>
     public static string HeadHtml(PluginConfiguration config)
     {
-        if (!config.Logo)
+        StringBuilder html = new();
+        string palette = Palette.Css(config);
+        if (palette.Length > 0)
         {
-            return string.Empty;
+            html.Append("<style id=\"gj-palette\">").Append(palette).Append("</style>");
         }
 
-        Match logo = LogoRegex().Match(Read(Stylesheets["glassjelly.css"]));
-        if (!logo.Success)
+        if (Palette.HasAccent(config))
         {
-            return string.Empty;
+            html.Append("<script>document.documentElement.setAttribute('data-gj-accent','')</script>");
         }
 
-        string uri = logo.Groups[1].Value;
-        string early = CommentRegex().Replace(Read("GlassJelly.css.early.css"), string.Empty).Replace("\n", string.Empty).Replace("\r", string.Empty);
-        return "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + uri + "\"><style id=\"gj-early\">"
-            + ".splashLogo{background-image:url(\"" + uri + "\")!important;background-size:min(112px,100%) auto!important}"
-            + early + "</style>";
+        Match logo = config.Logo ? LogoRegex().Match(Read(Stylesheets["glassjelly.css"])) : Match.Empty;
+        if (logo.Success)
+        {
+            string uri = logo.Groups[1].Value;
+            string early = CommentRegex().Replace(Read("GlassJelly.css.early.css"), string.Empty).Replace("\n", string.Empty).Replace("\r", string.Empty);
+            html.Append("<link rel=\"icon\" type=\"image/svg+xml\" href=\"").Append(uri).Append("\"><style id=\"gj-early\">")
+                .Append(".splashLogo{background-image:url(\"").Append(uri).Append("\")!important;background-size:min(112px,100%) auto!important}")
+                .Append(early).Append("</style>");
+        }
+
+        return html.ToString();
     }
 
     /// <summary>Before &lt;/body&gt;: the stylesheet (after #reactRoot, so it comes after Jellyfin's theme.css and wins the

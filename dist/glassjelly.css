@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.8.1";
+  --gj-version: "2.9.0";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -35,10 +35,20 @@
   --gj-ambient-scale: 1.2;
   --gj-ambient-fade: 600ms;
   --gj-ambient-overlay: linear-gradient(180deg, rgba(0,0,0,.14) 0%, rgba(0,0,0,.26) 45%, rgba(0,0,0,.50) 100%);
+  /* v2.9: a veil of the canvas colour over the artwork (the plugin's Background option sets it; none = Graphite) */
+  --gj-ambient-wash: linear-gradient(transparent, transparent);
   --gj-bg: #0d0e12;   /* solid canvas colour (full-screen dialogs, overscroll, fallbacks); was #000 in v1.1 */
   --gj-surface-1: #1c1c1e;
   --gj-surface-2: #2c2c2e;
   --gj-surface-3: #3a3a3c;
+  /* v2.9 ink: the dark tints of the glass, menus and dialogs as "r,g,b" (used as rgba(var(--gj-ink),.58)), so a
+     canvas colour also tints the glass. --gj-bg-rgb = --gj-bg as channels. The plugin's Background option sets
+     these together with the canvas, bg and surfaces. */
+  --gj-ink-deep: 10,10,14;
+  --gj-ink: 26,26,32;
+  --gj-ink-raised: 40,40,44;
+  --gj-ink-hover: 72,72,78;
+  --gj-bg-rgb: 13,14,18;
   --gj-fill: rgba(118,118,128,.24);
   --gj-fill-strong: rgba(118,118,128,.36);
   --gj-separator: rgba(84,84,88,.6);
@@ -50,18 +60,20 @@
   --gj-accent: #fff;
   --gj-accent-channel: 255 255 255;
   --gj-on-accent: #000;
+  --gj-accent-hover: #e5e5ea;   /* v2.9: a colour accent sets all five (see 21u) */
+  --gj-accent-dark: #d1d1d6;
   --gj-link: #0a84ff;
   --gj-toggle-on: #30d158;
   --gj-destructive: #ff453a;
-  --gj-progress: #fff;
+  --gj-progress: var(--gj-accent);
   /* v2 Liquid Glass materials: a light tint over a short blur with boosted saturation/brightness (the backdrop stays
      readable through the glass, colours glow), a specular rim instead of a flat hairline, a faint top sheen.
      ultrathin/thin = capsules over content, regular = bars/panels, thick = menus, sheet = dialogs with forms. */
-  --gj-mat-ultrathin: rgba(26,26,32,.14);
-  --gj-mat-thin: rgba(26,26,32,.24);
-  --gj-mat-regular: rgba(24,24,30,.40);
-  --gj-mat-thick: rgba(24,24,30,.58);
-  --gj-mat-sheet: rgba(26,26,32,.80);
+  --gj-mat-ultrathin: rgba(var(--gj-ink),.14);
+  --gj-mat-thin: rgba(var(--gj-ink),.24);
+  --gj-mat-regular: rgba(var(--gj-ink),.40);
+  --gj-mat-thick: rgba(var(--gj-ink),.58);
+  --gj-mat-sheet: rgba(var(--gj-ink),.80);
   --gj-blur-s: blur(8px) saturate(190%) brightness(1.06);
   --gj-blur-m: blur(14px) saturate(190%) brightness(1.05);
   --gj-blur-l: blur(26px) saturate(200%) brightness(1.03);
@@ -93,7 +105,7 @@
   --gj-shadow-lift: 0 22px 44px rgba(0,0,0,.62), 0 6px 14px rgba(0,0,0,.4);
   --gj-shadow-float: 0 18px 50px rgba(0,0,0,.55);
   --gj-shadow-dialog: 0 40px 100px rgba(0,0,0,.7);
-  --gj-dialog-solid: rgb(30,30,32);   /* opaque twin of --gj-mat-thick (dialog footers, QA-14) */
+  --gj-dialog-solid: rgb(var(--gj-ink));   /* opaque twin of --gj-mat-thick (dialog footers, QA-14) */
   /* one page gutter for Media Bar (4%), home rows and details (QA-10); library grids keep Jellyfin's A-Z padding */
   --gj-gutter: max(16px, env(safe-area-inset-left), 4vw);
   --gj-ease: cubic-bezier(.2,.8,.2,1);
@@ -116,12 +128,12 @@
   --jf-palette-divider: var(--gj-separator);
   --jf-palette-primary-main: var(--gj-accent);
   --jf-palette-primary-light: var(--gj-accent);
-  --jf-palette-primary-dark: #d1d1d6;
+  --jf-palette-primary-dark: var(--gj-accent-dark);
   --jf-palette-primary-mainChannel: var(--gj-accent-channel);
   --jf-palette-primary-contrastText: var(--gj-on-accent);
   --jf-palette-secondary-main: var(--gj-accent);
   --jf-palette-secondary-light: var(--gj-accent);
-  --jf-palette-secondary-dark: #d1d1d6;
+  --jf-palette-secondary-dark: var(--gj-accent-dark);
   --jf-palette-secondary-mainChannel: var(--gj-accent-channel);
   --jf-palette-secondary-contrastText: var(--gj-on-accent);
   --jf-palette-AppBar-defaultBg: var(--gj-mat-regular);
@@ -157,7 +169,7 @@
 /* phones (UA layout or narrow window): cheaper materials, tighter gutter */
 html.layout-mobile, html.layout-mobile[data-theme] {
   --gj-blur-s: blur(10px) saturate(180%); --gj-blur-m: blur(16px) saturate(180%); --gj-blur-l: blur(20px) saturate(180%);
-  --gj-mat-thick: rgba(24,24,30,.66);
+  --gj-mat-thick: rgba(var(--gj-ink),.66);
   --gj-ambient-blur: 44px; --gj-ambient-scale: 1.3;
   --gj-gutter: max(16px, env(safe-area-inset-left));
   --gj-r-card: 10px; --gj-hero-h: 56vh;
@@ -165,7 +177,7 @@ html.layout-mobile, html.layout-mobile[data-theme] {
 @media (max-width: 600px) {
   :root, html[data-theme] {
     --gj-blur-s: blur(10px) saturate(180%); --gj-blur-m: blur(16px) saturate(180%); --gj-blur-l: blur(20px) saturate(180%);
-    --gj-mat-thick: rgba(24,24,30,.66);
+    --gj-mat-thick: rgba(var(--gj-ink),.66);
     --gj-ambient-blur: 44px; --gj-ambient-scale: 1.3;
     --gj-gutter: max(16px, env(safe-area-inset-left));
     --gj-r-card: 10px;
@@ -248,7 +260,7 @@ html #gjAmbient > .gj-amb-layer.is-on { opacity: 1; }
 /* contrast scrim (darker toward the bottom) + vignette + grain (no banding in the blurred gradients) */
 html #gjAmbient::after {
   content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity var(--gj-ambient-fade) var(--gj-ease);
-  background: var(--gj-canvas-noise), radial-gradient(130% 95% at 50% 42%, rgba(0,0,0,0) 50%, rgba(0,0,0,.36) 100%), var(--gj-ambient-overlay);
+  background: var(--gj-canvas-noise), radial-gradient(130% 95% at 50% 42%, rgba(0,0,0,0) 50%, rgba(0,0,0,.36) 100%), var(--gj-ambient-wash), var(--gj-ambient-overlay);
 }
 html #gjAmbient.is-lit::after { opacity: 1; }
 /* never behind the video (pure black) or the login poster wall */
@@ -283,7 +295,7 @@ html header.MuiAppBar-root.MuiAppBar-colorDefault {
 }
 html header.MuiAppBar-root.MuiAppBar-colorDefault::before {
   content: ""; position: absolute; inset: 0 0 -28px 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(180deg, rgba(10,10,14,.66) 0%, rgba(10,10,14,.38) 55%, rgba(10,10,14,0) 100%);
+  background: linear-gradient(180deg, rgba(var(--gj-ink-deep),.66) 0%, rgba(var(--gj-ink-deep),.38) 55%, rgba(var(--gj-ink-deep),0) 100%);
   /* v2.4: no blur here any more - it fogged everything under the clear capsules; the dark fade is enough */
   -webkit-mask-image: linear-gradient(180deg, #000 40%, transparent); mask-image: linear-gradient(180deg, #000 40%, transparent);
 }
@@ -426,27 +438,27 @@ html #slides-container .play-button {
    recomputed every frame -> translucent dark fill instead of glass. */
 html #slides-container .trailer-button {
   min-height: 44px; padding: 0 20px 0 16px !important; gap: 8px; border-radius: var(--gj-r-pill);
-  background: rgba(40,40,44,.55); color: #fff; font: 600 16px var(--gj-font); box-shadow: var(--gj-glass-edge);
+  background: rgba(var(--gj-ink-raised),.55); color: #fff; font: 600 16px var(--gj-font); box-shadow: var(--gj-glass-edge);
 }
 html #slides-container .detail-button, html #slides-container .favorite-button {
-  width: 44px; height: 44px; padding: 0 !important; background: rgba(40,40,44,.55); color: #fff; box-shadow: var(--gj-glass-edge);
+  width: 44px; height: 44px; padding: 0 !important; background: rgba(var(--gj-ink-raised),.55); color: #fff; box-shadow: var(--gj-glass-edge);
   transition: transform var(--gj-dur-fast) var(--gj-ease), background-color var(--gj-dur-fast);
 }
 html #slides-container .favorite-button.favorited { color: #fff; background: rgba(255,255,255,.28); }
 html #slides-container :is(.play-button, .trailer-button, .detail-button, .favorite-button):hover { opacity: 1; transform: scale(1.04); }
 html #slides-container .play-button:hover { background: #e5e5ea; }
-html #slides-container :is(.detail-button, .favorite-button, .trailer-button):hover { background: rgba(72,72,78,.7); }
+html #slides-container :is(.detail-button, .favorite-button, .trailer-button):hover { background: rgba(var(--gj-ink-hover),.7); }
 html #slides-container :is(.play-button, .trailer-button, .detail-button, .favorite-button):active { transform: scale(.97); }
 html #slides-container :is(button, .pause-button, .mute-button):focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 html #slides-container .dot { width: 6px; height: 6px; background: rgba(255,255,255,.35); transition: width var(--gj-dur) var(--gj-ease), background-color var(--gj-dur); }
 html #slides-container .dot.active { width: 18px; border-radius: 3px; background: #fff; transform: none; }
 html #slides-container .arrow {
-  width: 44px; height: 44px; line-height: 44px; background: rgba(40,40,44,.5); box-shadow: var(--gj-glass-edge);
+  width: 44px; height: 44px; line-height: 44px; background: rgba(var(--gj-ink-raised),.5); box-shadow: var(--gj-glass-edge);
 }
 /* QA-33: slideshow pause = 36px glass circle (44px on touch, QA-19); the plugin keeps its position */
 html #slides-container .pause-button {
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
-  background: rgba(40,40,44,.5); color: #fff; box-shadow: var(--gj-glass-edge);
+  background: rgba(var(--gj-ink-raised),.5); color: #fff; box-shadow: var(--gj-glass-edge);
 }
 html #slides-container .pause-button .material-icons { font-size: 20px; }
 @media (hover: hover) and (pointer: fine) {
@@ -514,9 +526,9 @@ html .cardOverlayContainer { background: linear-gradient(0deg, rgba(0,0,0,.5), r
    Glass only on the card under the pointer; elsewhere a dark translucent fill that looks the same at rest. */
 html .cardOverlayButton {
   width: 34px; height: 34px; min-width: 0; min-height: 0; padding: 0; border-radius: 50%; color: #fff;
-  background: rgba(28,28,30,.55);
+  background: rgba(var(--gj-ink),.55);
 }
-html .cardOverlayButton:hover { background: rgba(72,72,76,.8); }
+html .cardOverlayButton:hover { background: rgba(var(--gj-ink-hover),.8); }
 @media (hover: hover) and (pointer: fine) {
   html .card:is(:hover, :focus-within) .cardOverlayButton {
     background: rgba(255,255,255,.18); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
@@ -565,7 +577,7 @@ html .countIndicator, html .playedIndicator, html .mediaSourceIndicator, html .f
 html :is(.countIndicator, .playedIndicator, .mediaSourceIndicator, .fullSyncIndicator) > svg { fill: #fff; }
 html .playedIndicator .indicatorIcon, html .indicatorIcon { font-size: 15px; }
 html :is(.defaultCardBackground1, .defaultCardBackground2, .defaultCardBackground3, .defaultCardBackground4, .defaultCardBackground5) {
-  background: linear-gradient(160deg, #2c2c2e, #1c1c1e);
+  background: linear-gradient(160deg, var(--gj-surface-2), var(--gj-surface-1));
 }
 html .cardImageIcon, html .cardPadder .cardImageIcon { color: var(--gj-text-3); }
 /* QA-34: chapter ("Scenes") cards without a thumbnail get a placeholder tile instead of floating text */
@@ -704,7 +716,7 @@ html.layout-desktop .itemDetailPage .detailRibbon {
 /* QA-11: long, soft fade (was solid black 15rem below the buttons = hard slab); art fades out before Cast & Crew */
 html.layout-desktop:has(.backgroundContainer.withBackdrop) .itemDetailPage .detailPageWrapperContainer {
   margin-top: -15rem; padding-top: 3rem;
-  background: linear-gradient(180deg, rgba(13,14,18,0) 0, rgba(13,14,18,.45) 10rem, rgba(13,14,18,.82) 26rem, var(--gj-bg) 40rem) !important;
+  background: linear-gradient(180deg, rgba(var(--gj-bg-rgb),0) 0, rgba(var(--gj-bg-rgb),.45) 10rem, rgba(var(--gj-bg-rgb),.82) 26rem, var(--gj-bg) 40rem) !important;
 }
 /* v1.2 with the ambient script: no opaque slab, the hero fades out on scroll instead (section 2) */
 html.gj-amb.layout-desktop:has(.backgroundContainer.withBackdrop) .itemDetailPage .detailPageWrapperContainer {
@@ -763,7 +775,7 @@ html .videoOsdBottom { will-change: auto; }
 html .videoOsdBottom .osdControls {
   margin: 0 max(3vw, env(safe-area-inset-right)) 0 max(3vw, env(safe-area-inset-left));
   padding: 14px 20px 10px; border-radius: var(--gj-r-l);
-  background: rgba(24,24,30,.20); box-shadow: var(--gj-glass-edge), var(--gj-shadow-float);
+  background: rgba(var(--gj-ink),.20); box-shadow: var(--gj-glass-edge), var(--gj-shadow-float);
   -webkit-backdrop-filter: var(--gj-blur-l); backdrop-filter: var(--gj-blur-l);
 }
 html .videoOsdBottom .osdTitle, html .videoOsdBottom .osdTextContainer { font-family: var(--gj-font); }
@@ -995,7 +1007,7 @@ html .emby-select-withcolor:not(.detailTrackSelect) { padding-left: 12px; }
 html .emby-input:focus, html .emby-textarea:focus, html .emby-select-withcolor:focus {
   border-color: transparent !important; box-shadow: 0 0 0 2px rgba(255,255,255,.85); outline: 0;
 }
-html .emby-select-withcolor > option, html select option { background: #1c1c1e; color: #fff; }
+html .emby-select-withcolor > option, html select option { background: var(--gj-surface-1); color: #fff; }
 html .inputLabel, html .selectLabel, html .textareaLabel { color: var(--gj-text-2); font-weight: 500; }
 html .inputLabelFocused, html .selectLabelFocused, html .textareaLabelFocused { color: #fff; }
 html .selectArrowContainer { color: var(--gj-text-2); }
@@ -1149,10 +1161,12 @@ html body.dashboardDocument .page .save-button { background: #fff; color: #000; 
 /* ============ 19. PHONE ============ */
 @media (max-width: 600px) {
   html header.MuiAppBar-root > .MuiToolbar-root { min-height: 56px; }
-  /* solid, no blur (scrolls constantly). QA-25: .97 so rows don't ghost through */
-  html header.MuiAppBar-root.MuiAppBar-colorDefault { background: rgba(18,18,20,.97) !important; -webkit-backdrop-filter: none; backdrop-filter: none; }
-  html header.MuiAppBar-root.MuiAppBar-colorDefault::before { display: none; }   /* v2 scroll edge: desktop only */
-  html .skinHeader.skinHeader-withBackground:not(.osdHeader) { background: rgba(18,18,20,.97) !important; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  /* v2.9: the floating glass capsules of the desktop, no solid bar (was rgba(var(--gj-ink-deep),.97), QA-25). The scroll edge
+     is a little deeper and darker, so rows passing under the capsules don't fight the icons. */
+  html header.MuiAppBar-root.MuiAppBar-colorDefault::before {
+    inset: 0 0 -36px 0;
+    background: linear-gradient(180deg, rgba(var(--gj-ink-deep),.78) 0%, rgba(var(--gj-ink-deep),.46) 55%, rgba(var(--gj-ink-deep),0) 100%);
+  }
   /* QA-22: phone form dialogs fill the screen -> square corners */
   html .dialog.dialog-fixedSize { border-radius: 0; }
   /* QA-21: calmer poster wall behind "Please sign in" (blur stays desktop-only) */
@@ -1210,7 +1224,7 @@ html.layout-tv .card:focus .cardScalable { outline: 0; }
 html.layout-tv .sectionTitle { font-size: 26px; }
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   html header.MuiAppBar-root.MuiAppBar-colorDefault, html .dialog:not(.dialog-fullscreen), html .actionSheet,
-  html .MuiMenu-paper, html .MuiDrawer-paper, html .videoOsdBottom .osdControls, html .nowPlayingBar { background: rgba(28,28,30,.96) !important; }
+  html .MuiMenu-paper, html .MuiDrawer-paper, html .videoOsdBottom .osdControls, html .nowPlayingBar { background: rgba(var(--gj-ink),.96) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   html .card .cardScalable, html #slides-container *, html header.MuiAppBar-root { transition: none !important; }
@@ -1221,8 +1235,8 @@ html.layout-tv .sectionTitle { font-size: 26px; }
 /* 21a. Accessibility: "Reduce transparency" (macOS / iOS / Windows "Transparency effects" off) = solid materials */
 @media (prefers-reduced-transparency: reduce) {
   :root, html[data-theme] {
-    --gj-mat-ultrathin: rgba(30,30,34,.94); --gj-mat-thin: rgba(30,30,34,.94); --gj-mat-regular: rgba(28,28,32,.95);
-    --gj-mat-thick: rgba(28,28,32,.97); --gj-mat-sheet: rgba(28,28,32,.98); --gj-glass-fill: rgba(70,70,76,.92);
+    --gj-mat-ultrathin: rgba(var(--gj-ink),.94); --gj-mat-thin: rgba(var(--gj-ink),.94); --gj-mat-regular: rgba(var(--gj-ink),.95);
+    --gj-mat-thick: rgba(var(--gj-ink),.97); --gj-mat-sheet: rgba(var(--gj-ink),.98); --gj-glass-fill: rgba(var(--gj-ink-hover),.92);
     --gj-lens: saturate(1); --gj-lens-cap: saturate(1); --gj-lens-panel: saturate(1); --gj-lens-s: saturate(1); --gj-bubble: saturate(1); --gj-bubble-s: saturate(1); --gj-bubble-fab: saturate(1);
   }
 }
@@ -1424,7 +1438,7 @@ html #searchPage .searchFields .searchFieldsInner,
 html .itemDetailPage .detailButton:not(.btnPlay):not(.btnResume),
 html #slides-container :is(.trailer-button, .detail-button, .favorite-button, .arrow, .pause-button),
 html .osdHeader .headerButton {
-  background: var(--gj-glass-clear), rgba(26,26,32,.10) !important; box-shadow: var(--gj-glass-edge) !important;
+  background: var(--gj-glass-clear), rgba(var(--gj-ink),.10) !important; box-shadow: var(--gj-glass-edge) !important;
 }
 html #searchPage .searchFields .searchFieldsInner:focus-within { box-shadow: var(--gj-glass-edge), 0 0 0 2px rgba(255,255,255,.85) !important; }
 html .itemDetailPage .detailButton:not(.btnPlay):not(.btnResume) { width: 48px; height: 48px; }
@@ -1557,7 +1571,7 @@ html header.MuiAppBar-root .MuiTab-root.Mui-selected, html .headerTabs .emby-tab
       header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButton-root),
       .MuiButtonGroup-root:not(.cardOverlayButton-br)):has(:hover) {
       background: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.07), rgba(255,255,255,.015) 60%, rgba(255,255,255,.035)),
-                  rgba(10,10,14,.22) !important;
+                  rgba(var(--gj-ink-deep),.22) !important;
       backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(header.MuiAppBar-root .MuiStack-root > .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root,
@@ -1579,8 +1593,8 @@ html header.MuiAppBar-root .MuiTab-root.Mui-selected, html .headerTabs .emby-tab
    versions. */
 :root, html[data-theme] {
   --gj-liquid-menu: rgba(12,12,16,.64);
-  --gj-liquid-sheet: rgba(14,14,18,.76);
-  --gj-liquid-osd: rgba(10,10,14,.40);
+  --gj-liquid-sheet: rgba(var(--gj-ink-deep),.76);
+  --gj-liquid-osd: rgba(var(--gj-ink-deep),.40);
   --gj-liquid-sheen: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0) 40%);
   --gj-liquid-text: 0 1px 3px rgba(0,0,0,.65), 0 0 10px rgba(0,0,0,.35);
 }
@@ -1596,7 +1610,7 @@ html header.MuiAppBar-root .MuiTab-root.Mui-selected, html .headerTabs .emby-tab
     }
     /* the floating footer of form dialogs: frosted over the form that scrolls under it (inside the dialog) */
     html:not(.layout-mobile):not(.layout-tv) .dialog:not(.dialog-fullscreen) .formDialogFooter:not(.formDialogFooter-clear) {
-      background: rgba(14,14,18,.55); backdrop-filter: blur(14px) saturate(160%);
+      background: rgba(var(--gj-ink-deep),.55); backdrop-filter: blur(14px) saturate(160%);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(.MuiDrawer-paper, .mainDrawer) {
       background: var(--gj-liquid-sheen), var(--gj-liquid-menu) !important;
@@ -1973,7 +1987,7 @@ html #jePanelSearch { background: var(--gj-q-well) !important; box-shadow: var(-
 @supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
   @media (hover: hover) and (pointer: fine) {
     html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root:not(.MuiAppBar-colorTransparent) > .MuiToolbar-root > :is(.MuiStack-root:first-of-type, .MuiBox-root:has(> .MuiIconButton-root)) {
-      background: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.07), rgba(255,255,255,.015) 60%), rgba(10,10,14,.34) !important;   /* no frost: it hid the refraction (user: "only transparent") */
+      background: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.07), rgba(255,255,255,.015) 60%), rgba(var(--gj-ink-deep),.34) !important;   /* no frost: it hid the refraction (user: "only transparent") */
     }
   }
 }
@@ -1994,11 +2008,11 @@ html .card .cardOverlayButton:not(.cardOverlayFab-primary) .material-icons { fil
 
 /* [9] phones: the action sheet is denser (page text showed through it crisp) */
 html.layout-mobile .actionSheet.dialog {
-  background: var(--gj-glass-sheen), rgba(22,22,28,.86) !important;
+  background: var(--gj-glass-sheen), rgba(var(--gj-ink),.86) !important;
   -webkit-backdrop-filter: blur(30px) saturate(1.6); backdrop-filter: blur(30px) saturate(1.6);
 }
 @media (max-width: 600px) {
-  html .actionSheet.dialog { background: var(--gj-glass-sheen), rgba(22,22,28,.86) !important; -webkit-backdrop-filter: blur(30px) saturate(1.6); backdrop-filter: blur(30px) saturate(1.6); }
+  html .actionSheet.dialog { background: var(--gj-glass-sheen), rgba(var(--gj-ink),.86) !important; -webkit-backdrop-filter: blur(30px) saturate(1.6); backdrop-filter: blur(30px) saturate(1.6); }
 }
 
 /* [10] header: the Jellyfin Enhanced / Media Bar icons are 40px like the others (the capsule was 8px taller) */
@@ -2027,10 +2041,10 @@ html body.dashboardDocument .MuiDrawer-paper .MuiListItemButton-root.Mui-selecte
 }
 
 /* [13] Media Bar hero: glass slide counter, the mute toggle a glass bead, both clear of the header capsule */
-html [id="slides-container"] .slide-counter { background: var(--gj-glass-clear), rgba(26,26,32,.18) !important; box-shadow: var(--gj-glass-edge) !important; }
+html [id="slides-container"] .slide-counter { background: var(--gj-glass-clear), rgba(var(--gj-ink),.18) !important; box-shadow: var(--gj-glass-edge) !important; }
 html [id="slides-container"] .mute-button {
   width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--gj-glass-clear), rgba(26,26,32,.10); box-shadow: var(--gj-glass-edge);
+  background: var(--gj-glass-clear), rgba(var(--gj-ink),.10); box-shadow: var(--gj-glass-edge);
 }
 html [id="slides-container"] :is(.mute-button, .pause-button) { margin-top: 10px; }
 /* the plugin shows/hides the mute toggle with an inline display:block|none, which beats the grid above →
@@ -2113,7 +2127,7 @@ html .searchFieldsInner .jellyseerr-icon.is-no-user { opacity: .45; }
 :root, html[data-theme] {
   --gj-rim: inset 0 0 0 1px rgba(255,255,255,.20), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.6), inset 0 -1px 0 rgba(255,255,255,.08);
   --gj-rim-bead: inset 0 0 0 1px rgba(255,255,255,.28), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.7), inset 0 -1px 0 rgba(255,255,255,.08);
-  --gj-cap-fill: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.07), rgba(255,255,255,.015) 60%, rgba(255,255,255,.035)), rgba(10,10,14,.22);
+  --gj-cap-fill: radial-gradient(120% 120% at 30% 15%, rgba(255,255,255,.07), rgba(255,255,255,.015) 60%, rgba(255,255,255,.035)), rgba(var(--gj-ink-deep),.22);
   --gj-cap-text: 0 1px 3px rgba(0,0,0,.7), 0 0 10px rgba(0,0,0,.45);
   --gj-sel-bg: radial-gradient(22% 40% at 18% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
                linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 48%, rgba(255,255,255,.02) 56%, rgba(255,255,255,.07) 100%),
@@ -2121,7 +2135,7 @@ html .searchFieldsInner .jellyseerr-icon.is-no-user { opacity: .45; }
   --gj-sel-rim: inset 0 0 0 1px rgba(255,255,255,.42), inset 0 1px 0 rgba(255,255,255,.55);
   --gj-prom-bg: radial-gradient(56px 22px at 40px 13px, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),   /* px glint: same on a 148px pill and a full-width phone button */
                 linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.07) 48%, rgba(255,255,255,.035) 56%, rgba(255,255,255,.10) 100%),
-                rgba(10,10,14,.18);
+                rgba(var(--gj-ink-deep),.18);
   --gj-prom-rim: inset 0 0 0 1px rgba(255,255,255,.40), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.8), inset 0 -1px 0 rgba(255,255,255,.12), 0 6px 18px rgba(0,0,0,.28);
   /* the shared rim tokens of the older sections, re-pointed at the one rim */
   --gj-glass-edge: var(--gj-rim);
@@ -2152,7 +2166,7 @@ html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), [id="slides-con
   background: radial-gradient(60px 24px at 40px 13px, rgba(255,255,255,.42), rgba(255,255,255,0) 70%),
               radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.08), rgba(255,255,255,0) 60%),
               linear-gradient(180deg, rgba(255,255,255,.24) 0%, rgba(255,255,255,.09) 48%, rgba(255,255,255,.05) 56%, rgba(255,255,255,.12) 100%),
-              rgba(10,10,14,.12) !important;
+              rgba(var(--gj-ink-deep),.12) !important;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 10px rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.32) !important;
 }
 html :is(.itemDetailPage .detailButton:is(.btnPlay, .btnResume), [id="slides-container"] .play-button):focus-visible {
@@ -2235,7 +2249,7 @@ html .dialog:not(.dialog-fullscreen) .formDialogFooter:not(.formDialogFooter-cle
 }
 /* login buttons: header capsules (section 17 styles them through #loginPage: an id selector is needed to win) */
 html #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer) {
-  background: var(--gj-glass-clear), rgba(26,26,32,.18); box-shadow: var(--gj-rim); text-shadow: var(--gj-cap-text);
+  background: var(--gj-glass-clear), rgba(var(--gj-ink),.18); box-shadow: var(--gj-rim); text-shadow: var(--gj-cap-text);
 }
 html #loginPage .manualLoginForm .raised.cancel { max-width: none; }   /* [15] never applied: the button is .raised.cancel.block, and section 17's #loginPage max-width won */
 
@@ -2261,7 +2275,7 @@ html #loginPage .manualLoginForm .raised.cancel { max-width: none; }   /* [15] n
     html:not(.layout-mobile):not(.layout-tv) body :is(.itemDetailPage .trackSelections .detailTrackSelect:not([disabled]), .itemDetailPage .itemExternalLinks a.button-link):hover,
     html:not(.layout-mobile):not(.layout-tv) body #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer):hover {
       background: radial-gradient(30% 24% at 24% 20%, rgba(255,255,255,.34), rgba(255,255,255,0) 70%),
-                  radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.07), rgba(255,255,255,0) 60%), rgba(10,10,14,.18) !important;
+                  radial-gradient(120% 120% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.07), rgba(255,255,255,0) 60%), rgba(var(--gj-ink-deep),.18) !important;
       box-shadow: var(--gj-clear-hover-rim) !important;
       -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.06); backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.06);
     }
@@ -2291,3 +2305,27 @@ html #loginPage .manualLoginForm .raised.cancel { max-width: none; }   /* [15] n
     }
   }
 }
+
+/* 21u. COLOUR ACCENT (v2.9). Off by default: the accent is white like tvOS and nothing below applies. A colour accent
+   (the plugin's Accent option sets --gj-accent* and html[data-gj-accent]) fills progress bars, slider tracks,
+   checkboxes and the solid primary buttons (Save, Sign In, Media Bar Save) with it; MUI picks it up through the
+   --jf-palette-primary-* tokens. Play / Resume stay clear glass. ":not(#gj)" = one id of weight, so these win over
+   the white primaries of 21q/21t and their hover in every section. */
+html[data-gj-accent]:not(#gj) :is(.itemProgressBarForeground, .playbackProgress > div, .iconOsdProgressInner, .mdl-slider-background-lower) {
+  background-color: var(--gj-accent) !important;
+}
+html[data-gj-accent]:not(#gj) progress::-webkit-progress-value { background-color: var(--gj-accent); }
+html[data-gj-accent]:not(#gj) progress[aria-valuenow]::before { background-color: var(--gj-accent); }
+html[data-gj-accent]:not(#gj) .emby-checkbox:checked + span + .checkboxOutline { background-color: var(--gj-accent) !important; border-color: var(--gj-accent) !important; }
+html[data-gj-accent]:not(#gj) .emby-checkbox:checked + span + .checkboxOutline .checkboxIcon-checked { color: var(--gj-on-accent) !important; }
+html[data-gj-accent]:not(#gj) :is(.button-submit, .raised.button-submit, .MuiButton-containedPrimary, .fab:not(.mini), .media-bar-btn-submit,
+  body.dashboardDocument .je-save-dock .je-save-dock-btn, body.dashboardDocument .page .save-button) {
+  background: radial-gradient(34% 60% at 22% 20%, rgba(255,255,255,.28), rgba(255,255,255,0) 70%), var(--gj-accent) !important;
+  color: var(--gj-on-accent) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 rgba(0,0,0,.12), 0 6px 18px rgba(0,0,0,.30) !important;
+}
+html[data-gj-accent]:not(#gj) :is(.button-submit, .MuiButton-containedPrimary, .fab:not(.mini), .media-bar-btn-submit,
+  body.dashboardDocument .je-save-dock .je-save-dock-btn, body.dashboardDocument .page .save-button):hover {
+  background: radial-gradient(130% 125% at var(--gj-mx, 50%) var(--gj-my, 0%), rgba(255,255,255,.22), rgba(255,255,255,0) 70%), var(--gj-accent-hover) !important;
+}
+html[data-gj-accent]:not(#gj) :is(.button-submit, .MuiButton-containedPrimary) :is(span, .MuiSvgIcon-root) { color: inherit; }
