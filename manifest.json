@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.9.6.0",
+        "changelog": "- Header on servers without Jellyfin Enhanced (or with File Transformation broken, which stops Jellyfin Enhanced from\n  loading): the icon capsule (SyncPlay, Cast, Search) spanned the whole header on desktop, lay over the nav capsule and\n  its lens bent the tab labels into ghost copies above and below them. It now hugs its icons on every width, as it\n  already did on phones. Checked with and without Jellyfin Enhanced on home, library, details and the dashboard at\n  1920, 1280 and 390 px.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.9.6/glassjelly-plugin_2.9.6.0.zip",
+        "checksum": "2292C72709619CBC93A56AAD28A8DDE8",
+        "timestamp": "2026-10-14T08:38:39Z"
+      },
+      {
         "version": "2.9.5.0",
         "changelog": "- Player header (Jellyfin 12 draws it with React, `.videoOsd-appBar`): Back, SyncPlay and Cast are glass beads like the\n  rest of the header; they were bare glyphs, because the theme only styled the legacy `.headerButton`.\n- Jellyfin Enhanced pause screen: the close button is a glass bead with a drawn X, centred (the \"×\" character sat ~2px\n  low), and on phones the Back bead is no longer cut in half (the plugin narrows the header to 10vw, 39px).\n- QA: a full pass with the real player (local test clip, playback reports blocked so no resume position is written)\n  over home, details, season, episode, libraries, sort menu, search, user menu, drawer, settings, dashboard, the\n  GlassJelly page, the player with its subtitle and settings menus and the pause screen, on desktop and phone.",
         "targetAbi": "12.0.0.0",
