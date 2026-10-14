@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.9.5";
+  --gj-version: "2.9.6";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -1220,6 +1220,11 @@ html header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButto
   background: var(--gj-glass-sheen), var(--gj-mat-thin); box-shadow: var(--gj-glass-edge);
   -webkit-backdrop-filter: var(--gj-blur-s); backdrop-filter: var(--gj-blur-s);
 }
+/* v2.9.6: the cluster hugs its icons on every width. MUI gives it flex-grow: 1; Jellyfin Enhanced used to hide that
+   on desktop, so on a server without it (or with File Transformation broken) the capsule spanned the whole header,
+   lay over the nav capsule and its lens bent the tab labels into ghost copies above and below them. */
+html header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButton-root) { flex: none; width: auto; margin-inline-start: auto; }
+html header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButton-root) + .MuiBox-root:has(> .MuiIconButton-root) { margin-inline-start: 0; }
 html header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButton-root) .MuiIconButton-root:has(.MuiAvatar-root) { padding: 2px; }
 @media (min-width: 601px) {
   html header.MuiAppBar-root > .MuiToolbar-root > .MuiBox-root:has(> .MuiIconButton-root) .MuiIconButton-root:not(:has(.MuiAvatar-root)) { padding: 9px; min-width: 40px; min-height: 40px; }

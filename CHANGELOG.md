@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.9.6 — 2026-10-14
+
+- Header on servers without Jellyfin Enhanced (or with File Transformation broken, which stops Jellyfin Enhanced from
+  loading): the icon capsule (SyncPlay, Cast, Search) spanned the whole header on desktop, lay over the nav capsule and
+  its lens bent the tab labels into ghost copies above and below them. It now hugs its icons on every width, as it
+  already did on phones. Checked with and without Jellyfin Enhanced on home, library, details and the dashboard at
+  1920, 1280 and 390 px.
+
 ## v2.9.5 — 2026-10-12
 
 - Player header (Jellyfin 12 draws it with React, `.videoOsd-appBar`): Back, SyncPlay and Cast are glass beads like the
