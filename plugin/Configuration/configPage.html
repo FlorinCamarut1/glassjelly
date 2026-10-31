@@ -62,6 +62,13 @@
                         </label>
                         <div class="fieldDescription checkboxFieldDescription">Subtitles rise above the player controls while they are visible, and Settings → Subtitles → Subtitle Appearance applies to every subtitle type (ASS/SSA too). Sets every user's subtitle styling to "Custom". Fine-tune per device in the browser console: <code>localStorage.jfSubGap</code> (px above the bar, default 20) and <code>localStorage.jfSubRest</code> (px when the bar is hidden, default -1).</div>
                     </div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="gjQualityLabels" name="QualityLabels" type="checkbox" is="emby-checkbox" />
+                            <span>Quality labels</span>
+                        </label>
+                        <div class="fieldDescription checkboxFieldDescription">The streaming quality menus (player Settings → Quality, and Settings → Playback) show the resolution the server sends, such as 1080p, with the bitrate under it, instead of the bitrate alone. Only the labels change.</div>
+                    </div>
                     <div class="verticalSection">
                         <h2 class="sectionTitle">Colours</h2>
                     </div>
@@ -122,7 +129,7 @@
         <script type="text/javascript">
             (function () {
                 var pluginId = 'b3a397c3-d76f-4a9a-8980-3ad430af041f';
-                var keys = ['Enabled', 'Logo', 'Ambient', 'BackdropsDefault', 'Hover', 'Player', 'SubtitleLift'];
+                var keys = ['Enabled', 'Logo', 'Ambient', 'BackdropsDefault', 'Hover', 'Player', 'SubtitleLift', 'QualityLabels'];
                 var defaults = { SubtitleLift: false };
                 // text settings (selects + colour pickers) and their defaults
                 var values = { Background: 'graphite', BackgroundColor: '#1e3a5f', Accent: 'white', AccentColor: '#0a84ff', AmbientStrength: 'normal' };

@@ -110,6 +110,7 @@ public static partial class ThemeAssets
             ("player", config.Player),
             ("hover", config.Hover),
             ("sublift", config.SubtitleLift),
+            ("quality", config.QualityLabels),
         };
         foreach ((string name, bool on) in scripts)
         {

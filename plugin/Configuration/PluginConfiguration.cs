@@ -27,6 +27,10 @@ public class PluginConfiguration : BasePluginConfiguration
     /// applies to every subtitle type. Off by default: it sets every user's subtitle styling to "Custom".</summary>
     public bool SubtitleLift { get; set; }
 
+    /// <summary>Streaming quality menus (player Settings → Quality, Settings → Playback) name each choice by the
+    /// resolution the server sends ("1080p"), with the bitrate as a second line, instead of the bitrate alone.</summary>
+    public bool QualityLabels { get; set; } = true;
+
     /// <summary>Canvas colour: graphite (the stylesheet's own), midnight, ocean, forest, plum, wine, espresso, oled or
     /// custom (<see cref="BackgroundColor"/>). Also tints the dark glass of menus and dialogs.</summary>
     public string Background { get; set; } = "graphite";

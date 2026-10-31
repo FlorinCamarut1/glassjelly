@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.10.0 — 2026-10-31
+
+- New option **Quality labels** (on by default): the streaming quality menus show the resolution the server sends
+  ("4K", "1440p", "1080p", "720p"…) with the bitrate as a second line, instead of the bitrate alone. Covers the
+  player's Settings → Quality list and the value of its Quality row, and the home network / internet / Chromecast
+  quality selects in Settings → Playback. In the player the label follows the source (a 1080p film stays "1080p" at
+  40 Mbps). Only the text changes: every choice keeps its bitrate, so Jellyfin streams exactly as before. The
+  resolution for each bitrate is Jellyfin 12's own server rule (`ResolutionNormalizer`, 24 fps sources).
+
 ## v2.9.6 — 2026-10-14
 
 - Header on servers without Jellyfin Enhanced (or with File Transformation broken, which stops Jellyfin Enhanced from
