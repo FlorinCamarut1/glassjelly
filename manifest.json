@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.10.0.0",
+        "changelog": "- New option **Quality labels** (on by default): the streaming quality menus show the resolution the server sends\n  (\"4K\", \"1440p\", \"1080p\", \"720p\"…) with the bitrate as a second line, instead of the bitrate alone. Covers the\n  player's Settings → Quality list and the value of its Quality row, and the home network / internet / Chromecast\n  quality selects in Settings → Playback. In the player the label follows the source (a 1080p film stays \"1080p\" at\n  40 Mbps). Only the text changes: every choice keeps its bitrate, so Jellyfin streams exactly as before. The\n  resolution for each bitrate is Jellyfin 12's own server rule (`ResolutionNormalizer`, 24 fps sources).",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.10.0/glassjelly-plugin_2.10.0.0.zip",
+        "checksum": "B1F002E5E9864FBF3756C70BF2E227D0",
+        "timestamp": "2026-10-31T14:58:55Z"
+      },
+      {
         "version": "2.9.6.0",
         "changelog": "- Header on servers without Jellyfin Enhanced (or with File Transformation broken, which stops Jellyfin Enhanced from\n  loading): the icon capsule (SyncPlay, Cast, Search) spanned the whole header on desktop, lay over the nav capsule and\n  its lens bent the tab labels into ghost copies above and below them. It now hugs its icons on every width, as it\n  already did on phones. Checked with and without Jellyfin Enhanced on home, library, details and the dashboard at\n  1920, 1280 and 390 px.",
         "targetAbi": "12.0.0.0",
