@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.11.0 — 2026-11-18
+
+A full pass over desktop, phone, tablet and TV layouts on Jellyfin 12.4 (Chromium 157):
+
+- **TV layout:** the header no longer collapses to half height (logo, icons, avatar and clock were cut); focused rows
+  in Settings and in ⋮ menus are readable (black text and icons on the white focus); a focused poster gets a white
+  ring; focused buttons on the details and login pages no longer grow over their neighbours.
+- **Library grids:** Jellyfin 12.4 draws the watched-progress bar with a new component that showed in Jellyfin blue
+  across the whole card; it is the white pill inside the poster again (or the colour accent, if one is set).
+- **Phones:** the A–Z bar no longer sits on the library toolbar; the dashboard Back button is a glass bead like the
+  other header buttons; the login buttons use the header glass instead of the frosted look; the glint on the
+  full-width Play button scales with it.
+- **Login page (desktop):** the buttons use the smaller lens, so the background no longer folds into zig-zags at
+  their ends.
+- **Colours:** links are white (underlined inside running text) and the dashboard info chips are neutral, instead
+  of blue. Media Bar mute / pause buttons are easier to see.
+
 ## v2.10.1 — 2026-11-17
 
 - Liquid glass works again in Chromium 157 (Chrome, Brave, Edge): the header capsules, menus, dialogs, the player

@@ -19,7 +19,7 @@
 :root, html[data-theme] {
   /* check in the browser console which theme build a tab is running:
      getComputedStyle(document.documentElement).getPropertyValue('--gj-version') */
-  --gj-version: "2.10.1";
+  --gj-version: "2.11.0";
   /* v1.2 base canvas (CSS only, always on): deep graphite, cool lift at the top, soft vignette, faint grain
      against banding. Set --gj-canvas-noise to "none" to drop the grain. */
   --gj-canvas-top: #15161b;
@@ -62,7 +62,7 @@
   --gj-on-accent: #000;
   --gj-accent-hover: #e5e5ea;   /* v2.9: a colour accent sets all five (see 21u) */
   --gj-accent-dark: #d1d1d6;
-  --gj-link: #0a84ff;
+  --gj-link: rgba(255,255,255,.92);   /* v2.11: was iOS blue; links are white + underlined (section 21w) */
   --gj-toggle-on: #30d158;
   --gj-destructive: #ff453a;
   --gj-progress: var(--gj-accent);
@@ -1039,7 +1039,7 @@ html body.dashboardDocument {
   --gj-dash-card: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.04));
   --gj-dash-card-solid: #161619;           /* opaque twin: tables, sticky table header */
   --gj-dash-row-hover: rgba(255,255,255,.045);
-  --primary-accent-color: var(--gj-link);  /* Jellyfin Enhanced config page accent (default #00a4dc) */
+  --primary-accent-color: #0a84ff;  /* Jellyfin Enhanced config page accent (default #00a4dc); stays a colour: JE puts white text on it */
 }
 /* D1 page text + headings (MUI h1/h2 inherit html's text-2 and read as greyed out) */
 html body.dashboardDocument .page { color: rgba(235,235,245,.78); }
@@ -1090,7 +1090,7 @@ html body.dashboardDocument .page .MuiAvatar-colorDefault > svg { color: inherit
 html body.dashboardDocument .page .MuiButton-root:not(.MuiButton-text) { min-height: 36px; padding-inline: 16px; }
 /* D8 chips + alerts: tinted, not saturated blocks */
 html body.dashboardDocument .MuiChip-root { border-radius: var(--gj-r-pill); font-weight: 600; }
-html body.dashboardDocument .MuiChip-filled.MuiChip-colorInfo { background: rgba(10,132,255,.2); color: #64b5ff; }
+html body.dashboardDocument .MuiChip-filled.MuiChip-colorInfo { background: rgba(255,255,255,.14); color: #fff; }
 html body.dashboardDocument .MuiChip-filled.MuiChip-colorSuccess { background: rgba(48,209,88,.2); color: #5ee17c; }
 html body.dashboardDocument .MuiChip-filled.MuiChip-colorWarning { background: rgba(255,159,10,.2); color: #ffb340; }
 html body.dashboardDocument .MuiChip-filled.MuiChip-colorError { background: rgba(255,69,58,.2); color: #ff6961; }
@@ -1993,8 +1993,8 @@ html body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > .je-heade
   background: var(--gj-glass-sheen), var(--gj-mat-thin); box-shadow: inset 0 0 0 1px rgba(255,255,255,.20), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.6);
   -webkit-backdrop-filter: var(--gj-blur-s); backdrop-filter: var(--gj-blur-s);
 }
-/* [23] the bare first icon of the bar (phone hamburger, dashboard Back) becomes a glass bead like the avatar */
-html header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child {
+/* [23] the bare icons of the bar (phone hamburger, dashboard Back - its 2nd child on phones, v2.11) become glass beads like the avatar */
+html header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root {
   background: var(--gj-glass-sheen), var(--gj-mat-thin); box-shadow: inset 0 0 0 1px rgba(255,255,255,.20), inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.6);
   -webkit-backdrop-filter: var(--gj-blur-s); backdrop-filter: var(--gj-blur-s); border-radius: 50%;
 }
@@ -2267,10 +2267,10 @@ html #loginPage .manualLoginForm .raised.cancel { max-width: none; }   /* [15] n
       -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04); backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04);
     }
     html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .detailButton:not(.btnPlay):not(.btnResume), .osdHeader .headerButton,
-      header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child) {
+      header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root) {
       -webkit-backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04); backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04);
     }
-    html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child { background: var(--gj-cap-fill); box-shadow: var(--gj-rim); }
+    html:not(.layout-mobile):not(.layout-tv) header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root { background: var(--gj-cap-fill); box-shadow: var(--gj-rim); }
     html:not(.layout-mobile):not(.layout-tv) :is(.itemDetailPage .trackSelections .detailTrackSelect:not([disabled]),
       body.dashboardDocument header.MuiAppBar-root > .MuiToolbar-root > .je-header-actions-host:not(:has(> .MuiIconButton-root)):has(.headerButton)),
     html:not(.layout-mobile):not(.layout-tv) #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer) {
@@ -2318,7 +2318,7 @@ html #loginPage .manualLoginForm .raised.cancel { max-width: none; }   /* [15] n
    checkboxes and the solid primary buttons (Save, Sign In, Media Bar Save) with it; MUI picks it up through the
    --jf-palette-primary-* tokens. Play / Resume stay clear glass. ":not(#gj)" = one id of weight, so these win over
    the white primaries of 21q/21t and their hover in every section. */
-html[data-gj-accent]:not(#gj) :is(.itemProgressBarForeground, .playbackProgress > div, .iconOsdProgressInner, .mdl-slider-background-lower) {
+html[data-gj-accent]:not(#gj) :is(.itemProgressBarForeground, .cardImageContainer .MuiLinearProgress-bar, .playbackProgress > div, .iconOsdProgressInner, .mdl-slider-background-lower) {
   background-color: var(--gj-accent) !important;
 }
 html[data-gj-accent]:not(#gj) progress::-webkit-progress-value { background-color: var(--gj-accent); }
@@ -2346,7 +2346,7 @@ html[data-gj-accent]:not(#gj) :is(.button-submit, .MuiButton-containedPrimary) :
      WebKit and has no lens) gets the desktop lens on top instead of the blur. */
 html.layout-mobile:not(#gj) header.MuiAppBar-root > .MuiToolbar-root > :is(
     .MuiStack-root:first-of-type:has(> .MuiButton-root), .MuiBox-root:has(> .MuiIconButton-root),
-    .MuiIconButton-root:first-child, .je-header-actions-host:has(.MuiIconButton-root, .headerButton)) {
+    .MuiIconButton-root, .je-header-actions-host:has(.MuiIconButton-root, .headerButton)) {
   background: var(--gj-cap-fill) !important; box-shadow: var(--gj-rim) !important;
   -webkit-backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important; backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important;
 }
@@ -2355,13 +2355,13 @@ html.layout-mobile.gj-lens:not(#gj) header.MuiAppBar-root > .MuiToolbar-root > :
     .je-header-actions-host:has(.MuiIconButton-root, .headerButton)) {
   -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04) !important; backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04) !important;
 }
-html.layout-mobile.gj-lens:not(#gj) header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child {
+html.layout-mobile.gj-lens:not(#gj) header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root {
   -webkit-backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04) !important; backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04) !important;
 }
 @media (pointer: coarse), (hover: none) {
   html:not(.layout-tv):not(#gj) header.MuiAppBar-root > .MuiToolbar-root > :is(
       .MuiStack-root:first-of-type:has(> .MuiButton-root), .MuiBox-root:has(> .MuiIconButton-root),
-      .MuiIconButton-root:first-child, .je-header-actions-host:has(.MuiIconButton-root, .headerButton)) {
+      .MuiIconButton-root, .je-header-actions-host:has(.MuiIconButton-root, .headerButton)) {
     background: var(--gj-cap-fill) !important; box-shadow: var(--gj-rim) !important;
     -webkit-backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important; backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important;
   }
@@ -2370,11 +2370,64 @@ html.layout-mobile.gj-lens:not(#gj) header.MuiAppBar-root > .MuiToolbar-root > .
       .je-header-actions-host:has(.MuiIconButton-root, .headerButton)) {
     -webkit-backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04) !important; backdrop-filter: var(--gj-lens-cap) saturate(150%) brightness(1.04) !important;
   }
-  html.gj-lens:not(.layout-tv):not(#gj) header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root:first-child {
+  html.gj-lens:not(.layout-tv):not(#gj) header.MuiAppBar-root > .MuiToolbar-root > .MuiIconButton-root {
     -webkit-backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04) !important; backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04) !important;
   }
 }
 html.layout-mobile header.MuiAppBar-root .MuiIconButton-root .MuiSvgIcon-root { filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
 @media (pointer: coarse), (hover: none) {
   html:not(.layout-tv) header.MuiAppBar-root .MuiIconButton-root .MuiSvgIcon-root { filter: drop-shadow(0 1px 2px rgba(0,0,0,.6)); }
+}
+
+/* 21w. AUDIT 3 (v2.11, Jellyfin 12.4 + Chromium 157; theme/qa/audit3/REPORT.md, ids in brackets). */
+/* [A3-01] TV: section 4b shrinks the tab strip, but Jellyfin pulls it up by -4.3em to sit beside .headerTop -> the
+   header collapsed to 40px and cut the logo, icons, avatar and clock in half. Give the strip its old height back. */
+html.layout-tv .skinHeader:not(.osdHeader) > .headerTabs { min-height: 4.3em; display: flex; align-items: center; }
+/* [A3-02] focused list rows paint white (section 8) but their children kept white text / grey icons */
+html .userPreferencesPage .listItem-border:is(.show-focus:focus, :focus-visible) :is(.listItem, .listItemIcon, .listItemBodyText) { color: #000; }
+html .actionSheetMenuItem:is(.show-focus:focus, :focus-visible) .actionsheetMenuItemIcon { color: #000; }
+html.layout-tv .actionSheetMenuItem.show-focus:focus { border-radius: var(--gj-r-s); }
+/* [A3-03] 12.4 library grids draw progress with MUI LinearProgress (Jellyfin blue, full width, flush to the edge):
+   same white pill as .itemProgressBar on the home rows */
+html .cardImageContainer .MuiLinearProgress-root {
+  background-color: rgba(255,255,255,.3) !important; height: 4px; border-radius: var(--gj-r-pill);
+  left: 8px !important; right: 8px !important; bottom: 8px !important; width: auto !important;
+}
+html .cardImageContainer .MuiLinearProgress-bar { background-color: var(--gj-progress) !important; border-radius: inherit; }
+/* [A3-05] login pills, Chromium desktop: the capsule lens (built for the 44px header over posters) folded the splash
+   triangle into chevrons at both ends; the small round-button lens bends it a little, like the header does */
+@supports (-webkit-app-region: drag) and (backdrop-filter: url("#a")) {
+  @media (hover: hover) and (pointer: fine) {
+    html:not(.layout-mobile):not(.layout-tv) #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer) {
+      -webkit-backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04); backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04);
+    }
+  }
+}
+/* [A3-06] phones: the fixed A-Z bar started at 144px, over the library toolbar's paging capsule */
+html.layout-mobile .alphaPicker-fixed-right { top: 176px !important; max-height: calc(100dvh - 192px); }
+/* [A3-07] TV focus scale (1.2) pushed the focused pill over its neighbours */
+html.layout-tv .itemDetailPage .detailButton.show-focus:focus { transform: scale(1.06); }
+html.layout-tv .itemDetailPage .mainDetailButtons { gap: 14px; }
+html.layout-tv #loginPage .raised.block { margin-block: .7em; }
+html.layout-tv #loginPage .raised.block.show-focus:focus { transform: scale(1.05); }
+/* [A3-08] links are white now (--gj-link): the ones inside running text get a faint underline to read as links */
+html a:not([class]) { text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(255,255,255,.45); }   /* prose links only: the metadata links (tags, people, genres) stay plain */
+/* [A3-10] phone login pills: the header capsule material (they were the frosted 10px blur) */
+html.layout-mobile #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer) {
+  background: var(--gj-cap-fill) !important; box-shadow: var(--gj-rim) !important;
+  -webkit-backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important; backdrop-filter: blur(3px) saturate(120%) brightness(1.04) !important;
+}
+html.layout-mobile.gj-lens #loginPage :is(.btnManual, .btnQuick, .btnForgotPassword, .btnSelectServer) {
+  -webkit-backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04) !important; backdrop-filter: var(--gj-lens-s) saturate(150%) brightness(1.04) !important;
+}
+/* [A3-11] TV: a focused poster only grew and got a shadow - add a white ring so it is easy to find on a grid */
+html.layout-tv .card:focus .cardScalable { box-shadow: 0 0 0 3px rgba(255,255,255,.9), var(--gj-shadow-lift) !important; }
+/* [A3-12] Media Bar mute / pause beads idled at the plugin's .3 opacity: inside a glass bead that read as disabled */
+html #slides-container :is(.mute-button, .pause-button) { opacity: .7; }
+html #slides-container :is(.mute-button, .pause-button):hover { opacity: 1; }
+/* [A3-13] phones: the fixed 56x22 glint looked like a smudge on the full-width Play pill -> sized with the pill */
+html.layout-mobile:not(#gj) {
+  --gj-prom-bg: radial-gradient(18% 50% at 12% 25%, rgba(255,255,255,.30), rgba(255,255,255,0) 70%),
+                linear-gradient(180deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.07) 48%, rgba(255,255,255,.035) 56%, rgba(255,255,255,.10) 100%),
+                rgba(var(--gj-ink-deep),.18);
 }
