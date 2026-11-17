@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.11.0.0",
+        "changelog": "A full pass over desktop, phone, tablet and TV layouts on Jellyfin 12.4 (Chromium 157):\n\n- **TV layout:** the header no longer collapses to half height (logo, icons, avatar and clock were cut); focused rows\n  in Settings and in ⋮ menus are readable (black text and icons on the white focus); a focused poster gets a white\n  ring; focused buttons on the details and login pages no longer grow over their neighbours.\n- **Library grids:** Jellyfin 12.4 draws the watched-progress bar with a new component that showed in Jellyfin blue\n  across the whole card; it is the white pill inside the poster again (or the colour accent, if one is set).\n- **Phones:** the A–Z bar no longer sits on the library toolbar; the dashboard Back button is a glass bead like the\n  other header buttons; the login buttons use the header glass instead of the frosted look; the glint on the\n  full-width Play button scales with it.\n- **Login page (desktop):** the buttons use the smaller lens, so the background no longer folds into zig-zags at\n  their ends.\n- **Colours:** links are white (underlined inside running text) and the dashboard info chips are neutral, instead\n  of blue. Media Bar mute / pause buttons are easier to see.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.11.0/glassjelly-plugin_2.11.0.0.zip",
+        "checksum": "34B11B7CA10469CEF9D22ACC09185888",
+        "timestamp": "2026-11-17T22:46:15Z"
+      },
+      {
         "version": "2.10.1.0",
         "changelog": "- Liquid glass works again in Chromium 157 (Chrome, Brave, Edge): the header capsules, menus, dialogs, the player\n  panel and the round buttons had lost their refraction and showed only the tint and the rim. The lens finds the\n  element's edge by eroding a solid box; it used the backdrop's own alpha for that box, and since Chromium 157 the\n  backdrop is opaque past the element's edges too, so there was no edge to find. The box is now an `feFlood` clipped\n  to the filter region. Same lens values as before, so the strength of the effect is unchanged.",
         "targetAbi": "12.0.0.0",
