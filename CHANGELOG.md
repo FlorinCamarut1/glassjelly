@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.10.1 — 2026-11-17
+
+- Liquid glass works again in Chromium 157 (Chrome, Brave, Edge): the header capsules, menus, dialogs, the player
+  panel and the round buttons had lost their refraction and showed only the tint and the rim. The lens finds the
+  element's edge by eroding a solid box; it used the backdrop's own alpha for that box, and since Chromium 157 the
+  backdrop is opaque past the element's edges too, so there was no edge to find. The box is now an `feFlood` clipped
+  to the filter region. Same lens values as before, so the strength of the effect is unchanged.
+
 ## v2.10.0 — 2026-10-31
 
 - New option **Quality labels** (on by default): the streaming quality menus show the resolution the server sends

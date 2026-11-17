@@ -1,19 +1,23 @@
 // Liquid Glass refraction filter for CSS backdrop-filter (Chromium only).
 // Built from the element's own box, so the lens rim has the same width in pixels on a 44px button and on a 1500px
 // player panel (a stretched displacement image would give a 180px rim on a wide bar):
-//   SourceAlpha (the box) -erode rim-> -blur soft-> A      1 inside, ramps to 0 over the last ~rim+2*soft px
+//   feFlood (the box) -erode rim-> -blur soft-> A          1 inside, ramps to 0 over the last ~rim+2*soft px
+// v2.10.1: the box is an feFlood clipped to the filter region, not SourceAlpha. Since Chromium 157 the backdrop
+// handed to backdrop-filter is opaque beyond the element's edges too, so eroding SourceAlpha found no edge, the
+// height field was flat and the lens bent nothing (only tint + rim were left).
 //   gx = dA/dx, gy = dA/dy (convolutions, bias .5)         surface normals of a rounded glass slab
 //   feDisplacementMap(backdrop, R:gx G:gy, scale)          the rim samples the backdrop from further inside, like
 //                                                          the thick edge of a lens; the interior is untouched.
 // Corners: the box is a rectangle, so the element also gets clip-path: inset(0 round R) (Chromium does not clip
 // url() backdrop filters to border-radius anyway).
+const BOX = "<feFlood flood-color='#000' flood-opacity='1' result='box'/>";
 export function lens({ rim = 10, soft = 7, scale = 36, reach = 4, spread = 0 } = {}) {
   const k = ['-1', ...Array(2 * reach - 1).fill('0'), '1'].join(' ');
   const n = 2 * reach + 1;
   const svg =
     "<svg xmlns='http://www.w3.org/2000/svg'>" +
     "<filter id='lg' x='0' y='0' width='100%' height='100%' color-interpolation-filters='sRGB'>" +
-    `<feMorphology in='SourceAlpha' operator='erode' radius='${rim}' result='e'/>` +
+    BOX + `<feMorphology in='box' operator='erode' radius='${rim}' result='e'/>` +
     `<feGaussianBlur in='e' stdDeviation='${soft}' result='b'/>` +
     "<feColorMatrix in='b' type='matrix' values='0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1' result='h'/>" +
     `<feConvolveMatrix in='h' order='${n} 1' kernelMatrix='${k}' divisor='1' bias='.5' preserveAlpha='true' edgeMode='duplicate' result='gx'/>` +
@@ -88,7 +92,7 @@ export function dome({ band = 14, dir = 10, p = 1.6, scale = 40, reach = 3 } = {
     "<svg xmlns='http://www.w3.org/2000/svg'>" +
     "<filter id='lg' x='0' y='0' width='100%' height='100%' color-interpolation-filters='linearRGB'>" +
     // direction field
-    `<feGaussianBlur in='SourceAlpha' stdDeviation='${dir}' result='d0'/>` +
+    BOX + `<feGaussianBlur in='box' stdDeviation='${dir}' result='d0'/>` +
     "<feColorMatrix in='d0' type='matrix' values='0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1' result='d1'/>" +
     `<feConvolveMatrix in='d1' order='${n} 1' kernelMatrix='${k}' divisor='1' bias='.5' preserveAlpha='true' edgeMode='duplicate' result='gx'/>` +
     `<feConvolveMatrix in='d1' order='1 ${n}' kernelMatrix='${k}' divisor='1' bias='.5' preserveAlpha='true' edgeMode='duplicate' result='gy'/>` +
@@ -97,7 +101,7 @@ export function dome({ band = 14, dir = 10, p = 1.6, scale = 40, reach = 3 } = {
     "<feComposite in='rx' in2='ry' operator='arithmetic' k2='1' k3='1' result='g'/>" +
     "<feComponentTransfer in='g' result='u'><feFuncR type='linear' slope='40' intercept='-19.5'/><feFuncG type='linear' slope='40' intercept='-19.5'/></feComponentTransfer>" +
     // magnitude: 1 at the edge, 0 deeper than ~band
-    `<feMorphology in='SourceAlpha' operator='erode' radius='${Math.round(band / 2)}' result='e'/>` +
+    `<feMorphology in='box' operator='erode' radius='${Math.round(band / 2)}' result='e'/>` +
     `<feGaussianBlur in='e' stdDeviation='${band / 2}' result='eb'/>` +
     "<feColorMatrix in='eb' type='matrix' values='0 0 0 -1 1 0 0 0 -1 1 0 0 0 -1 1 0 0 0 0 1' result='m0'/>" +
     `<feComponentTransfer in='m0' result='m'><feFuncR type='gamma' exponent='${p}'/><feFuncG type='gamma' exponent='${p}'/></feComponentTransfer>` +
