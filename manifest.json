@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/FlorinCamarut1/glassjelly/main/assets/plugin/thumb.png",
     "versions": [
       {
+        "version": "2.10.1.0",
+        "changelog": "- Liquid glass works again in Chromium 157 (Chrome, Brave, Edge): the header capsules, menus, dialogs, the player\n  panel and the round buttons had lost their refraction and showed only the tint and the rim. The lens finds the\n  element's edge by eroding a solid box; it used the backdrop's own alpha for that box, and since Chromium 157 the\n  backdrop is opaque past the element's edges too, so there was no edge to find. The box is now an `feFlood` clipped\n  to the filter region. Same lens values as before, so the strength of the effect is unchanged.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/FlorinCamarut1/glassjelly/releases/download/v2.10.1/glassjelly-plugin_2.10.1.0.zip",
+        "checksum": "242FAFC6959C32FFF114D9A73A038C93",
+        "timestamp": "2026-11-17T21:34:39Z"
+      },
+      {
         "version": "2.10.0.0",
         "changelog": "- New option **Quality labels** (on by default): the streaming quality menus show the resolution the server sends\n  (\"4K\", \"1440p\", \"1080p\", \"720p\"…) with the bitrate as a second line, instead of the bitrate alone. Covers the\n  player's Settings → Quality list and the value of its Quality row, and the home network / internet / Chromecast\n  quality selects in Settings → Playback. In the player the label follows the source (a 1080p film stays \"1080p\" at\n  40 Mbps). Only the text changes: every choice keeps its bitrate, so Jellyfin streams exactly as before. The\n  resolution for each bitrate is Jellyfin 12's own server rule (`ResolutionNormalizer`, 24 fps sources).",
         "targetAbi": "12.0.0.0",
